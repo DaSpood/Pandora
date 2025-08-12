@@ -1,0 +1,717 @@
+[
+    {
+        "tier": 1,
+        "name": "Raumphalt Proto",
+        "pity": 50,
+        "loot_slots": [
+            {
+                "slot_no": 1,
+                "special": "no",
+                "rate": 1,
+                "loot_groups": [
+                    {
+                        "alias": "Credits",
+                        "group_no": 1,
+                        "rate": 0.50,
+                        "loot_items": [
+                            {
+                                "name": "credits",
+                                "amount": 50000,
+                                "rate": 0.80
+                            },
+                            {
+                                "name": "credits",
+                                "amount": 100000,
+                                "rate": 0.15
+                            },
+                            {
+                                "name": "credits",
+                                "amount": 250000,
+                                "rate": 0.05
+                            }
+                        ]
+                    },
+                    {
+                        "alias": "Crew XP",
+                        "group_no": 2,
+                        "rate": 0.50,
+                        "loot_items": [
+                            {
+                                "name": "crew xp: general booklet (small)",
+                                "amount": 1,
+                                "rate": 0.80
+                            },
+                            {
+                                "name": "crew xp: general directive (medium)",
+                                "amount": 1,
+                                "rate": 0.15
+                            },
+                            {
+                                "name": "crew xp: universal manual (big)",
+                                "amount": 1,
+                                "rate": 0.05
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "slot_no": 2,
+                "special": "no",
+                "rate": 1,
+                "loot_groups": [
+                    {
+                        "alias": "Boosters",
+                        "group_no": 1,
+                        "rate": 1,
+                        "loot_items": [
+                            {
+                                "name": "booster: free/crew xp",
+                                "amount": 1,
+                                "rate": 0.34
+                            },
+                            {
+                                "name": "booster: tank xp",
+                                "amount": 1,
+                                "rate": 0.33
+                            },
+                            {
+                                "name": "booster: credits",
+                                "amount": 1,
+                                "rate": 0.33
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "slot_no": 3,
+                "special": "no",
+                "rate": 0.50,
+                "loot_groups": [
+                    {
+                        "alias": "Premium Account",
+                        "group_no": 1,
+                        "rate": 1,
+                        "loot_items": [
+                            {
+                                "name": "days of premium account",
+                                "amount": 1,
+                                "rate": 0.80
+                            },
+                            {
+                                "name": "days of premium account",
+                                "amount": 3,
+                                "rate": 0.15
+                            },
+                            {
+                                "name": "days of premium account",
+                                "amount": 7,
+                                "rate": 0.05
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "slot_no": 4,
+                "special": "box",
+                "rate": 0.20,
+                "loot_groups": [
+                    {
+                        "alias": "Extra Boxes",
+                        "group_no": 1,
+                        "rate": 1,
+                        "loot_items": [
+                            {
+                                "name": "Raumphalt Proto",
+                                "amount": 1,
+                                "rate": 0.23
+                            },
+                            {
+                                "name": "Raumphalt Alpha",
+                                "amount": 1,
+                                "rate": 0.75
+                            },
+                            {
+                                "name": "Raumphalt Prime",
+                                "amount": 1,
+                                "rate": 0.02
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "slot_no": 5,
+                "special": "tank",
+                "rate": 0.02,
+                "loot_groups": [
+                    {
+                        "alias": "Tanks",
+                        "group_no": 1,
+                        "rate": 1,
+                        "loot_items": [
+                            {
+                                "name": " t08 Kpz. 3 GST Tour",
+                                "amount": 1,
+                                "rate": 0.13
+                            },
+                            {
+                                "name": " t09 Czolg Pancernik",
+                                "amount": 1,
+                                "rate": 0.08
+                            },
+                            {
+                                "name": " t08 AMBT",
+                                "amount": 1,
+                                "rate": 0.08
+                            },
+                            {
+                                "name": " t08 SDP wz 66 Grom",
+                                "amount": 1,
+                                "rate": 0.13
+                            },
+                            {
+                                "name": " t08 Jagdtiger Prototype",
+                                "amount": 1,
+                                "rate": 0.08
+                            },
+                            {
+                                "name": " t08 T-44-100",
+                                "amount": 1,
+                                "rate": 0.08
+                            },
+                            {
+                                "name": " t08 AAT60",
+                                "amount": 1,
+                                "rate": 0.08
+                            },
+                            {
+                                "name": " t09 VCS 6X6 TS 90",
+                                "amount": 1,
+                                "rate": 0.13
+                            },
+                            {
+                                "name": " t08 EMIL 1951",
+                                "amount": 1,
+                                "rate": 0.13
+                            },
+                            {
+                                "name": " t08 T77",
+                                "amount": 1,
+                                "rate": 0.08
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "tier": 2,
+        "name": "Raumphalt Alpha",
+        "pity": 40,
+        "loot_slots": [
+            {
+                "slot_no": 1,
+                "special": "no",
+                "rate": 1,
+                "loot_groups": [
+                    {
+                        "alias": "Free XP",
+                        "group_no": 1,
+                        "rate": 1,
+                        "loot_items": [
+                            {
+                                "name": "free xp",
+                                "amount": 1500,
+                                "rate": 0.80
+                            },
+                            {
+                                "name": "free xp",
+                                "amount": 5000,
+                                "rate": 0.15
+                            },
+                            {
+                                "name": "free xp",
+                                "amount": 25000,
+                                "rate": 0.05
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "slot_no": 2,
+                "special": "no",
+                "rate": 0.75,
+                "loot_groups": [
+                    {
+                        "alias": "Premium Account",
+                        "group_no": 1,
+                        "rate": 0.34,
+                        "loot_items": [
+                            {
+                                "name": "days of premium account",
+                                "amount": 3,
+                                "rate": 0.80
+                            },
+                            {
+                                "name": "days of premium account",
+                                "amount": 7,
+                                "rate": 0.15
+                            },
+                            {
+                                "name": "days of premium account",
+                                "amount": 14,
+                                "rate": 0.05
+                            }
+                        ]
+                    },
+                    {
+                        "alias": "Boosters",
+                        "group_no": 2,
+                        "rate": 0.33,
+                        "loot_items": [
+                            {
+                                "name": "booster: free/crew xp",
+                                "amount": 2,
+                                "rate": 0.34
+                            },
+                            {
+                                "name": "booster: tank xp",
+                                "amount": 2,
+                                "rate": 0.33
+                            },
+                            {
+                                "name": "booster: credits",
+                                "amount": 2,
+                                "rate": 0.33
+                            }
+                        ]
+                    },
+                    {
+                        "alias": "Crew XP",
+                        "group_no": 3,
+                        "rate": 0.33,
+                        "loot_items": [
+                            {
+                                "name": "crew xp: general directive (medium)",
+                                "amount": 1,
+                                "rate": 0.80
+                            },
+                            {
+                                "name": "crew xp: universal manual (big)",
+                                "amount": 1,
+                                "rate": 0.15
+                            },
+                            {
+                                "name": "crew xp: personal manual (huge)",
+                                "amount": 1,
+                                "rate": 0.05
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "slot_no": 3,
+                "special": "no",
+                "rate": 0.50,
+                "loot_groups": [
+                    {
+                        "alias": "3D Attachments",
+                        "group_no": 1,
+                        "rate": 1,
+                        "loot_items": [
+                            {
+                                "name": "3D attachment",
+                                "amount": 1,
+                                "rate": 1
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "slot_no": 4,
+                "special": "box",
+                "rate": 0.20,
+                "loot_groups": [
+                    {
+                        "alias": "Extra Boxes",
+                        "group_no": 1,
+                        "rate": 1,
+                        "loot_items": [
+                            {
+                                "name": "Raumphalt Proto",
+                                "amount": 1,
+                                "rate": 0.02
+                            },
+                            {
+                                "name": "Raumphalt Alpha",
+                                "amount": 1,
+                                "rate": 0.23
+                            },
+                            {
+                                "name": "Raumphalt Prime",
+                                "amount": 1,
+                                "rate": 0.75
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "slot_no": 5,
+                "special": "no",
+                "rate": 0.15,
+                "loot_groups": [
+                    {
+                        "alias": "Experimental Materials",
+                        "group_no": 1,
+                        "rate": 0.50,
+                        "loot_items": [
+                            {
+                                "name": "experimental materials",
+                                "amount": 100,
+                                "rate": 0.80
+                            },
+                            {
+                                "name": "experimental materials",
+                                "amount": 200,
+                                "rate": 0.15
+                            },
+                            {
+                                "name": "experimental materials",
+                                "amount": 500,
+                                "rate": 0.05
+                            }
+                        ]
+                    },
+                    {
+                        "alias": "XP Missions",
+                        "group_no": 2,
+                        "rate": 0.50,
+                        "loot_items": [
+                            {
+                                "name": "missions for x5 XP",
+                                "amount": 3,
+                                "rate": 0.80
+                            },
+                            {
+                                "name": "missions for x5 XP",
+                                "amount": 5,
+                                "rate": 0.15
+                            },
+                            {
+                                "name": "missions for x5 XP",
+                                "amount": 10,
+                                "rate": 0.05
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "slot_no": 6,
+                "special": "tank",
+                "rate": 0.05,
+                "loot_groups": [
+                    {
+                        "alias": "Tanks",
+                        "group_no": 1,
+                        "rate": 1,
+                        "loot_items": [
+                            {
+                                "name": " t09 UDES 03 Alt 3",
+                                "amount": 1,
+                                "rate": 0.35
+                            },
+                            {
+                                "name": " t09 Kpz. Erich Konzept I",
+                                "amount": 1,
+                                "rate": 0.15
+                            },
+                            {
+                                "name": " t10 BZ-72-1",
+                                "amount": 1,
+                                "rate": 0.05
+                            },
+                            {
+                                "name": " t09 Vz. 58 Medved",
+                                "amount": 1,
+                                "rate": 0.10
+                            },
+                            {
+                                "name": " t09 E 77",
+                                "amount": 1,
+                                "rate": 0.35
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "tier": 3,
+        "name": "Raumphalt Prime",
+        "pity": 20,
+        "loot_slots": [
+            {
+                "slot_no": 1,
+                "special": "no",
+                "rate": 1,
+                "loot_groups": [
+                    {
+                        "alias": "Gold",
+                        "group_no": 1,
+                        "rate": 1,
+                        "loot_items": [
+                            {
+                                "name": "gold",
+                                "amount": 750,
+                                "rate": 0.80
+                            },
+                            {
+                                "name": "gold",
+                                "amount": 1500,
+                                "rate": 0.15
+                            },
+                            {
+                                "name": "gold",
+                                "amount": 3000,
+                                "rate": 0.05
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "slot_no": 2,
+                "special": "no",
+                "rate": 1,
+                "loot_groups": [
+                    {
+                        "alias": "3D Attachments",
+                        "group_no": 1,
+                        "rate": 1,
+                        "loot_items": [
+                            {
+                                "name": "3D attachment",
+                                "amount": 1,
+                                "rate": 1
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "slot_no": 3,
+                "special": "no",
+                "rate": 0.75,
+                "loot_groups": [
+                    {
+                        "alias": "Premium Account",
+                        "group_no": 1,
+                        "rate": 0.34,
+                        "loot_items": [
+                            {
+                                "name": "days of premium account",
+                                "amount": 7,
+                                "rate": 0.80
+                            },
+                            {
+                                "name": "days of premium account",
+                                "amount": 14,
+                                "rate": 0.15
+                            },
+                            {
+                                "name": "days of premium account",
+                                "amount": 30,
+                                "rate": 0.05
+                            }
+                        ]
+                    },
+                    {
+                        "alias": "Boosters",
+                        "group_no": 2,
+                        "rate": 0.33,
+                        "loot_items": [
+                            {
+                                "name": "booster: free/crew xp",
+                                "amount": 6,
+                                "rate": 0.34
+                            },
+                            {
+                                "name": "booster: tank xp",
+                                "amount": 6,
+                                "rate": 0.33
+                            },
+                            {
+                                "name": "booster: credits",
+                                "amount": 6,
+                                "rate": 0.33
+                            }
+                        ]
+                    },
+                    {
+                        "alias": "Crew XP",
+                        "group_no": 3,
+                        "rate": 0.33,
+                        "loot_items": [
+                            {
+                                "name": "crew xp: general directive (medium)",
+                                "amount": 1,
+                                "rate": 0.80
+                            },
+                            {
+                                "name": "crew xp: universal manual (big)",
+                                "amount": 1,
+                                "rate": 0.15
+                            },
+                            {
+                                "name": "crew xp: personal manual (huge)",
+                                "amount": 1,
+                                "rate": 0.05
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "slot_no": 4,
+                "special": "no",
+                "rate": 0.30,
+                "loot_groups": [
+                    {
+                        "alias": "Crew Members",
+                        "group_no": 1,
+                        "rate": 0.34,
+                        "loot_items": [
+                            {
+                                "name": "crew member: with 1 skill",
+                                "amount": 1,
+                                "rate": 0.80
+                            },
+                            {
+                                "name": "crew member: with 2 skills",
+                                "amount": 1,
+                                "rate": 0.15
+                            },
+                            {
+                                "name": "crew member: with 3 skills",
+                                "amount": 1,
+                                "rate": 0.05
+                            }
+                        ]
+                    },
+                    {
+                        "alias": "Experimental Materials",
+                        "group_no": 2,
+                        "rate": 0.33,
+                        "loot_items": [
+                            {
+                                "name": "experimental materials",
+                                "amount": 200,
+                                "rate": 0.80
+                            },
+                            {
+                                "name": "experimental materials",
+                                "amount": 500,
+                                "rate": 0.15
+                            },
+                            {
+                                "name": "experimental materials",
+                                "amount": 1000,
+                                "rate": 0.05
+                            }
+                        ]
+                    },
+                    {
+                        "alias": "XP Missions",
+                        "group_no": 3,
+                        "rate": 0.33,
+                        "loot_items": [
+                            {
+                                "name": "missions for x5 XP",
+                                "amount": 10,
+                                "rate": 0.80
+                            },
+                            {
+                                "name": "missions for x5 XP",
+                                "amount": 20,
+                                "rate": 0.15
+                            },
+                            {
+                                "name": "missions for x5 XP",
+                                "amount": 50,
+                                "rate": 0.05
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "slot_no": 5,
+                "special": "box",
+                "rate": 0.20,
+                "loot_groups": [
+                    {
+                        "alias": "Extra Boxes",
+                        "group_no": 1,
+                        "rate": 1,
+                        "loot_items": [
+                            {
+                                "name": "Raumphalt Proto",
+                                "amount": 1,
+                                "rate": 0.75
+                            },
+                            {
+                                "name": "Raumphalt Alpha",
+                                "amount": 1,
+                                "rate": 0.23
+                            },
+                            {
+                                "name": "Raumphalt Prime",
+                                "amount": 1,
+                                "rate": 0.02
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "slot_no": 6,
+                "special": "tank",
+                "rate": 0.10,
+                "loot_groups": [
+                    {
+                        "alias": "Tanks",
+                        "group_no": 1,
+                        "rate": 1,
+                        "loot_items": [
+                            {
+                                "name": " t09 Vercingetorix",
+                                "amount": 1,
+                                "rate": 0.20
+                            },
+                            {
+                                "name": " t10 MBT-B",
+                                "amount": 1,
+                                "rate": 0.40
+                            },
+                            {
+                                "name": " t10 Chieftain Mk. 6",
+                                "amount": 1,
+                                "rate": 0.40
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]
