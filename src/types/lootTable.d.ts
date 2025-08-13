@@ -20,9 +20,12 @@ export interface LootTable {
      */
     endDate: string;
     /**
-     * Longer description or extra information about the event or loot table.
+     * Whether this event uses a regular or recursive format for lootboxes (recursive lootboxes may contain other
+     * lootboxes in their rewards).
+     *
+     * This field has no impact on the algorithm, it exists only for documentation purposes and loot table validation.
      */
-    description?: string;
+    recursive: boolean;
     /**
      * The author of the loot table. So users know who spent their evening writing a json to open fake lootboxes online.
      */
@@ -32,12 +35,9 @@ export interface LootTable {
      */
     source: string;
     /**
-     * Whether this event uses a regular or recursive format for lootboxes (recursive lootboxes may contain other
-     * lootboxes in their rewards).
-     *
-     * This field has no impact on the algorithm, it exists only for documentation purposes and loot table validation.
+     * Extra info / comments about the loot table (i.e. justifying certain non-officially-confirmed stats).
      */
-    recursive: boolean;
+    notes?: string;
     /**
      * The list of lootboxes available in the event.
      *
@@ -90,15 +90,15 @@ export interface Lootbox {
      * If "replace_all": future occurrences will be replaced with another item, defined in the `mainPrizeSubstitute`
      *                   field.
      *
-     * If "remove_even": once an item has dropped, it will be removed from the loot table and its drop rate will be
+     * If "remove_even": once a LootDrop has dropped, it will be removed from the loot table and its drop rate will be
      *                   redistributed EVENLY to other items of the same group (`See LootGroup structure` part of the
      *                   documentation). Once all items are removed, any new main-prize drop will be replaced with
-     *                   `mainPrizeSubstitute`.
+     *                   `mainPrizeSubstitute` or the LootDrop's `substitute`.
      *
-     * If "remove_prop": once an item has dropped, it will be removed from the loot table and its drop rate will be
+     * If "remove_prop": once a LootDrop has dropped, it will be removed from the loot table and its drop rate will be
      *                   redistributed to other items of the same group PROPORTIONALLY to their current drop rate
      *                   (`See LootGroup structure` part of the documentation). Once all items are removed, any new
-     *                   main-prize drop will be replaced with `mainPrizeSubstitute`.
+     *                   main-prize drop will be replaced with `mainPrizeSubstitute` or the LootDrop's `substitute`.
      *
      * WARNING: The choice of redistribution method for the "remove" scenario will have an impact on the accuracy of
      *          results when opening a small number of boxes, or if there are many other items with varying operates
@@ -107,9 +107,15 @@ export interface Lootbox {
      */
     mainPrizeDuplicates: 'allowed' | 'replace_individual' | 'replace_all' | 'remove_even' | 'remove_prop';
     /**
-     * The "compensation" drop used if the main prize LootSlot does not contain any LootDrops (this scenario should only
-     * happen if the `mainPrizeDuplicates` field above is set to `remove_even` or `remove_prop`), or if a duplicate
-     * happens when `replace_all` is used as a handling method. The field is mandatory for these cases.
+     * The "compensation" / replacement drop after every LootDrop has been dropped already, if duplication is not
+     * allowed.
+     *
+     * If `mainPrizeDuplicates` === 'replace_all', this field is mandatory.
+     *
+     * If `mainPrizeDuplicates` === 'remove_even' || `mainPrizeDuplicates` === 'remove_prop', this field OR
+     * `LootDrop.substitute` are mandatory. Only one of the two can exist simultaneously, and `LootDrop.substitute` must
+     * exist for all LootDrops if it is chosen (in case neither are present, validation errors will mention
+     * `LootDrop.substitute`).
      */
     mainPrizeSubstitute?: LootDropSubstitute;
     /**
@@ -235,9 +241,17 @@ export interface LootDrop {
      */
     amount: number;
     /**
-     * If the lootbox's `mainPrizeDuplicates` field was set to `replace_individual` and this item belongs to the
-     * main-prize slot, this is the item that will be used as a replacement (or "compensation") instead of the original
-     * one in case of a duplicate. Mandatory in this case.
+     * The "compensation" / replacement drop after every LootDrop has been dropped already, if duplication is not
+     * allowed.
+     *
+     * If `mainPrizeDuplicates` === 'replace_individual', this field is mandatory.
+     *
+     * If `Lootbox.mainPrizeDuplicates` === 'remove_even' || `Lootbox.mainPrizeDuplicates` === 'remove_prop', this field
+     * OR `Lootbox.mainPrizeSubstitute` are mandatory. Only one of the two can exist simultaneously, and `substitute`
+     * must exist for all LootDrops in order to be valid  (in case none are present, validation errors will mention
+     * `substitute`).
+     *
+     * In all cases where `substitute` is not mandatory, it is not supposed to be present.
      */
     substitute?: LootDropSubstitute;
 }

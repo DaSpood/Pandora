@@ -6,11 +6,12 @@ It supports custom loot tables, allowing you to enjoy free gambling for any game
 write some JSON first).
 
 It offers 3 opening "modes":
+
 - "single": opens one box at a time
 - "budget": opens a given number of boxes rapidly and gives you a recap of the rewards obtained
 - "until": opens boxes one by one until a given goal is achieved (a specific reward, all rewards...) and gives you a
-           recap of rewards obtained, as well as how many boxes were required. You can run thousands of iterations of
-           this simulation to generate "best case", "average" and "worst case" **estimates**.
+  recap of rewards obtained, as well as how many boxes were required. You can run thousands of iterations of
+  this simulation to generate "best case", "average" and "worst case" **estimates**.
 
 Pandora supports common lootbox mechanics like pity, duplicate prevention/compensation, and of course, "tiered" (aka
 "recursive" or "matryoshka") lootboxes ! Why is that a thing ? Go ask Wargaming !
@@ -26,6 +27,7 @@ system). However, it still aims to be compatible with most common implementation
 popular gacha games, but the main focus is for it to work World Of Tanks PC's lootbox events.
 
 There are three main goals here:
+
 - let people experience infinite gambling for their favorite game without spending their real money (gambling is epic,
   financial ruin is not)
 - let people simulate a certain amount of openings, so they can get a better picture of what their odds are and make
@@ -68,6 +70,9 @@ specific, and well documented in [this file](src/types/lootTable.d.ts), you can 
 on the loaded loot table.
 
 The loaded loot table will be fully validated and type checked to make sure it will work with the simulator.
+
+***WARNING: THE LOOT TABLE FORMAT IS NOT YET FINALIZED AND MAY STILL CHANGE UNEXPECTEDLY AS I FIGURE OUT HOW TO PROPERLY
+HANDLE EVERYTHING. THIS WARNING WILL BE REMOVED ONCE IT'S STABLE.***
 
 ### Config
 
@@ -113,6 +118,7 @@ a dedicated subreddit, so that there is some proof of community acceptance).
 
 When it comes to pull requests about the algorithm itself, I will not accept changes that alter the algorithm too much,
 for two reasons:
+
 - I want to keep it working mainly for World Of Tanks PC, or otherwise be as generic as possible, so I am not interested
   in adding extra processing for specific games
 - I want to avoid breaking compatibility with existing loot tables, so no structure changes unless absolutely necessary

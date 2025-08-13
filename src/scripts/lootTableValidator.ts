@@ -73,7 +73,7 @@ export const validateLootDropSubstitute = (substitute: Maybe<LootDropSubstitute>
     return errors;
 };
 
-export const validateLootDrop = (drop: Maybe<LootDrop>, selfIndex: number, isReplaceIndividual: boolean): string[] => {
+export const validateLootDrop = (drop: Maybe<LootDrop>, selfIndex: number, expectSubstitute: boolean): string[] => {
     const prefix = `lootDrops[${selfIndex}]`;
     if (!drop) return [`${prefix} is null`];
     const errors = [];
@@ -93,14 +93,16 @@ export const validateLootDrop = (drop: Maybe<LootDrop>, selfIndex: number, isRep
     if (!validateRequiredPositiveInt(drop.amount)) {
         errors.push(`${prefix}.amount is invalid`);
     }
-    if (isReplaceIndividual) {
+    if (expectSubstitute) {
         errors.push(...validateLootDropSubstitute(drop.substitute).map((error) => `${prefix}.${error}`));
+    } else if (drop.substitute) {
+        errors.push(`${prefix}.substitute should not be present`);
     }
 
     return errors;
 };
 
-export const validateLootGroup = (group: LootGroup, selfIndex: number, isReplaceIndividual: boolean): string[] => {
+export const validateLootGroup = (group: LootGroup, selfIndex: number, expectSubstitute: boolean): string[] => {
     const prefix = `lootGroups[${selfIndex}]`;
     if (!group) return [`${prefix} is null`];
     const errors = [];
@@ -117,7 +119,7 @@ export const validateLootGroup = (group: LootGroup, selfIndex: number, isReplace
 
     let dropRatesTotal = 0;
     group.lootDrops.forEach((drop, index) => {
-        errors.push(...validateLootDrop(drop, index, isReplaceIndividual).map((error) => `${prefix}.${error}`));
+        errors.push(...validateLootDrop(drop, index, expectSubstitute).map((error) => `${prefix}.${error}`));
         dropRatesTotal += drop.dropRate ?? 0;
     });
     if (Number(dropRatesTotal.toFixed(6)) !== 1) {
@@ -127,7 +129,7 @@ export const validateLootGroup = (group: LootGroup, selfIndex: number, isReplace
     return errors;
 };
 
-export const validateLootSlot = (slot: LootSlot, selfIndex: number, isReplaceIndividual: boolean): string[] => {
+export const validateLootSlot = (slot: LootSlot, selfIndex: number, expectSubstitute: boolean): string[] => {
     const prefix = `lootSlots[${selfIndex}]`;
     if (!slot) return [`${prefix} is null`];
     const errors = [];
@@ -147,7 +149,7 @@ export const validateLootSlot = (slot: LootSlot, selfIndex: number, isReplaceInd
 
     let dropRatesTotal = 0;
     slot.lootGroups.forEach((group, index) => {
-        errors.push(...validateLootGroup(group, index, isReplaceIndividual).map((error) => `${prefix}.${error}`));
+        errors.push(...validateLootGroup(group, index, expectSubstitute).map((error) => `${prefix}.${error}`));
         dropRatesTotal += group.dropRate ?? 0;
     });
     if (Number(dropRatesTotal.toFixed(6)) !== 1) {
@@ -185,7 +187,7 @@ export const validateLootbox = (box: Lootbox, selfIndex: number): string[] => {
     ) {
         errors.push(`${prefix}.mainPrizeDuplicates is invalid`);
     }
-    if (['replace_all', 'remove_even', 'remove_prop'].includes(box.mainPrizeDuplicates)) {
+    if (box.mainPrizeDuplicates === 'replace_all') {
         errors.push(
             ...validateLootDropSubstitute(box.mainPrizeSubstitute, 'mainPrizeSubstitute').map(
                 (error) => `${prefix}.${error}`,
@@ -198,12 +200,11 @@ export const validateLootbox = (box: Lootbox, selfIndex: number): string[] => {
 
     let mainPrizeSlots = 0;
     let lootboxSlots = 0;
+    const expectSubstitute =
+        box.mainPrizeDuplicates === 'replace_individual' ||
+        (['remove_even', 'remove_prop'].includes(box.mainPrizeDuplicates) && !box.mainPrizeSubstitute);
     box.lootSlots.forEach((slot, index) => {
-        errors.push(
-            ...validateLootSlot(slot, index, box.mainPrizeDuplicates === 'replace_individual').map(
-                (error) => `${prefix}.${error}`,
-            ),
-        );
+        errors.push(...validateLootSlot(slot, index, expectSubstitute).map((error) => `${prefix}.${error}`));
         if (slot.contentType === 'main_prize') mainPrizeSlots++;
         if (slot.contentType === 'lootbox') lootboxSlots++;
     });
@@ -231,8 +232,8 @@ export const validateLootTable = (table: LootTable): string[] => {
     if (!validateRequiredDate(table.endDate)) {
         errors.push(`${prefix}.endDate is invalid`);
     }
-    if (!validateOptionalString(table.description)) {
-        errors.push(`${prefix}.description is invalid`);
+    if (!validateRequiredBoolean(table.recursive)) {
+        errors.push(`${prefix}.recursive is invalid`);
     }
     if (!validateRequiredString(table.author)) {
         errors.push(`${prefix}.author is invalid`);
@@ -240,8 +241,8 @@ export const validateLootTable = (table: LootTable): string[] => {
     if (!validateRequiredString(table.source)) {
         errors.push(`${prefix}.source is invalid`);
     }
-    if (!validateRequiredBoolean(table.recursive)) {
-        errors.push(`${prefix}.recursive is invalid`);
+    if (!validateOptionalString(table.notes)) {
+        errors.push(`${prefix}.notes is invalid`);
     }
     if (!validateRequiredArray(table.lootboxes)) {
         errors.push(`${prefix}.lootboxes is invalid`);

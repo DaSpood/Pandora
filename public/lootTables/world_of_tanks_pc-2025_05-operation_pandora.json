@@ -3,10 +3,10 @@
     "eventName": "Operation Pandora",
     "startDate": "2025-05-15",
     "endDate": "2025-05-30",
-    "description": "Not officially confirmed if duplicates are remove_even or remove_prop, assume the latter. 3D attachments bundled into 1 drop type because nobody cares about them.",
+    "recursive": true,
     "author": "DaSpood",
     "source": "'https://worldoftanks.asia/ko/news/specials/raumfalte-last-stand-2025-bundles/', bottom of the page, hidden by default",
-    "recursive": true,
+    "notes": "Not officially confirmed if duplicates are remove_even or remove_prop, assume the latter. 3D attachments bundled into 1 drop type because nobody cares about them.",
     "lootboxes": [
         {
             "name": "Raumfalte Proto",

@@ -1,0 +1,354 @@
+{
+    "game": "World Of Tanks PC",
+    "eventName": "Operation Pandora",
+    "startDate": "2025-15-05",
+    "endDate": "2025-05-30",
+    "recursive": false,
+    "author": "DaSpood",
+    "source": "",
+    "notes": "Purposely invalid file to test validation errors",
+    "lootboxes": [
+        {
+            "name": "Raumfalte Proto",
+            "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/raumfalte_proto_small.png",
+            "purchasable": true,
+            "pity": 0,
+            "mainPrizeDuplicates": "remove_prop",
+            "mainPrizeSubstitute": {
+                "name": "Raumfalte Prime",
+                "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/raumfalte_prime_small.png",
+                "backgroundUrl": "https://freesvg.org/img/1539051429.png",
+                "amount": 1
+            },
+            "lootSlots": [
+                {
+                    "alias": "Guaranteed slot 1 (Credits & Crew books)",
+                    "dropRate": 2,
+                    "contentType": "filler",
+                    "lootGroups": [
+                        {
+                            "alias": "Credits",
+                            "dropRate": 0.00,
+                            "lootDrops": [
+                                {
+                                    "name": "",
+                                    "pictureUrl": "ssh://eu-wotp.wgcdn.co/dcont/fb/image/new_credits_icon_440x440_png.png",
+                                    "dropRate": 0.90,
+                                    "amount": 0,
+                                    "substitute": {
+                                        "name": "Raumfalte Prime",
+                                        "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/raumfalte_prime_small.png",
+                                        "backgroundUrl": "https://freesvg.org/img/1539051429.png",
+                                        "amount": 1
+                                    }
+                                },
+                                {
+                                    "name": "credits",
+                                    "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/new_credits_icon_440x440_png.png",
+                                    "dropRate": -0.15,
+                                    "amount": 100000
+                                },
+                                {
+                                    "name": "credits",
+                                    "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/new_credits_icon_440x440_png.png",
+                                    "dropRate": 0.05,
+                                    "amount": 250000
+                                }
+                            ]
+                        },
+                        {
+                            "alias": "Crew books",
+                            "dropRate": 0.50,
+                            "lootDrops": [
+                                {
+                                    "name": "crew book: universal booklet",
+                                    "pictureUrl": "https://content-wg.gcdn.co/locdoc/game_guides/crew_training/universal_brochure.png",
+                                    "dropRate": 0.80,
+                                    "amount": 1
+                                },
+                                {
+                                    "name": "crew book: universal guide",
+                                    "pictureUrl": "https://content-wg.gcdn.co/locdoc/game_guides/crew_training/universal_guide.png",
+                                    "dropRate": 0.15,
+                                    "amount": 1
+                                },
+                                {
+                                    "name": "crew book: universal manual",
+                                    "pictureUrl": "https://content-wg.gcdn.co/locdoc/book-cards/img/universalBook1.png",
+                                    "dropRate": 0.05,
+                                    "amount": 1
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "alias": "Guaranteed slot 2 (Personal reserves)",
+                    "dropRate": 1,
+                    "contentType": "lootbox",
+                    "lootGroups": [
+                        {
+                            "alias": "Personal reserves",
+                            "dropRate": 1,
+                            "lootDrops": [
+                                {
+                                    "name": "personal reserve: +200% free & crew xp",
+                                    "pictureUrl": "https://tanki-media-content.tanki.su/tanki-media/images/stronghold/awards/7.png",
+                                    "dropRate": 0.34,
+                                    "amount": 1
+                                },
+                                {
+                                    "name": "personal reserve: +50% combat xp",
+                                    "pictureUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3mAwLYPEO69GSWoRj61BlxOhnNSIexK4NtA",
+                                    "dropRate": 0.33,
+                                    "amount": 1
+                                },
+                                {
+                                    "name": "personal reserve: +50% credits",
+                                    "pictureUrl": "https://tanki-media-content.tanki.su/tanki-media/images/stronghold/awards/6.png",
+                                    "dropRate": 0.33,
+                                    "amount": 1
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "alias": "Filler slot 1 (Premium account)",
+                    "dropRate": 0.50,
+                    "contentType": "filler",
+                    "lootGroups": [
+                        {
+                            "alias": "Premium account",
+                            "dropRate": 1,
+                            "lootDrops": [
+                                {
+                                    "name": "days of premium account",
+                                    "pictureUrl": "https://na-wotp.wgcdn.co/dcont/fb/image/440_wot_premium.png",
+                                    "dropRate": 0.80,
+                                    "amount": 1
+                                },
+                                {
+                                    "name": "days of premium account",
+                                    "pictureUrl": "https://na-wotp.wgcdn.co/dcont/fb/image/440_wot_premium.png",
+                                    "dropRate": 0.15,
+                                    "amount": 3
+                                },
+                                {
+                                    "name": "days of premium account",
+                                    "pictureUrl": "https://na-wotp.wgcdn.co/dcont/fb/image/440_wot_premium.png",
+                                    "dropRate": 0.05,
+                                    "amount": 7
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "alias": "Extra lootboxes",
+                    "dropRate": 0.20,
+                    "contentType": "lootbox",
+                    "lootGroups": [
+                        {
+                            "alias": "Extra lootboxes",
+                            "dropRate": 1,
+                            "lootDrops": [
+                                {
+                                    "name": "Raumfalte Proto",
+                                    "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/raumfalte_proto_small.png",
+                                    "dropRate": 0.23,
+                                    "amount": 1
+                                },
+                                {
+                                    "name": "Raumfalte Alpha",
+                                    "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/raumfalte_alpha_small.png",
+                                    "dropRate": 0.75,
+                                    "amount": 1
+                                },
+                                {
+                                    "name": "Raumfalte Prime",
+                                    "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/raumfalte_prime_small.png",
+                                    "backgroundUrl": "https://freesvg.org/img/1539051429.png",
+                                    "dropRate": 0.02,
+                                    "amount": 1
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "alias": "Tanks",
+                    "dropRate": 0.02,
+                    "contentType": "filler",
+                    "lootGroups": [
+                        {
+                            "alias": "Tanks",
+                            "dropRate": 1,
+                            "lootDrops": [
+                                {
+                                    "name": "Kpz. 3 GST Turm",
+                                    "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/germany-G174_Kpz3_GST_Turm.png",
+                                    "backgroundUrl": "https://freesvg.org/img/1539051429.png",
+                                    "dropRate": 0.13,
+                                    "amount": 1
+                                },
+                                {
+                                    "name": "CC-46 Pancernik",
+                                    "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/poland-Pl26_Czolg_P_Wz_46.png",
+                                    "backgroundUrl": "https://freesvg.org/img/1539051429.png",
+                                    "dropRate": 0.08,
+                                    "amount": 1
+                                },
+                                {
+                                    "name": "AMBT",
+                                    "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/usa-A149_AMBT.png",
+                                    "backgroundUrl": "https://freesvg.org/img/1539051429.png",
+                                    "dropRate": 0.08,
+                                    "amount": 1
+                                },
+                                {
+                                    "name": "SDP wz 66 Grom",
+                                    "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/poland-Pl27_SDP_Wz_66T.png",
+                                    "backgroundUrl": "https://freesvg.org/img/1539051429.png",
+                                    "dropRate": 0.13,
+                                    "amount": 1
+                                },
+                                {
+                                    "name": "Jagdtiger Prototype",
+                                    "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/germany-G44_JagdTigerH.png",
+                                    "backgroundUrl": "https://freesvg.org/img/1539051429.png",
+                                    "dropRate": 0.08,
+                                    "amount": 1
+                                },
+                                {
+                                    "name": "T-44-100",
+                                    "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/ussr-R122_T44_100.png",
+                                    "backgroundUrl": "https://freesvg.org/img/1539051429.png",
+                                    "dropRate": 0.08,
+                                    "amount": 1
+                                },
+                                {
+                                    "name": "AAT60",
+                                    "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/usa-A155_AAT60.png",
+                                    "backgroundUrl": "https://freesvg.org/img/1539051429.png",
+                                    "dropRate": 0.08,
+                                    "amount": 1
+                                },
+                                {
+                                    "name": "VCS 6X6 TS 90",
+                                    "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/france-F122_VCS_6x6_TS90.png",
+                                    "backgroundUrl": "https://freesvg.org/img/1539051429.png",
+                                    "dropRate": 0.13,
+                                    "amount": 1
+                                },
+                                {
+                                    "name": "EMIL 1951",
+                                    "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/sweden-S25_EMIL_51.png",
+                                    "backgroundUrl": "https://freesvg.org/img/1539051429.png",
+                                    "dropRate": 0.13,
+                                    "amount": 1
+                                },
+                                {
+                                    "name": "T77",
+                                    "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/usa-A132_T77.png",
+                                    "backgroundUrl": "https://freesvg.org/img/1539051429.png",
+                                    "dropRate": 0.08,
+                                    "amount": 1
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Raumfalte Alpha",
+            "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/raumfalte_alpha_small.png",
+            "purchasable": false,
+            "pity": 40,
+            "mainPrizeDuplicates": "remove_prop",
+            "lootSlots": [
+                {
+                    "alias": "Guaranteed slot 1 (Free XP)",
+                    "dropRate": 1,
+                    "contentType": "filler",
+                    "lootGroups": [
+                        {
+                            "alias": "Free XP",
+                            "dropRate": 1,
+                            "lootDrops": [
+                                {
+                                    "name": "free xp",
+                                    "pictureUrl": "https://na-wotp.wgcdn.co/dcont/fb/image/wot_xpicon_freexp_164x157.png",
+                                    "dropRate": 0.80,
+                                    "amount": 1500
+                                },
+                                {
+                                    "name": "free xp",
+                                    "pictureUrl": "https://na-wotp.wgcdn.co/dcont/fb/image/wot_xpicon_freexp_164x157.png",
+                                    "dropRate": 0.15,
+                                    "amount": 5000
+                                },
+                                {
+                                    "name": "free xp",
+                                    "pictureUrl": "https://na-wotp.wgcdn.co/dcont/fb/image/wot_xpicon_freexp_164x157.png",
+                                    "dropRate": 0.05,
+                                    "amount": 25000
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "alias": "Filler slot 1 (Premium account, Personal reserves, Crew books)",
+                    "dropRate": 0.75,
+                    "contentType": "main_prize",
+                    "lootGroups": [
+                        {
+                            "alias": "Premium account",
+                            "dropRate": 0.34,
+                            "lootDrops": [
+                                {
+                                    "name": "days of premium account",
+                                    "pictureUrl": "https://na-wotp.wgcdn.co/dcont/fb/image/440_wot_premium.png",
+                                    "dropRate": 0.80,
+                                    "amount": 3,
+                                    "substitute": {
+                                        "name": "Raumfalte Prime",
+                                        "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/raumfalte_prime_small.png",
+                                        "backgroundUrl": "https://freesvg.org/img/1539051429.png",
+                                        "amount": 1
+                                    }
+                                },
+                                {
+                                    "name": "days of premium account",
+                                    "pictureUrl": "https://na-wotp.wgcdn.co/dcont/fb/image/440_wot_premium.png",
+                                    "dropRate": 0.15,
+                                    "amount": 7,
+                                    "substitute": {
+                                        "name": "Raumfalte Prime",
+                                        "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/raumfalte_prime_small.png",
+                                        "backgroundUrl": "https://freesvg.org/img/1539051429.png",
+                                        "amount": 1
+                                    }
+                                },
+                                {
+                                    "name": "days of premium account",
+                                    "pictureUrl": "https://na-wotp.wgcdn.co/dcont/fb/image/440_wot_premium.png",
+                                    "dropRate": 0.05,
+                                    "amount": 14,
+                                    "substitute": {
+                                        "name": "Raumfalte Prime",
+                                        "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/raumfalte_prime_small.png",
+                                        "backgroundUrl": "https://freesvg.org/img/1539051429.png",
+                                        "amount": 1
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
