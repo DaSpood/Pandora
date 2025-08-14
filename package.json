@@ -11,7 +11,9 @@
         "test": "jest --testPathPatterns=src/tests --runInBand --verbose=false"
     },
     "dependencies": {
+        "bootstrap": "^5.3.7",
         "react": "^19.1.1",
+        "react-bootstrap": "^2.10.10",
         "react-dom": "^19.1.1"
     },
     "devDependencies": {

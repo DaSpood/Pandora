@@ -4,7 +4,7 @@ import { validateLootTable } from '../scripts/lootTableValidator';
 
 import type { LootTable } from '../types/lootTable';
 
-const LOOT_TABLES_DIRPATH = path.resolve(__dirname, '../../public/lootTables');
+const LOOT_TABLES_DIRPATH = path.resolve(__dirname, '../assets/lootTables');
 
 describe('LootTableValidator', () => {
     const lootTables = fs.readdirSync(LOOT_TABLES_DIRPATH).map((f) => path.resolve(LOOT_TABLES_DIRPATH, f));
