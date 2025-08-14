@@ -8,7 +8,12 @@ export interface LootTable {
      */
     game: string;
     /**
-     * Display name of the event this loot table is for.
+     * Display name of the event/banner this loot table is for.
+     * If there is no official name, make one of your own, as long as it is uniquely identifiable.
+     * If the name is not unique, add a uniquely identifiable suffix, like a game version or date.
+     * For example:
+     * - "Operation Pandora 2025"
+     * - "5.8 Phase 1 Ineffa"
      */
     eventName: string;
     /**

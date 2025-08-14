@@ -66,7 +66,8 @@ TODO: this will be refined as the UI takes shape, until then, I trust that the U
 
 The algorithm will use a specified loot table to handle everything in a rolling session. The loot table format is very
 specific, and well documented in [this file](src/types/lootTable.d.ts), you can find provided samples in
-[this directory](public/lootTables). Everything the algorithm does, including how it handles its configuration, depends
+[this directory](src/assets/lootTables). Everything the algorithm does, including how it handles its configuration,
+depends
 on the loaded loot table.
 
 The loaded loot table will be fully validated and type checked to make sure it will work with the simulator.

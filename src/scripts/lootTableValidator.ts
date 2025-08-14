@@ -1,6 +1,5 @@
 import type { Lootbox, LootDrop, LootDropSubstitute, LootGroup, LootSlot, LootTable } from '../types/lootTable';
-
-type Maybe<T> = T | undefined | null;
+import type { Maybe } from '../types/utils';
 
 // Primitives
 
@@ -118,7 +117,7 @@ export const validateLootGroup = (group: LootGroup, selfIndex: number, expectSub
     }
 
     let dropRatesTotal = 0;
-    group.lootDrops.forEach((drop, index) => {
+    group.lootDrops?.forEach((drop, index) => {
         errors.push(...validateLootDrop(drop, index, expectSubstitute).map((error) => `${prefix}.${error}`));
         dropRatesTotal += drop.dropRate ?? 0;
     });
@@ -148,7 +147,7 @@ export const validateLootSlot = (slot: LootSlot, selfIndex: number, expectSubsti
     }
 
     let dropRatesTotal = 0;
-    slot.lootGroups.forEach((group, index) => {
+    slot.lootGroups?.forEach((group, index) => {
         errors.push(...validateLootGroup(group, index, expectSubstitute).map((error) => `${prefix}.${error}`));
         dropRatesTotal += group.dropRate ?? 0;
     });
@@ -203,7 +202,7 @@ export const validateLootbox = (box: Lootbox, selfIndex: number): string[] => {
     const expectSubstitute =
         box.mainPrizeDuplicates === 'replace_individual' ||
         (['remove_even', 'remove_prop'].includes(box.mainPrizeDuplicates) && !box.mainPrizeSubstitute);
-    box.lootSlots.forEach((slot, index) => {
+    box.lootSlots?.forEach((slot, index) => {
         errors.push(...validateLootSlot(slot, index, expectSubstitute).map((error) => `${prefix}.${error}`));
         if (slot.contentType === 'main_prize') mainPrizeSlots++;
         if (slot.contentType === 'lootbox') lootboxSlots++;
@@ -251,7 +250,7 @@ export const validateLootTable = (table: LootTable): string[] => {
         errors.push(`${prefix}.lootboxes should only contain 1 entry`);
     }
 
-    table.lootboxes.forEach((box, index) => {
+    table.lootboxes?.forEach((box, index) => {
         errors.push(...validateLootbox(box, index).map((error) => `${prefix}.${error}`));
     });
 
