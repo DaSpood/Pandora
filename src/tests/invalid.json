@@ -4,6 +4,7 @@
     "startDate": "2025-15-05",
     "endDate": "2025-05-30",
     "recursive": false,
+    "autoOpenRecursive": true,
     "author": "DaSpood",
     "source": "",
     "notes": "Purposely invalid file to test validation errors",
@@ -85,7 +86,7 @@
                 {
                     "alias": "Guaranteed slot 2 (Personal reserves)",
                     "dropRate": 1,
-                    "contentType": "lootbox",
+                    "contentType": "filler",
                     "lootGroups": [
                         {
                             "alias": "Personal reserves",
@@ -147,7 +148,7 @@
                 {
                     "alias": "Extra lootboxes",
                     "dropRate": 0.20,
-                    "contentType": "lootbox",
+                    "contentType": "filler",
                     "lootGroups": [
                         {
                             "alias": "Extra lootboxes",
@@ -267,6 +268,7 @@
             "purchasable": false,
             "pity": 40,
             "mainPrizeDuplicates": "remove_prop",
+            "secondaryPrizeDuplicates": "remove_prop",
             "lootSlots": [
                 {
                     "alias": "Guaranteed slot 1 (Free XP)",
@@ -302,7 +304,7 @@
                 {
                     "alias": "Filler slot 1 (Premium account, Personal reserves, Crew books)",
                     "dropRate": 0.75,
-                    "contentType": "main_prize",
+                    "contentType": "main",
                     "lootGroups": [
                         {
                             "alias": "Premium account",

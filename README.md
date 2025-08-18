@@ -58,7 +58,8 @@ tens of thousands of simulations in parallel. Your CPU will scream, not mine.
 
 ## How to use
 
-TODO: this will be refined as the UI takes shape, until then, I trust that the UI will be intuitive enough.
+TODO: no point in writing this section until the UI is somewhat final. Until then, I trust that the UI will be intuitive
+enough.
 
 ## The Algorithm
 
@@ -67,10 +68,29 @@ TODO: this will be refined as the UI takes shape, until then, I trust that the U
 The algorithm will use a specified loot table to handle everything in a rolling session. The loot table format is very
 specific, and well documented in [this file](src/types/lootTable.d.ts), you can find provided samples in
 [this directory](src/assets/lootTables). Everything the algorithm does, including how it handles its configuration,
-depends
-on the loaded loot table.
+depends on the loaded loot table.
 
 The loaded loot table will be fully validated and type checked to make sure it will work with the simulator.
+
+If you want to write your own loot table for a game with somewhat complicated lootbox mechanics, take the time to really
+think about what these mechanics imply and how you can "translate" them into more common mechanics. For example:
+
+- CS:GO's stat track addon is just a duplicate of a weapon skin drop with the stat track slapped on it. You could
+  represent it as an auto-opening recursive lootbox, or you could simply have both variants of the skin in the same loot
+  pool and adapt their respective dropRate.
+
+- Some gacha's 50/50 system really just means the 5-star drop is an auto-opening recursive lootbox with a pity of 1,
+  where its own main prize is the banner character and the filler slot is a standard character.
+
+- If your duplicate compensation drop contains multiple items (usually specific-shards and generic-shards, or upgrade
+  item and a bit of currency), do you *really* need to represent all of it in the loot table, or can you simply allow
+  duplicates / only represent the generic currency and let the player do the math on their own for the specific item?
+
+- Genshin Impact's Capturing Radiance ? Your bad luck should have made you quit long before this mechanic becomes
+  relevant. *I don't want to think about implementing this one...*
+
+Overall, try to keep it simple. Some mechanics are overly complicated, but can either be dumbed down to a more simple
+mechanic, or ignored because the details aren't that important.
 
 ***WARNING: THE LOOT TABLE FORMAT IS NOT YET FINALIZED AND MAY STILL CHANGE UNEXPECTEDLY AS I FIGURE OUT HOW TO PROPERLY
 HANDLE EVERYTHING. THIS WARNING WILL BE REMOVED ONCE IT'S STABLE.***
@@ -79,7 +99,7 @@ HANDLE EVERYTHING. THIS WARNING WILL BE REMOVED ONCE IT'S STABLE.***
 
 TODO: still need to clarify how this will work.
 
-The simulator will let you save and load configs to not have to pick every parameter every time.
+The simulator will let you save and load configs to not have to manually pick every parameter every time.
 
 ### RNG rolls
 
@@ -90,16 +110,23 @@ single group amongst the slot's `lootGroups`. And finally, it does another roll 
 
 ### Pity
 
-After a box is opened, the algorithm will check that one of the reward belongs to the "main prize" slot. If a main prize
-is found, the pity for this lootbox is reset. If not, the pity counter is updated.
+After a box is opened, the algorithm will check that one of the reward belongs to the "main" or "secondary" prize slot.
+If a special prize is found, the pity counter for this lootbox and this special prize is reset. If not, the pity counter
+is updated.
 
-Once a player "reaches pity", the dropRate of the "main prize" slot will be artificially increased to 1 for the next
-opening.
+Once a player "reaches hardPity" (the pity counter is equal to the hardPity setting), the dropRate of the "main prize"
+slot will be artificially increased to 100% for the next opening.
+
+If a "soft" pity mechanic exists, the special prize slot's dropRate will linearly increase starting when the softPity is
+reached, and until it reaches 100% when hardPity is reached. For example, if the base dropRate is 1%, softPity is at 65,
+and hardPity is at 90, it means the slot's dropRate will be equal to 4.96% on box number 65, and will keep increasing by
+3.96% (additively) every further box until the main prize drops.
 
 ### Duplicates
 
 The extra logic used to handle duplicates is a bit tough to word properly, as it depends a lot on what "mode" was
-chosen for specific lootboxes and items, so I will let you read the code directly. It's not actually that complicated.
+chosen for specific lootboxes and items, so I will let you read the code directly. It's not actually that complicated
+and you don't need to worry about it too much until you are writing your own loot table.
 
 ### Tiered boxes
 
@@ -114,7 +141,7 @@ publish something that uses my code, but I won't be mad if you don't.
 If you want to add your own loot tables to this repo, feel free to open a pull request, and I'll look into it when I
 have time. The file name should be `<game_and_platform_if_needed>-<YYYY_MM>-<event_name>.json`. However, note that I am
 not familiar with that many games, so I will only accept loot tables where the `source` root field contains a URL to
-either an official article or a community-accepted compilation of droprates (preferably a post on official forums, or on
+either an official article or a community-accepted compilation of dropRates (preferably a post on official forums, or on
 a dedicated subreddit, so that there is some proof of community acceptance).
 
 When it comes to pull requests about the algorithm itself, I will not accept changes that alter the algorithm too much,

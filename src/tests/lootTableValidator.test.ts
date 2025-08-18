@@ -16,8 +16,10 @@ describe('LootTableValidator', () => {
 
         const expectedErrors = [
             'LootTable.startDate is invalid',
+            'LootTable.autoOpenRecursive is cannot be true if LootTable.recursive is false',
             'LootTable.source is invalid',
             'LootTable.lootboxes should only contain 1 entry',
+            'LootTable.lootboxes[0].secondaryPrizeDuplicates is invalid',
             'LootTable.lootboxes[0].lootSlots[0].dropRate is invalid',
             'LootTable.lootboxes[0].lootSlots[0].lootGroups[0].dropRate is invalid',
             'LootTable.lootboxes[0].lootSlots[0].lootGroups[0].lootDrops[0].name is invalid',
@@ -28,9 +30,6 @@ describe('LootTableValidator', () => {
             'LootTable.lootboxes[0].lootSlots[0].lootGroups[0].lootDrops has an invalid total dropRate of 0.8',
             'LootTable.lootboxes[0].lootSlots[0].lootGroups has an invalid total dropRate of 0.5',
             'LootTable.lootboxes[0].lootSlots has an invalid number of non-filler slots',
-            'LootTable.lootboxes[1].lootSlots[0].lootGroups[0].lootDrops[0].substitute is null',
-            'LootTable.lootboxes[1].lootSlots[0].lootGroups[0].lootDrops[1].substitute is null',
-            'LootTable.lootboxes[1].lootSlots[0].lootGroups[0].lootDrops[2].substitute is null',
             'LootTable.lootboxes[1].lootSlots[1].lootGroups has an invalid total dropRate of 0.34',
         ];
 

@@ -4,6 +4,7 @@
     "startDate": "2025-05-15",
     "endDate": "2025-05-30",
     "recursive": true,
+    "autoOpenRecursive": false,
     "author": "DaSpood",
     "source": "'https://worldoftanks.asia/ko/news/specials/raumfalte-last-stand-2025-bundles/', bottom of the page, hidden by default",
     "notes": "Not officially confirmed if duplicates are remove_even or remove_prop, assume the latter. 3D attachments bundled into 1 drop type because nobody cares about them.",
@@ -14,6 +15,7 @@
             "purchasable": true,
             "pity": 50,
             "mainPrizeDuplicates": "remove_prop",
+            "secondaryPrizeDuplicates": "allowed",
             "mainPrizeSubstitute": {
                 "name": "Raumfalte Prime",
                 "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/raumfalte_prime_small.png",
@@ -141,7 +143,7 @@
                 {
                     "alias": "Extra lootboxes",
                     "dropRate": 0.20,
-                    "contentType": "lootbox",
+                    "contentType": "filler",
                     "lootGroups": [
                         {
                             "alias": "Extra lootboxes",
@@ -173,7 +175,7 @@
                 {
                     "alias": "Tanks",
                     "dropRate": 0.02,
-                    "contentType": "main_prize",
+                    "contentType": "main",
                     "lootGroups": [
                         {
                             "alias": "Tanks",
@@ -261,6 +263,7 @@
             "purchasable": false,
             "pity": 40,
             "mainPrizeDuplicates": "remove_prop",
+            "secondaryPrizeDuplicates": "allowed",
             "mainPrizeSubstitute": {
                 "name": "Raumfalte Prime",
                 "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/raumfalte_prime_small.png",
@@ -400,7 +403,7 @@
                 {
                     "alias": "Extra lootboxes",
                     "dropRate": 0.20,
-                    "contentType": "lootbox",
+                    "contentType": "filler",
                     "lootGroups": [
                         {
                             "alias": "Extra lootboxes",
@@ -487,7 +490,7 @@
                 {
                     "alias": "Tanks",
                     "dropRate": 0.05,
-                    "contentType": "main_prize",
+                    "contentType": "main",
                     "lootGroups": [
                         {
                             "alias": "Tanks",
@@ -540,6 +543,7 @@
             "purchasable": false,
             "pity": 20,
             "mainPrizeDuplicates": "remove_prop",
+            "secondaryPrizeDuplicates": "allowed",
             "mainPrizeSubstitute": {
                 "name": "Raumfalte Prime",
                 "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/raumfalte_prime_small.png",
@@ -758,7 +762,7 @@
                 {
                     "alias": "Extra lootboxes",
                     "dropRate": 0.20,
-                    "contentType": "lootbox",
+                    "contentType": "filler",
                     "lootGroups": [
                         {
                             "alias": "Extra lootboxes",
@@ -790,7 +794,7 @@
                 {
                     "alias": "Tanks",
                     "dropRate": 0.10,
-                    "contentType": "main_prize",
+                    "contentType": "main",
                     "lootGroups": [
                         {
                             "alias": "Tanks",
