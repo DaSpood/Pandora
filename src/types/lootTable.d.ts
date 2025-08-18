@@ -1,3 +1,7 @@
+export type DuplicateHandlingMode = 'allowed' | 'replace_individual' | 'replace_all' | 'remove_even' | 'remove_prop';
+
+export type LootDropType = 'main' | 'secondary' | 'filter';
+
 /**
  * The root of the loot tables contains metadata about the "event" / "lootbox family" for this loot table, mostly for
  * documentation and archiving purposes.
@@ -157,12 +161,12 @@ export interface Lootbox {
      *          in the same group. For simulating large numbers of boxes, though, this will not matter, as you are bound
      *          to obtain every reward eventually.
      */
-    mainPrizeDuplicates: 'allowed' | 'replace_individual' | 'replace_all' | 'remove_even' | 'remove_prop';
+    mainPrizeDuplicates: DuplicateHandlingMode;
     /**
      * Same mechanic as `mainPrizeDuplicates` but applies to secondary prizes. Must exist even if there are no secondary
      * slots.
      */
-    secondaryPrizeDuplicates: 'allowed' | 'replace_individual' | 'replace_all' | 'remove_even' | 'remove_prop';
+    secondaryPrizeDuplicates: DuplicateHandlingMode;
     /**
      * The "compensation" / replacement drop after every LootDrop has been dropped already, if duplication is not
      * allowed.
@@ -222,7 +226,7 @@ export interface LootSlot {
      *
      * "filler": the slot contains filler rewards that require no special handling.
      */
-    contentType: 'main' | 'secondary' | 'filler';
+    contentType: LootDropType;
     /**
      * The list of loot "groups" available in the slot.
      *

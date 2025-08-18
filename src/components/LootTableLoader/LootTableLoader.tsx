@@ -19,7 +19,7 @@ import type { LootTable } from '../../types/lootTable';
 import type { Maybe } from '../../types/utils';
 import { validateLootTable } from '../../scripts/lootTableValidator.ts';
 
-export default function LootTableLoader() {
+export default function LootTableLoader({ onTableLoaded }: { onTableLoaded: (submittedTable: string) => void }) {
     const publicLootTables: LootTable[] = useMemo(
         () =>
             Object.values(
@@ -41,9 +41,9 @@ export default function LootTableLoader() {
         const validationErrors = validateLootTable(submittedTable);
         setValidationErrors(validationErrors);
         if (!validationErrors.length) {
-            console.log("LET'S GO GAMBLING!");
+            onTableLoaded(JSON.stringify(submittedTable));
         }
-    }, [submittedTable]);
+    }, [onTableLoaded, submittedTable]);
 
     const submitUploadedFile = () => {
         if (!uploadedTable) return;
