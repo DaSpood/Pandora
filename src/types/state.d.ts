@@ -18,12 +18,13 @@ interface OpeningSession {
      */
     dynamicLootTable: LootTable;
     /**
-     * Cache associating each LootDrop's name with the corresponding full object in the `referenceLootTable`.
+     * Cache associating each LootDrop's name with the corresponding object in the `referenceLootTable`, excluding drop
+     * rate and substitute.
      *
      * The goal here is to allow easy access when displaying filters to the user (mainly for selecting pre-owned
      * main/secondary drops and setting the stop-condition of the "open until" mode) or accessing pictures.
      */
-    lootTableDrops: Record<string, LootDrop>;
+    lootTableUniqueDrops: Record<string, { name: string; pictureUrl?: string; backgroundUrl?: string }>;
     /**
      * For each Lootbox's name, how many boxes have been opened during the session.
      */
