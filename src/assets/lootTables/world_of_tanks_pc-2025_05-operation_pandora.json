@@ -13,7 +13,7 @@
             "name": "Raumfalte Proto",
             "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/raumfalte_proto_small.png",
             "purchasable": true,
-            "pity": 50,
+            "mainPrizeHardPity": 50,
             "mainPrizeDuplicates": "remove_prop",
             "secondaryPrizeDuplicates": "allowed",
             "mainPrizeSubstitute": {
@@ -95,7 +95,7 @@
                                 },
                                 {
                                     "name": "personal reserve: +50% combat xp",
-                                    "pictureUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3mAwLYPEO69GSWoRj61BlxOhnNSIexK4NtA",
+                                    "pictureUrl": "https://content-wg.gcdn.co/locdoc/rich-article/15th-anniversary-hub/img/bp_pr_credits.6e9500.png",
                                     "dropRate": 0.33,
                                     "amount": 1
                                 },
@@ -261,7 +261,7 @@
             "name": "Raumfalte Alpha",
             "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/raumfalte_alpha_small.png",
             "purchasable": false,
-            "pity": 40,
+            "mainPrizeHardPity": 40,
             "mainPrizeDuplicates": "remove_prop",
             "secondaryPrizeDuplicates": "allowed",
             "mainPrizeSubstitute": {
@@ -343,7 +343,7 @@
                                 },
                                 {
                                     "name": "personal reserve: +50% combat xp",
-                                    "pictureUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3mAwLYPEO69GSWoRj61BlxOhnNSIexK4NtA",
+                                    "pictureUrl": "https://content-wg.gcdn.co/locdoc/rich-article/15th-anniversary-hub/img/bp_pr_credits.6e9500.png",
                                     "dropRate": 0.33,
                                     "amount": 2
                                 },
@@ -541,7 +541,7 @@
             "name": "Raumfalte Prime",
             "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/raumfalte_prime_small.png",
             "purchasable": false,
-            "pity": 20,
+            "mainPrizeHardPity": 20,
             "mainPrizeDuplicates": "remove_prop",
             "secondaryPrizeDuplicates": "allowed",
             "mainPrizeSubstitute": {
@@ -642,7 +642,7 @@
                                 },
                                 {
                                     "name": "personal reserve: +50% combat xp",
-                                    "pictureUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3mAwLYPEO69GSWoRj61BlxOhnNSIexK4NtA",
+                                    "pictureUrl": "https://content-wg.gcdn.co/locdoc/rich-article/15th-anniversary-hub/img/bp_pr_credits.6e9500.png",
                                     "dropRate": 0.33,
                                     "amount": 6
                                 },

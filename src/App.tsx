@@ -2,11 +2,10 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import LootTableLoader from './components/LootTableLoader/LootTableLoader.tsx';
 import { useState } from 'react';
-import type { OpeningResult, OpeningSession, SessionConfiguration } from './types/state';
-import type { LootDrop, LootDropSubstitute, LootTable } from './types/lootTable';
+import type { OpeningSession, SessionConfiguration } from './types/state';
 import type { Maybe } from './types/utils';
 import { Button, Col, Container, Image, Row } from 'react-bootstrap';
-import { openOne } from './scripts/openingSessionManager.ts';
+import { newSession, openOneAndUpdateState } from './scripts/openingSessionManager.ts';
 
 function App() {
     const [session, setSession] = useState<Maybe<OpeningSession>>(null);
@@ -15,69 +14,6 @@ function App() {
     // SESSION MANAGEMENT
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    /** Generate a new OpeningSession object for the given LootTable using default values, does NOT setState */
-    const newSession = (rawTable: string, checksum: string): OpeningSession => {
-        const refTable = JSON.parse(rawTable) as LootTable;
-
-        const allLootDrops: (LootDrop | LootDropSubstitute)[] = refTable.lootboxes.flatMap((box) =>
-            box.lootSlots.flatMap((slot) =>
-                slot.lootGroups.flatMap((groups) =>
-                    groups.lootDrops.flatMap((drop) => (drop.substitute ? [drop, drop.substitute] : [drop])),
-                ),
-            ),
-        );
-        refTable.lootboxes.forEach((box) => {
-            if (box.mainPrizeSubstitute) {
-                allLootDrops.push(box.mainPrizeSubstitute);
-            }
-            if (box.secondaryPrizeSubstitute) {
-                allLootDrops.push(box.secondaryPrizeSubstitute);
-            }
-        });
-
-        const newSession: OpeningSession = {
-            referenceLootTable: refTable,
-            dynamicLootTable: JSON.parse(rawTable) as LootTable,
-            lootTableUniqueDrops: allLootDrops.reduce(
-                (acc, drop) => {
-                    acc[drop.name] = {
-                        name: drop.name,
-                        pictureUrl: drop.pictureUrl,
-                        backgroundUrl: drop.backgroundUrl,
-                    };
-                    return acc;
-                },
-                {} as Record<string, { name: string; pictureUrl?: string; backgroundUrl?: string }>,
-            ),
-            lootboxCounters: refTable.lootboxes.reduce(
-                (acc, box) => {
-                    acc[box.name] = 0;
-                    return acc;
-                },
-                {} as Record<string, number>,
-            ),
-            pityCounters: refTable.lootboxes.reduce(
-                (acc, box) => {
-                    acc[box.name] = { mainPity: 0, secondaryPity: 0 };
-                    return acc;
-                },
-                {} as Record<string, { mainPity: number; secondaryPity: number }>,
-            ),
-            aggregatedResults: allLootDrops.reduce(
-                (acc, drop) => {
-                    acc[drop.name] = 0;
-                    return acc;
-                },
-                {} as Record<string, number>,
-            ),
-            history: [],
-            simulatorConfig: {
-                lootTableChecksum: checksum,
-            },
-        };
-        return newSession;
-    };
-
     /** Reinitialize the state's session using the given LootTable and SessionConfiguration */
     const initSession = (rawTable: string, checksum: string, simulatorConfig?: SessionConfiguration): void => {
         const session = newSession(rawTable, checksum);
@@ -85,7 +21,7 @@ function App() {
             session.simulatorConfig = simulatorConfig;
             // TODO: update other fields as needed
         }
-        console.log(session);
+        console.log('Initialized session:', session);
         setSession(session);
     };
 
@@ -131,36 +67,29 @@ function App() {
     };
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // STUBS
+    // ACTIONS & STUBS
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    /**
-     * TODO: complete opening algorithm
-     * If I keep the state management component-side, this function will be mostly kept with added calls to various
-     * post-open checks for duplicates and pity management. Probably best option for now.
-     * Most likely will use a "manager" class that will handle the session and call setState. Probably an anti-pattern
-     * but will make it much easier to implement running multiple long simulations in parallel. Easy enough to refactor
-     * first option when needed.
-     */
-    const gamba = () => {
+    const openOne = (selectedBox: string = session?.referenceLootTable.lootboxes[0].name) => {
         if (!session) return;
-        const resultDrops = openOne(session?.dynamicLootTable?.lootboxes[0]);
-        const result: OpeningResult = {
-            openingNumber: 1,
-            boxName: session?.dynamicLootTable?.lootboxes[0].name,
-            boxOpeningNumber: 1,
-            mainHardPityReached: false,
-            secondaryHardPityReached: false,
-            drops: resultDrops,
-        };
-        const history = [...session.history, result];
-        const aggregatedResults = { ...session.aggregatedResults };
-        resultDrops.forEach((result) => (aggregatedResults[result.name] += result.amount));
-        setSession((prevState) => ({ ...(prevState as OpeningSession), history, aggregatedResults }));
+
+        // Costly but necessary for the session that's displayed. Won't clone every opening for auto sessions
+        const passedState = JSON.parse(JSON.stringify(session)) as OpeningSession;
+
+        // If no box left in the inventory, purchase a new one.
+        // Note: works for now, maybe we'll want to only enable the 'open' button if there is inventory, and add a
+        //  purchase button for refills. And only bypass the restriction if a specific setting is enabled.
+        if (passedState.lootboxPendingCounters[selectedBox] === 0) {
+            passedState.lootboxPurchasedCounters[selectedBox]++;
+            passedState.lootboxPendingCounters[selectedBox]++;
+        }
+
+        const newState = openOneAndUpdateState(passedState, selectedBox);
+        setSession(newState);
     };
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // RENDER STUBS
+    // COMPONENTS RENDER & STUBS
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     const renderButtons = () => {
@@ -168,7 +97,7 @@ function App() {
             session && (
                 <Row className="justify-content-center">
                     <Col className="col-2">
-                        <Button variant="primary" type="button" onClick={() => gamba()}>
+                        <Button variant="primary" type="button" onClick={() => openOne()}>
                             GAMBA !
                         </Button>
                     </Col>
@@ -218,8 +147,46 @@ function App() {
         );
     };
 
+    const renderStats = () => {
+        if (!session?.history.length) return;
+
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        const { drops, ...lastPullMetadata } = session.history[session.history.length - 1];
+        const {
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            referenceLootTable,
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            dynamicLootTable,
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            lootTableUniqueDrops,
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            history,
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            simulatorConfig,
+            aggregatedResults,
+            ...sessionMetadata
+        } = session;
+
+        return (
+            session &&
+            session.history.length > 0 && (
+                <Row>
+                    <Col className="text-start">
+                        <pre>Last box metadata: {JSON.stringify(lastPullMetadata, null, 2)}</pre>
+                    </Col>
+                    <Col className="text-start">
+                        <pre>Session metadata: {JSON.stringify(sessionMetadata, null, 2)}</pre>
+                    </Col>
+                    <Col className="text-start">
+                        <pre>Total results: {JSON.stringify(aggregatedResults, null, 2)}</pre>
+                    </Col>
+                </Row>
+            )
+        );
+    };
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // RENDER
+    // MAIN LAYOUT RENDER
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     return (
@@ -227,6 +194,7 @@ function App() {
             {!session && <LootTableLoader onTableLoaded={onTableLoaded} />}
             {renderLatestResult() /*TODO: remove stub*/}
             {renderButtons() /*TODO: remove stub*/}
+            {renderStats() /*TODO: remove stub*/}
             {/*TODO CSS: fix the fucking grid and properly draw component container outlines*/}
             {/*TODO Component: prettier central opening view and last-results display (can reuse renderLatestResult for now, it's good enough for a start, animations would be nice)*/}
             {/*TODO Component: box-selector on the left (WoT Style, only in single-box mode)*/}

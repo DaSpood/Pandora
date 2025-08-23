@@ -28,7 +28,15 @@ interface OpeningSession {
     /**
      * For each Lootbox's name, how many boxes have been opened during the session.
      */
-    lootboxCounters: Record<string, number>;
+    lootboxOpenedCounters: Record<string, number>;
+    /**
+     * For each Lootbox's name, how many boxes have been purchased during the session.
+     */
+    lootboxPurchasedCounters: Record<string, number>;
+    /**
+     * For each Lootbox's name, how many boxes are currently available to open.
+     */
+    lootboxPendingCounters: Record<string, number>;
     /**
      * For each Lootbox's name, the current pity counter of the main and secondary prize.
      */
@@ -60,15 +68,15 @@ interface OpeningSession {
  */
 export interface OpeningResult {
     /** Box opening counter for the session */
-    openingNumber: number;
+    sessionOpeningNumber: number;
     /** Unique name of the Lootbox that was opened */
     boxName: string;
     /** Box opening counter for this specific Lootbox */
     boxOpeningNumber: number;
-    /** Whether main prize hard pity was reached with this box */
-    mainHardPityReached: boolean;
-    /** Whether secondary prize hard pity was reached with this box */
-    secondaryHardPityReached: boolean;
+    /** Main prize pity counter when the box was opened */
+    boxMainPity: number;
+    /** Secondary prize pity counter when the box was opened */
+    boxSecondaryPity: number;
     /** The list of drops obtained in this box */
     drops: OpeningResultDrop[];
 }
