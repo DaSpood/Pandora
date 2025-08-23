@@ -1,5 +1,17 @@
-import type { Lootbox, LootDrop, LootDropSubstitute, LootTable } from '../types/lootTable';
+import type {
+    DuplicateHandlingMode,
+    Lootbox,
+    LootDrop,
+    LootDropSubstitute,
+    LootGroup,
+    LootTable,
+} from '../types/lootTable';
 import type { OpeningResult, OpeningResultDrop, OpeningSession } from '../types/state';
+import type { Maybe } from '../types/utils';
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// SESSION
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /**
  * Generate a new OpeningSession object for the given LootTable using default values, does NOT setState
@@ -27,7 +39,7 @@ export const newSession = (rawTable: string, checksum: string): OpeningSession =
         }
     });
 
-    const newSession: OpeningSession = {
+    return {
         referenceLootTable: refTable,
         dynamicLootTable: JSON.parse(rawTable) as LootTable,
         lootTableUniqueDrops: allLootDrops.reduce(
@@ -81,8 +93,11 @@ export const newSession = (rawTable: string, checksum: string): OpeningSession =
             lootTableChecksum: checksum,
         },
     };
-    return newSession;
 };
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// MATH
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /**
  * Picks a random item from the given list using the items' `dropRate` field as weights.
@@ -106,37 +121,30 @@ const pickWeightedRandom = <T extends { dropRate: number }>(items: T[]): T => {
 };
 
 /**
- * Opens a single given Lootbox.
- *
- * This function does not mutate the state, and does not do any special handling. It should be wrapped by a manager
- * which handles dynamic editing of the LootTable (drop rates, duplicates handling, pity...) and session management.
- *
- * @param lootbox The Lootbox to open.
- * @returns The list of OpeningResultDrop obtained in the box.
+ * Distributes the `distributedDropRate` to a given `recipientDropRate` according to the chosen `strategy`.
  */
-const openOne = (lootbox: Lootbox): OpeningResultDrop[] => {
-    if (!lootbox) return [];
-    const results: OpeningResultDrop[] = [];
-    lootbox.lootSlots.forEach((slot) => {
-        if (slot.dropRate <= Math.random()) return;
-        const pickedGroup = pickWeightedRandom(slot.lootGroups);
-        const pickedDrop = pickWeightedRandom(pickedGroup.lootDrops);
-        results.push({
-            type: slot.contentType,
-            name: pickedDrop.name,
-            amount: pickedDrop.amount,
-        });
-    });
-    return results;
+const distributeDropRate = (
+    recipientDropRate: number,
+    distributedDropRate: number,
+    strategy: 'remove_even' | 'remove_prop',
+    recipientCount: number,
+): number => {
+    return strategy === 'remove_even'
+        ? recipientDropRate + distributedDropRate / recipientCount
+        : recipientDropRate + (recipientDropRate / (1 - distributedDropRate)) * distributedDropRate;
 };
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// PITY HANDLING
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /**
  * Updates the dropRate of the non-filler slots of a given Lootbox according to its pity status. To be called right
  * before the lootbox gets opened.
  *
- * @param session The opening session
- * @param refLootbox The reference object of the opened Lootbox
- * @param lootbox The opened dynamic Lootbox
+ * @param session The opening session.
+ * @param refLootbox The reference object of the opened Lootbox.
+ * @param lootbox The opened dynamic Lootbox.
  */
 const preOpenPityHandling = (session: OpeningSession, refLootbox: Lootbox, lootbox: Lootbox): void => {
     // Main prize slot
@@ -169,10 +177,10 @@ const preOpenPityHandling = (session: OpeningSession, refLootbox: Lootbox, lootb
  *
  * If a pity gets reset, the corresponding slot's dropRate will also be reset.
  *
- * @param session The opening session
- * @param refLootbox The reference object of the opened Lootbox
- * @param lootbox The opened dynamic Lootbox
- * @param result The opening result
+ * @param session The opening session.
+ * @param refLootbox The reference object of the opened Lootbox.
+ * @param lootbox The opened dynamic Lootbox.
+ * @param result The opening result.
  */
 const postOpenPityHandling = (
     session: OpeningSession,
@@ -206,6 +214,133 @@ const postOpenPityHandling = (
     }
 };
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// DUPLICATE HANDLING
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/**
+ * Updates the dynamic loot table of the recently opened lootbox to apply the 'replace_individual' duplication rule to
+ * the obtained results.
+ *
+ * @param result The name of the dropped item belonging to this group.
+ * @param group The LootGroup to which the rule must be applied.
+ * @returns The new rule to save for the dynamic Lootbox ('replace_individual' by default, 'allowed' once all drops are
+ *          replaced with their substitute).
+ */
+const handleReplaceIndividualDuplicateRule = (result: string, group: LootGroup): DuplicateHandlingMode => {
+    // Replace matching loot table drop
+    const lootDrop = group.lootDrops.find((drop) => drop.name === result)!;
+    lootDrop.name = lootDrop.substitute!.name;
+    lootDrop.pictureUrl = lootDrop.substitute!.pictureUrl;
+    lootDrop.backgroundUrl = lootDrop.substitute!.backgroundUrl;
+    lootDrop.amount = lootDrop.substitute!.amount;
+
+    // Check if all group drops have been handled
+    for (const drop of group.lootDrops) {
+        if (
+            drop.name !== drop.substitute!.name ||
+            drop.pictureUrl !== drop.substitute!.pictureUrl ||
+            drop.backgroundUrl !== drop.substitute!.backgroundUrl ||
+            drop.amount !== drop.substitute!.amount
+        ) {
+            // There are still original drops
+            return 'replace_individual';
+        }
+    }
+    // All drops have been replaced with a substitute, duplicate handling no longer required
+    return 'allowed';
+};
+
+/**
+ * Updates the dynamic loot table of the recently opened lootbox to apply the 'replace_all' duplication rule to the
+ * obtained results.
+ *
+ * @param result The name of the dropped item belonging to this group.
+ * @param group The LootGroup to which the rule must be applied.
+ * @param substitute The lootbox-level substitute for this LootGroup.
+ * @returns The new rule to save for the dynamic Lootbox ('replace_all' by default, 'allowed' once all drops are
+ *          replaced with their substitute).
+ */
+const handleReplaceAllDuplicationRule = (
+    result: string,
+    group: LootGroup,
+    substitute: LootDropSubstitute,
+): DuplicateHandlingMode => {
+    // Replace matching loot table drop
+    const lootDrop = group.lootDrops.find((drop) => drop.name === result)!;
+    lootDrop.name = substitute.name;
+    lootDrop.pictureUrl = substitute.pictureUrl;
+    lootDrop.backgroundUrl = substitute.backgroundUrl;
+    lootDrop.amount = substitute.amount;
+
+    // Check if all group drops have been handled
+    for (const drop of group.lootDrops) {
+        if (
+            drop.name !== substitute.name ||
+            drop.pictureUrl !== substitute.pictureUrl ||
+            drop.backgroundUrl !== substitute.backgroundUrl ||
+            drop.amount !== substitute.amount
+        ) {
+            // There are still original drops
+            return 'replace_all';
+        }
+    }
+    // All drops have been replaced with a substitute, duplicate handling no longer required
+    return 'allowed';
+};
+
+/**
+ * Updates the dynamic loot table of the recently opened lootbox to apply the 'remove_*' duplication rule to the
+ * obtained results.
+ *
+ * @param result The name of the dropped item belonging to this group.
+ * @param refGroup The reference object of the LootGroup to which the rule must be applied.
+ * @param group The LootGroup to which the rule must be applied.
+ * @param globalSubstitute The lootbox-level substitute for this LootGroup. If missing, individual `LootDrop.substitute`
+ *                         will be used instead.
+ * @param rule Rule used to pick the distribution strategy between even and proportional.
+ * @returns The new rule to save for the dynamic Lootbox (`rule` by default, 'allowed' once all drops are removed).
+ */
+const handleRemoveDuplicateRule = (
+    result: string,
+    refGroup: LootGroup,
+    group: LootGroup,
+    globalSubstitute: Maybe<LootDropSubstitute>,
+    rule: 'remove_even' | 'remove_prop',
+): DuplicateHandlingMode => {
+    // Remove matching loot table drop and distribute its dropRate amongst remaining drops.
+    const excludedDrop = group.lootDrops.find((drop) => drop.name === result)!;
+    const remainingDrops: LootDrop[] = [];
+    group.lootDrops.forEach((drop) => {
+        if (drop.name !== result) remainingDrops.push(drop);
+    });
+    remainingDrops.forEach((drop) => {
+        drop.dropRate = distributeDropRate(drop.dropRate, excludedDrop.dropRate, rule, remainingDrops.length);
+    });
+
+    // Check if all group drops have been handled
+    if (remainingDrops.length) {
+        // There are still original drops
+        group.lootDrops = remainingDrops;
+        return rule;
+    }
+    // All drops have been dropped, reset drops and replace with substitutes, duplicate handling no longer required
+    refGroup.lootDrops.forEach((drop) => {
+        const substituteDrop = JSON.parse(JSON.stringify(drop));
+        substituteDrop.name = globalSubstitute ? globalSubstitute.name : substituteDrop.substitute!.name;
+        substituteDrop.pictureUrl = globalSubstitute
+            ? globalSubstitute.pictureUrl
+            : substituteDrop.substitute!.pictureUrl;
+        substituteDrop.backgroundUrl = globalSubstitute
+            ? globalSubstitute.backgroundUrl
+            : substituteDrop.substitute!.backgroundUrl;
+        substituteDrop.amount = globalSubstitute ? globalSubstitute.amount : substituteDrop.substitute!.amount;
+        remainingDrops.push(substituteDrop);
+        group.lootDrops = remainingDrops;
+    });
+    return 'allowed';
+};
+
 /**
  * Updates the dynamic loot table of the recently opened lootbox to apply duplication rules to the obtained results.
  *
@@ -213,28 +348,72 @@ const postOpenPityHandling = (
  * contained a duplicate, but instead alters the loot table to prevent the result's content from being duplicated in
  * future openings. This way, whatever the opened box contains is always known to be valid right away.
  *
- * @param session The opening session
- * @param refLootbox The reference object of the opened Lootbox
- * @param lootbox The opened dynamic Lootbox
- * @param result The opening result
+ * @param result The name of the dropped item belonging to this group.
+ * @param refGroup The reference object of the LootGroup to which the rule must be applied.
+ * @param group The LootGroup to which the rule must be applied.
+ * @param rule The rule to apply. Must originate from the dynamic lootbox, not reference.
+ * @param globalSubstitute The lootbox-level substitute for this LootGroup.
+ * @returns The new rule to save for the dynamic Lootbox (equal to `rule` by default, may become 'allowed' once all
+ *          drops are obtained and special handling is no longer necessary).
  */
 const handleDuplicationRules = (
-    session: OpeningSession,
-    refLootbox: Lootbox,
-    lootbox: Lootbox,
-    result: OpeningResult,
-): void => {
-    // Main prize slot
-    // TODO
-    // Secondary prize slot
-    // TODO
+    result: string,
+    refGroup: LootGroup,
+    group: LootGroup,
+    rule: DuplicateHandlingMode,
+    globalSubstitute: Maybe<LootDropSubstitute>,
+): DuplicateHandlingMode => {
+    switch (rule) {
+        case 'replace_individual':
+            return handleReplaceIndividualDuplicateRule(result, group);
+        case 'replace_all':
+            return handleReplaceAllDuplicationRule(result, group, globalSubstitute!);
+        case 'remove_even':
+            return handleRemoveDuplicateRule(result, refGroup, group, globalSubstitute, 'remove_even');
+        case 'remove_prop':
+            return handleRemoveDuplicateRule(result, refGroup, group, globalSubstitute, 'remove_prop');
+        case 'allowed':
+        default:
+            // Nothing to do
+            return 'allowed';
+    }
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// OPENING
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/**
+ * Opens a single given Lootbox.
+ *
+ * This function does not mutate the state, and does not do any special handling. It should be wrapped by a manager
+ * which handles dynamic editing of the LootTable (drop rates, duplicates handling, pity...) and session management.
+ *
+ * @param lootbox The Lootbox to open.
+ * @returns The list of OpeningResultDrop obtained in the box.
+ */
+const openOne = (lootbox: Lootbox): OpeningResultDrop[] => {
+    if (!lootbox) return [];
+    const results: OpeningResultDrop[] = [];
+    lootbox.lootSlots.forEach((slot) => {
+        if (slot.dropRate <= Math.random()) return;
+        const pickedGroup = pickWeightedRandom(slot.lootGroups);
+        const pickedDrop = pickWeightedRandom(pickedGroup.lootDrops);
+        results.push({
+            type: slot.contentType,
+            name: pickedDrop.name,
+            amount: pickedDrop.amount,
+        });
+    });
+    return results;
 };
 
 /**
  * Opens a single selected Lootbox and updates the session after handling
  *
  * @param session The current opening session state. This object will be modified without cloning and returned.
- *                The session is assumed to be in a valid state. Will not handle cases where expected value is missing.
+ *                The session is assumed to be in a valid state, there will be NO error handling for potentially missing
+ *                or invalid expected values.
  * @param lootboxName The `name` of the lootbox to open.
  * @returns The updated session state.
  */
@@ -271,7 +450,26 @@ export const openOneAndUpdateState = (session: OpeningSession, lootboxName: stri
     });
 
     // Handle duplication rules
-    handleDuplicationRules(session, refLootbox, lootbox, result);
+    const mainPrizeResult = result.drops.find((resultDrop) => resultDrop.type === 'main')?.name;
+    if (mainPrizeResult) {
+        lootbox.mainPrizeDuplicates = handleDuplicationRules(
+            mainPrizeResult,
+            refLootbox.lootSlots.find((slot) => slot.contentType === 'main')!.lootGroups[0],
+            lootbox.lootSlots.find((slot) => slot.contentType === 'main')!.lootGroups[0],
+            lootbox.mainPrizeDuplicates,
+            lootbox.mainPrizeSubstitute,
+        );
+    }
+    const secondaryPrizeResult = result.drops.find((resultDrop) => resultDrop.type === 'secondary')?.name;
+    if (secondaryPrizeResult) {
+        lootbox.secondaryPrizeDuplicates = handleDuplicationRules(
+            secondaryPrizeResult,
+            refLootbox.lootSlots.find((slot) => slot.contentType === 'secondary')!.lootGroups[0],
+            lootbox.lootSlots.find((slot) => slot.contentType === 'secondary')!.lootGroups[0],
+            lootbox.secondaryPrizeDuplicates,
+            lootbox.secondaryPrizeSubstitute,
+        );
+    }
 
     return session;
 };

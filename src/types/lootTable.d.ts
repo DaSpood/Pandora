@@ -270,7 +270,7 @@ export interface LootGroup {
  * A single LootGroup can only drop a single LootDrop. This means the sum of the `droprate` field of each LootDrop in a
  * LootGroup MUST equal 1.
  *
- * Note that a LootDrop describes a unique drop, not an unique item. In case your lootbox may drop multiple
+ * Note that a LootDrop describes a unique drop, not a unique item. In case your lootbox may drop multiple
  * amounts of the same resource, for example, either 1000 gold or 2000 gold, you would have a single LootGroup
  * encompassing all "gold" drops, and one LootDrop for each gold amount available (same `name`, different `mount` and
  * `droprate`).
