@@ -85,8 +85,8 @@ export interface Lootbox {
     /**
      * Whether this tier of lootboxes can be purchased.
      *
-     * By default, in all modes, the simulator will only let you open purchasable boxes, though you can choose to bypass
-     * this restriction if wanted.
+     * By default, except in "unlimited" mode, the simulator will only let you open purchasable boxes, though you can
+     * choose to bypass this restriction if wanted.
      */
     purchasable: boolean;
     /**
@@ -103,6 +103,10 @@ export interface Lootbox {
      * prize slot. The drop rate increases linearly starting **at** (including) softPity, so that it reaches 100% at
      * hardPity.
      *
+     * For example, if the base dropRate is 1%, softPity is at 65, and hardPity is at 90, it means the slot's dropRate
+     * will be equal to 4.96% on box number 65, and will keep increasing by 3.96% (additively) every further box until
+     * the main prize drops.
+     *
      * If mainPrizeHardPity is not provided, this field is forbidden.
      *
      * If provided, must be strictly positive and strictly inferior to mainPrizeHardPity.
@@ -111,24 +115,11 @@ export interface Lootbox {
      */
     mainPrizeSoftPity?: number;
     /**
-     * How many of this lootbox can the player open before they are guaranteed that the next one contains a drop from
-     * the secondary prize slot.
-     *
-     * If provided, must be strictly positive.
-     *
-     * If missing, no pity will be registered (there is never a guarantee to get the main prize).
+     * Same mechanic as `mainPrizeHardPity` but applies to secondary prizes.
      */
     secondaryPrizeHardPity?: number;
     /**
-     * How many of this lootbox can the player open before they are increasingly likely to get a drop from the secondary
-     * prize slot. The drop rate increases linearly starting **at** (including) softPity, so that it reaches 100% at
-     * hardPity.
-     *
-     * If secondaryPrizeHardPity is not provided, this field is forbidden.
-     *
-     * If provided, must be strictly positive and strictly inferior to secondaryPrizeHardPity.
-     *
-     * If missing, no pity will be registered (the dropRate will remain the same until hardPity, if any).
+     * Same mechanic as `mainPrizeSoftPity` but applies to secondary prizes.
      */
     secondaryPrizeSoftPity?: number;
     /**
@@ -223,6 +214,7 @@ export interface LootSlot {
      *              main prize. Zero or one (for now) LootSlot per Lootbox should have this contentType value.
      *              If no specific handling of duplicates or pity is required, **prefer using "filler" instead**,
      *              regardless of the perceived value of the drop, this label is mostly here for technical reasons.
+     *              If you just want a special highlight for a drop in the UI use `LootDrop.overrideRarityInUi` instead.
      *
      * "filler": the slot contains filler rewards that require no special handling.
      */
@@ -294,10 +286,13 @@ export interface LootDrop {
      */
     pictureUrl?: string;
     /**
-     * Url to a background image to display behind the item's picture (for example a special color to really insist that
-     * the drop is amazing and you deserve extra dopamine for it !)
+     * Override the LootDropType to allow for a different visual highlight in the UI. This is purely visual and does
+     * not impact anything else.
+     *
+     * Example use case: the slot is neither main nor secondary, but one of the drops contained in that slow is a
+     * rare-enough or important-enough to warrant highlighting it like a main or secondary prize anyway.
      */
-    backgroundUrl?: string;
+    overrideRarityInUi?: LootDropType;
     /**
      * The drop rate of the slot. 0 < dropRate <= 1.
      *
@@ -351,10 +346,13 @@ export interface LootDropSubstitute {
      */
     pictureUrl?: string;
     /**
-     * Url to a background image to display behind the item's picture (for example a special color to really insist that
-     * the drop is amazing and you deserve extra dopamine for it !)
+     * Override the LootDropType to allow for a different visual highlight in the UI. This is purely visual and does
+     * not impact anything else.
+     *
+     * Example use case: the slot is neither main nor secondary, but one of the drops contained in that slow is a
+     * rare-enough or important-enough to warrant highlighting it like a main or secondary prize anyway.
      */
-    backgroundUrl?: string;
+    overrideRarityInUi?: LootDropType;
     /**
      * How many of the item is included in a drop, strictly positive integer.
      */

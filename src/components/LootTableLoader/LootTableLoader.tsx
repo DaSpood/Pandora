@@ -4,7 +4,6 @@ import {
     AccordionHeader,
     AccordionItem,
     Button,
-    Col,
     Container,
     FormControl,
     FormLabel,
@@ -12,7 +11,6 @@ import {
     InputGroup,
     ListGroup,
     ListGroupItem,
-    Row,
 } from 'react-bootstrap';
 import { type ChangeEvent, useEffect, useMemo, useState } from 'react';
 import type { LootTable } from '../../types/lootTable';
@@ -53,9 +51,9 @@ export default function LootTableLoader({ onTableLoaded }: { onTableLoaded: (sub
     };
 
     return (
-        <Container fluid className="d-flex flex-column gap-4">
-            <Row className="gap-4 gap-lg-0">
-                <Col xs={12} lg={6}>
+        <Container fluid className="d-flex min-vh-100 align-items-center px-0 py-4 mx-0 my-auto">
+            <Container className="d-flex flex-column gap-4 w-auto p-4 bg-gradient rounded">
+                <Container>
                     <FormLabel>Load a loot table</FormLabel>
                     <InputGroup>
                         <FormSelect
@@ -78,8 +76,8 @@ export default function LootTableLoader({ onTableLoaded }: { onTableLoaded: (sub
                             LET'S GO GAMBLING!
                         </Button>
                     </InputGroup>
-                </Col>
-                <Col xs={12} lg={6}>
+                </Container>
+                <Container>
                     <FormLabel>Upload your loot table</FormLabel>
                     <InputGroup>
                         <FormControl
@@ -96,25 +94,25 @@ export default function LootTableLoader({ onTableLoaded }: { onTableLoaded: (sub
                             LET'S GO GAMBLING!
                         </Button>
                     </InputGroup>
-                </Col>
-            </Row>
-            {validationErrors.length > 0 && (
-                <Row>
-                    <Accordion>
-                        <AccordionItem eventKey="0">
-                            <AccordionHeader>Validation Errors</AccordionHeader>
-                            <AccordionBody className="p-0">
-                                <ListGroup className="list-group-flush text-start m-0">
-                                    <ListGroupItem>Aw dang it!</ListGroupItem>
-                                    {validationErrors.map((error, idx) => (
-                                        <ListGroupItem key={idx}>{error}</ListGroupItem>
-                                    ))}
-                                </ListGroup>
-                            </AccordionBody>
-                        </AccordionItem>
-                    </Accordion>
-                </Row>
-            )}
+                </Container>
+                {validationErrors.length > 0 && (
+                    <Container>
+                        <Accordion>
+                            <AccordionItem eventKey="0">
+                                <AccordionHeader>Validation Errors</AccordionHeader>
+                                <AccordionBody className="p-0">
+                                    <ListGroup className="list-group-flush text-start m-0">
+                                        <ListGroupItem>Aw dang it!</ListGroupItem>
+                                        {validationErrors.map((error, idx) => (
+                                            <ListGroupItem key={idx}>{error}</ListGroupItem>
+                                        ))}
+                                    </ListGroup>
+                                </AccordionBody>
+                            </AccordionItem>
+                        </Accordion>
+                    </Container>
+                )}
+            </Container>
         </Container>
     );
 }

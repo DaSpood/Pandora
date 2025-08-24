@@ -47,11 +47,10 @@ export const newSession = (rawTable: string, checksum: string): OpeningSession =
                 acc[drop.name] = {
                     name: drop.name,
                     pictureUrl: drop.pictureUrl,
-                    backgroundUrl: drop.backgroundUrl,
                 };
                 return acc;
             },
-            {} as Record<string, { name: string; pictureUrl?: string; backgroundUrl?: string }>,
+            {} as Record<string, { name: string; pictureUrl?: string }>,
         ),
         lootboxOpenedCounters: refTable.lootboxes.reduce(
             (acc, box) => {
@@ -91,6 +90,7 @@ export const newSession = (rawTable: string, checksum: string): OpeningSession =
         history: [],
         simulatorConfig: {
             lootTableChecksum: checksum,
+            openingMode: 'unlimited',
         },
     };
 };
@@ -232,7 +232,7 @@ const handleReplaceIndividualDuplicateRule = (result: string, group: LootGroup):
     const lootDrop = group.lootDrops.find((drop) => drop.name === result)!;
     lootDrop.name = lootDrop.substitute!.name;
     lootDrop.pictureUrl = lootDrop.substitute!.pictureUrl;
-    lootDrop.backgroundUrl = lootDrop.substitute!.backgroundUrl;
+    lootDrop.overrideRarityInUi = lootDrop.substitute!.overrideRarityInUi;
     lootDrop.amount = lootDrop.substitute!.amount;
 
     // Check if all group drops have been handled
@@ -240,7 +240,7 @@ const handleReplaceIndividualDuplicateRule = (result: string, group: LootGroup):
         if (
             drop.name !== drop.substitute!.name ||
             drop.pictureUrl !== drop.substitute!.pictureUrl ||
-            drop.backgroundUrl !== drop.substitute!.backgroundUrl ||
+            drop.overrideRarityInUi !== drop.substitute!.overrideRarityInUi ||
             drop.amount !== drop.substitute!.amount
         ) {
             // There are still original drops
@@ -270,7 +270,7 @@ const handleReplaceAllDuplicationRule = (
     const lootDrop = group.lootDrops.find((drop) => drop.name === result)!;
     lootDrop.name = substitute.name;
     lootDrop.pictureUrl = substitute.pictureUrl;
-    lootDrop.backgroundUrl = substitute.backgroundUrl;
+    lootDrop.overrideRarityInUi = substitute.overrideRarityInUi;
     lootDrop.amount = substitute.amount;
 
     // Check if all group drops have been handled
@@ -278,7 +278,7 @@ const handleReplaceAllDuplicationRule = (
         if (
             drop.name !== substitute.name ||
             drop.pictureUrl !== substitute.pictureUrl ||
-            drop.backgroundUrl !== substitute.backgroundUrl ||
+            drop.overrideRarityInUi !== substitute.overrideRarityInUi ||
             drop.amount !== substitute.amount
         ) {
             // There are still original drops
@@ -326,14 +326,14 @@ const handleRemoveDuplicateRule = (
     }
     // All drops have been dropped, reset drops and replace with substitutes, duplicate handling no longer required
     refGroup.lootDrops.forEach((drop) => {
-        const substituteDrop = JSON.parse(JSON.stringify(drop));
+        const substituteDrop: LootDrop = JSON.parse(JSON.stringify(drop));
         substituteDrop.name = globalSubstitute ? globalSubstitute.name : substituteDrop.substitute!.name;
         substituteDrop.pictureUrl = globalSubstitute
             ? globalSubstitute.pictureUrl
             : substituteDrop.substitute!.pictureUrl;
-        substituteDrop.backgroundUrl = globalSubstitute
-            ? globalSubstitute.backgroundUrl
-            : substituteDrop.substitute!.backgroundUrl;
+        substituteDrop.overrideRarityInUi = globalSubstitute
+            ? globalSubstitute.overrideRarityInUi
+            : substituteDrop.substitute!.overrideRarityInUi;
         substituteDrop.amount = globalSubstitute ? globalSubstitute.amount : substituteDrop.substitute!.amount;
         remainingDrops.push(substituteDrop);
         group.lootDrops = remainingDrops;
@@ -403,6 +403,7 @@ const openOne = (lootbox: Lootbox): OpeningResultDrop[] => {
             type: slot.contentType,
             name: pickedDrop.name,
             amount: pickedDrop.amount,
+            rarityInUi: pickedDrop.overrideRarityInUi || slot.contentType,
         });
     });
     return results;
@@ -410,6 +411,10 @@ const openOne = (lootbox: Lootbox): OpeningResultDrop[] => {
 
 /**
  * Opens a single selected Lootbox and updates the session after handling
+ *
+ * TODO: handle `autoOpenRecursive`: exclude recursive boxes from the results and replace them with their own content
+ *  immediately. Since it will involve its own set of state changes, should be a recursive call to this same function
+ *  and should probably take place at the end.
  *
  * @param session The current opening session state. This object will be modified without cloning and returned.
  *                The session is assumed to be in a valid state, there will be NO error handling for potentially missing

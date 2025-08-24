@@ -35,6 +35,10 @@ export const validateOptionalString = (obj: unknown): boolean => {
     return !obj || (typeof obj === 'string' && obj.trim().length > 0);
 };
 
+export const validateOptionalEnum = (obj: unknown, options: unknown[]): boolean => {
+    return !obj || options.includes(obj);
+};
+
 export const validateOptionalUrl = (obj: unknown): boolean => {
     return (
         !obj ||
@@ -62,8 +66,8 @@ export const validateLootDropSubstitute = (substitute: Maybe<LootDropSubstitute>
     if (!validateOptionalUrl(substitute.pictureUrl)) {
         errors.push(`${prefix}.pictureUrl is invalid`);
     }
-    if (!validateOptionalUrl(substitute.backgroundUrl)) {
-        errors.push(`${prefix}.backgroundUrl is invalid`);
+    if (!validateOptionalEnum(substitute.overrideRarityInUi, ['main', 'secondary', 'filler'])) {
+        errors.push(`${prefix}.overrideRarityInUi is invalid`);
     }
     if (!validateRequiredPositiveInt(substitute.amount)) {
         errors.push(`${prefix}.amount is invalid`);
@@ -83,8 +87,8 @@ export const validateLootDrop = (drop: Maybe<LootDrop>, selfIndex: number, expec
     if (!validateOptionalUrl(drop.pictureUrl)) {
         errors.push(`${prefix}.pictureUrl is invalid`);
     }
-    if (!validateOptionalUrl(drop.backgroundUrl)) {
-        errors.push(`${prefix}.backgroundUrl is invalid`);
+    if (!validateOptionalEnum(drop.overrideRarityInUi, ['main', 'secondary', 'filler'])) {
+        errors.push(`${prefix}.overrideRarityInUi is invalid`);
     }
     if (!validateRequiredDropRate(drop.dropRate)) {
         errors.push(`${prefix}.dropRate is invalid`);

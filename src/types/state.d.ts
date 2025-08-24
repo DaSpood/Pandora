@@ -24,7 +24,7 @@ interface OpeningSession {
      * The goal here is to allow easy access when displaying filters to the user (mainly for selecting pre-owned
      * main/secondary drops and setting the stop-condition of the "open until" mode) or accessing pictures.
      */
-    lootTableUniqueDrops: Record<string, { name: string; pictureUrl?: string; backgroundUrl?: string }>;
+    lootTableUniqueDrops: Record<string, { name: string; pictureUrl?: string }>;
     /**
      * For each Lootbox's name, how many boxes have been opened during the session.
      */
@@ -91,6 +91,8 @@ export interface OpeningResultDrop {
     name: string;
     /** Amount dropped */
     amount: number;
+    /** UI highlight */
+    rarityInUi: LootDropType;
 }
 
 /**
@@ -107,6 +109,13 @@ export interface SessionConfiguration {
      * LootDrops and pity.
      */
     lootTableChecksum: string;
+    /**
+     * The box opening mode.
+     *
+     * - 'unlimited': The user can open any box without purchases, one at a time.
+     * - 'budget': The user can only open boxes in their inventory. More boxes can be purchased.
+     */
+    openingMode: 'unlimited' | 'budget';
 
     // `slowOpening: boolean` for auto-opening modes to display each result in the UI with a slight delay or only display final results?
 }
