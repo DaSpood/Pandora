@@ -51,7 +51,7 @@ export default function LootTableLoader({ onTableLoaded }: { onTableLoaded: (sub
     };
 
     return (
-        <Container fluid className="d-flex min-vh-100 align-items-center px-0 py-4 mx-0 my-auto">
+        <Container fluid className="d-flex h-100 align-items-center px-0 py-4 mx-0 my-auto">
             <Container className="d-flex flex-column gap-4 w-auto p-4 bg-gradient rounded">
                 <Container>
                     <FormLabel>Load a loot table</FormLabel>
