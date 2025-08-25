@@ -1,6 +1,6 @@
 export type DuplicateHandlingMode = 'allowed' | 'replace_individual' | 'replace_all' | 'remove_even' | 'remove_prop';
 
-export type LootDropType = 'main' | 'secondary' | 'filter';
+export type LootDropType = 'main' | 'secondary' | 'filler';
 
 /**
  * The root of the loot tables contains metadata about the "event" / "lootbox family" for this loot table, mostly for
@@ -83,7 +83,7 @@ export interface Lootbox {
      */
     pictureUrl?: string;
     /**
-     * Whether this tier of lootboxes can be purchased.
+     * Whether this tier of lootboxes can be purchased. At least one lootbox in the table must be purchasable.
      *
      * By default, except in "unlimited" mode, the simulator will only let you open purchasable boxes, though you can
      * choose to bypass this restriction if wanted.
@@ -282,6 +282,16 @@ export interface LootDrop {
      */
     name: string;
     /**
+     * A number describing the priority of the drop in lists, strictly positive integer.
+     *
+     * Higher priority drops will be displayed above lower priority drops.
+     *
+     * If two items have the same priority, alphabetical order of the `name` field will be used instead.
+     *
+     * If missing, will default to 0. Leave empty if order does not matter.
+     */
+    displayPriority?: number;
+    /**
      * Url to an image that represents the dropped item.
      */
     pictureUrl?: string;
@@ -341,6 +351,16 @@ export interface LootDropSubstitute {
      * So be careful with typos and case sensitivity !
      */
     name: string;
+    /**
+     * A number describing the priority of the drop in lists, strictly positive integer.
+     *
+     * Higher priority drops will be displayed above lower priority drops.
+     *
+     * If two items have the same priority, alphabetical order of the `name` field will be used instead.
+     *
+     * If missing, will default to 0. Leave empty if order does not matter.
+     */
+    displayPriority?: number;
     /**
      * Url to an image that represents the dropped item.
      */

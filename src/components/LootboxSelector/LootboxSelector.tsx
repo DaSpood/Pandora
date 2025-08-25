@@ -18,7 +18,7 @@ export default function LootboxSelector({
 
     return (
         <Container fluid className="py-2 px-0">
-            <Container className="text-center">
+            <Container className="text-center mb-1">
                 {nextGuarantee > 1 ? (
                     <p>
                         <b>Guaranteed main reward in {nextGuarantee} boxes</b>
@@ -38,11 +38,17 @@ export default function LootboxSelector({
                             onClick={() => onSelectedLootboxNameChanged(lootboxName)}
                         >
                             <Image
-                                src={session.lootTableUniqueDrops[lootboxName]?.pictureUrl}
+                                src={
+                                    session.referenceLootTable.lootboxes.find(
+                                        (box: Lootbox) => box.name === lootboxName,
+                                    )!.pictureUrl || 'default-loot-box.png'
+                                }
                                 alt={lootboxName}
                                 className="object-fit-contain flex-grow-1"
                             />
-                            {session.simulatorConfig.openingMode !== 'unlimited' && (
+                            {!session.referenceLootTable.lootboxes.find((box: Lootbox) => box.name === lootboxName)!
+                                .pictureUrl && <p>{lootboxName}</p>}
+                            {session.simulatorConfig.openingMode === 'budget' && (
                                 <p>x{session.lootboxPendingCounters[lootboxName]}</p>
                             )}
                         </Container>

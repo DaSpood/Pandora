@@ -1,3 +1,11 @@
+# v0.2.0
+
+- Add settings modal
+    - User can select opening mode
+        - `budget` is available but purchase modal is not ready
+        - `unlimited` is locked for now
+    - User can select pre-owned prizes for which duplication rules will be pre-applied
+
 # v0.1.1
 
 - Display warning to low-width users because mobile browsers will fuck up the page.

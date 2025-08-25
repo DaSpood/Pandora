@@ -18,13 +18,22 @@ interface OpeningSession {
      */
     dynamicLootTable: LootTable;
     /**
-     * Cache associating each LootDrop's name with the corresponding object in the `referenceLootTable`, excluding drop
-     * rate and substitute.
+     * Cache associating each LootDrop's name with metadata of the corresponding object in the `referenceLootTable`.
      *
      * The goal here is to allow easy access when displaying filters to the user (mainly for selecting pre-owned
      * main/secondary drops and setting the stop-condition of the "open until" mode) or accessing pictures.
      */
-    lootTableUniqueDrops: Record<string, { name: string; pictureUrl?: string }>;
+    lootTableUniqueDrops: Record<
+        string,
+        {
+            name: string;
+            type: LootDropType;
+            isSubstitute: boolean;
+            priority: number;
+            isSubjectToDuplicationRules: boolean;
+            pictureUrl?: string;
+        }
+    >;
     /**
      * For each Lootbox's name, how many boxes have been opened during the session.
      */
@@ -115,7 +124,15 @@ export interface SessionConfiguration {
      * - 'unlimited': The user can open any box without purchases, one at a time.
      * - 'budget': The user can only open boxes in their inventory. More boxes can be purchased.
      */
-    openingMode: 'unlimited' | 'budget';
+    openingMode: 'unlimited' | 'budget' | 'until';
+    /**
+     * List of prizes which are already owned by the user, to apply duplication rules to the loot table from the start.
+     */
+    preOwnedPrizes: { name: string; type: LootDropType }[];
+    /**
+     * List of prizes which the simulator should obtain before stopping in 'unlimited' mode.
+     */
+    targetPrizes: { name: string; type: LootDropType }[];
 
     // `slowOpening: boolean` for auto-opening modes to display each result in the UI with a slight delay or only display final results?
 }

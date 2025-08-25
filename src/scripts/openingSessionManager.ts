@@ -3,11 +3,12 @@ import type {
     Lootbox,
     LootDrop,
     LootDropSubstitute,
+    LootDropType,
     LootGroup,
     LootTable,
 } from '../types/lootTable';
 import type { OpeningResult, OpeningResultDrop, OpeningSession } from '../types/state';
-import type { Maybe } from '../types/utils';
+import type { Maybe } from '../types/utils'; ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // SESSION
@@ -23,19 +24,63 @@ import type { Maybe } from '../types/utils';
 export const newSession = (rawTable: string, checksum: string): OpeningSession => {
     const refTable = JSON.parse(rawTable) as LootTable;
 
-    const allLootDrops: (LootDrop | LootDropSubstitute)[] = refTable.lootboxes.flatMap((box) =>
+    // This piece of shit object is worth it, I swear, it's a surprise tool that will help us later
+    const allLootDrops: {
+        drop: LootDrop | LootDropSubstitute;
+        type: LootDropType;
+        isSubstitute: boolean;
+        duplicateHandlingMode: DuplicateHandlingMode;
+    }[] = refTable.lootboxes.flatMap((box) =>
         box.lootSlots.flatMap((slot) =>
             slot.lootGroups.flatMap((groups) =>
-                groups.lootDrops.flatMap((drop) => (drop.substitute ? [drop, drop.substitute] : [drop])),
+                groups.lootDrops.flatMap((lootDrop) => {
+                    const duplicateHandlingMode =
+                        slot.contentType === 'main'
+                            ? box.mainPrizeDuplicates
+                            : slot.contentType === 'secondary'
+                              ? box.secondaryPrizeDuplicates
+                              : 'allowed';
+                    const toAdd: {
+                        drop: LootDrop | LootDropSubstitute;
+                        type: LootDropType;
+                        isSubstitute: boolean;
+                        duplicateHandlingMode: DuplicateHandlingMode;
+                    }[] = [
+                        {
+                            drop: lootDrop,
+                            type: slot.contentType,
+                            isSubstitute: false,
+                            duplicateHandlingMode: duplicateHandlingMode,
+                        },
+                    ];
+                    if (lootDrop.substitute)
+                        toAdd.push({
+                            drop: lootDrop.substitute,
+                            type: slot.contentType,
+                            isSubstitute: true,
+                            duplicateHandlingMode: 'allowed',
+                        });
+                    return toAdd;
+                }),
             ),
         ),
     );
     refTable.lootboxes.forEach((box) => {
         if (box.mainPrizeSubstitute) {
-            allLootDrops.push(box.mainPrizeSubstitute);
+            allLootDrops.push({
+                drop: box.mainPrizeSubstitute,
+                type: 'main',
+                isSubstitute: true,
+                duplicateHandlingMode: 'allowed',
+            });
         }
         if (box.secondaryPrizeSubstitute) {
-            allLootDrops.push(box.secondaryPrizeSubstitute);
+            allLootDrops.push({
+                drop: box.secondaryPrizeSubstitute,
+                type: 'secondary',
+                isSubstitute: true,
+                duplicateHandlingMode: 'allowed',
+            });
         }
     });
 
@@ -44,13 +89,27 @@ export const newSession = (rawTable: string, checksum: string): OpeningSession =
         dynamicLootTable: JSON.parse(rawTable) as LootTable,
         lootTableUniqueDrops: allLootDrops.reduce(
             (acc, drop) => {
-                acc[drop.name] = {
-                    name: drop.name,
-                    pictureUrl: drop.pictureUrl,
+                acc[drop.drop.name] = {
+                    name: drop.drop.name,
+                    type: drop.type,
+                    isSubstitute: drop.isSubstitute,
+                    priority: drop.drop.displayPriority ?? 0,
+                    isSubjectToDuplicationRules: drop.duplicateHandlingMode !== 'allowed',
+                    pictureUrl: drop.drop.pictureUrl,
                 };
                 return acc;
             },
-            {} as Record<string, { name: string; pictureUrl?: string }>,
+            {} as Record<
+                string,
+                {
+                    name: string;
+                    type: LootDropType;
+                    isSubstitute: boolean;
+                    priority: number;
+                    isSubjectToDuplicationRules: boolean;
+                    pictureUrl?: string;
+                }
+            >,
         ),
         lootboxOpenedCounters: refTable.lootboxes.reduce(
             (acc, box) => {
@@ -82,7 +141,7 @@ export const newSession = (rawTable: string, checksum: string): OpeningSession =
         ),
         aggregatedResults: allLootDrops.reduce(
             (acc, drop) => {
-                acc[drop.name] = 0;
+                acc[drop.drop.name] = 0;
                 return acc;
             },
             {} as Record<string, number>,
@@ -91,6 +150,8 @@ export const newSession = (rawTable: string, checksum: string): OpeningSession =
         simulatorConfig: {
             lootTableChecksum: checksum,
             openingMode: 'unlimited',
+            preOwnedPrizes: [],
+            targetPrizes: [],
         },
     };
 };
@@ -231,6 +292,7 @@ const handleReplaceIndividualDuplicateRule = (result: string, group: LootGroup):
     // Replace matching loot table drop
     const lootDrop = group.lootDrops.find((drop) => drop.name === result)!;
     lootDrop.name = lootDrop.substitute!.name;
+    lootDrop.displayPriority = lootDrop.substitute!.displayPriority ?? 0;
     lootDrop.pictureUrl = lootDrop.substitute!.pictureUrl;
     lootDrop.overrideRarityInUi = lootDrop.substitute!.overrideRarityInUi;
     lootDrop.amount = lootDrop.substitute!.amount;
@@ -239,6 +301,7 @@ const handleReplaceIndividualDuplicateRule = (result: string, group: LootGroup):
     for (const drop of group.lootDrops) {
         if (
             drop.name !== drop.substitute!.name ||
+            drop.displayPriority !== lootDrop.substitute!.displayPriority ||
             drop.pictureUrl !== drop.substitute!.pictureUrl ||
             drop.overrideRarityInUi !== drop.substitute!.overrideRarityInUi ||
             drop.amount !== drop.substitute!.amount
@@ -269,6 +332,7 @@ const handleReplaceAllDuplicationRule = (
     // Replace matching loot table drop
     const lootDrop = group.lootDrops.find((drop) => drop.name === result)!;
     lootDrop.name = substitute.name;
+    lootDrop.displayPriority = substitute.displayPriority ?? 0;
     lootDrop.pictureUrl = substitute.pictureUrl;
     lootDrop.overrideRarityInUi = substitute.overrideRarityInUi;
     lootDrop.amount = substitute.amount;
@@ -277,6 +341,7 @@ const handleReplaceAllDuplicationRule = (
     for (const drop of group.lootDrops) {
         if (
             drop.name !== substitute.name ||
+            drop.displayPriority !== substitute.displayPriority ||
             drop.pictureUrl !== substitute.pictureUrl ||
             drop.overrideRarityInUi !== substitute.overrideRarityInUi ||
             drop.amount !== substitute.amount
@@ -328,6 +393,9 @@ const handleRemoveDuplicateRule = (
     refGroup.lootDrops.forEach((drop) => {
         const substituteDrop: LootDrop = JSON.parse(JSON.stringify(drop));
         substituteDrop.name = globalSubstitute ? globalSubstitute.name : substituteDrop.substitute!.name;
+        substituteDrop.displayPriority = globalSubstitute
+            ? (globalSubstitute.displayPriority ?? 0)
+            : (substituteDrop.substitute!.displayPriority ?? 0);
         substituteDrop.pictureUrl = globalSubstitute
             ? globalSubstitute.pictureUrl
             : substituteDrop.substitute!.pictureUrl;
@@ -356,7 +424,7 @@ const handleRemoveDuplicateRule = (
  * @returns The new rule to save for the dynamic Lootbox (equal to `rule` by default, may become 'allowed' once all
  *          drops are obtained and special handling is no longer necessary).
  */
-const handleDuplicationRules = (
+export const handleDuplicationRules = (
     result: string,
     refGroup: LootGroup,
     group: LootGroup,

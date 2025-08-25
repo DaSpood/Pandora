@@ -27,7 +27,7 @@ export const validateRequiredDropRate = (obj: unknown): boolean => {
     return typeof obj === 'number' && obj > 0.0 && obj <= 1.0;
 };
 
-export const validateRequiredPositiveInt = (obj: unknown): boolean => {
+export const validateRequiredStrictlyPositiveInt = (obj: unknown): boolean => {
     return typeof obj === 'number' && Number.isInteger(obj) && obj > 0;
 };
 
@@ -49,8 +49,12 @@ export const validateOptionalUrl = (obj: unknown): boolean => {
     );
 };
 
-export const validateOptionalPositiveInt = (obj: unknown): boolean => {
+export const validateOptionalStrictlyPositiveInt = (obj: unknown): boolean => {
     return !obj || (typeof obj === 'number' && Number.isInteger(obj) && obj > 0);
+};
+
+export const validateOptionalPositiveInt = (obj: unknown): boolean => {
+    return !obj || (typeof obj === 'number' && Number.isInteger(obj) && obj >= 0);
 };
 
 // Loot table structure
@@ -63,13 +67,16 @@ export const validateLootDropSubstitute = (substitute: Maybe<LootDropSubstitute>
     if (!validateRequiredString(substitute.name)) {
         errors.push(`${prefix}.name is invalid`);
     }
+    if (!validateOptionalStrictlyPositiveInt(substitute.displayPriority)) {
+        errors.push(`${prefix}.displayPriority is invalid`);
+    }
     if (!validateOptionalUrl(substitute.pictureUrl)) {
         errors.push(`${prefix}.pictureUrl is invalid`);
     }
     if (!validateOptionalEnum(substitute.overrideRarityInUi, ['main', 'secondary', 'filler'])) {
         errors.push(`${prefix}.overrideRarityInUi is invalid`);
     }
-    if (!validateRequiredPositiveInt(substitute.amount)) {
+    if (!validateRequiredStrictlyPositiveInt(substitute.amount)) {
         errors.push(`${prefix}.amount is invalid`);
     }
 
@@ -84,6 +91,9 @@ export const validateLootDrop = (drop: Maybe<LootDrop>, selfIndex: number, expec
     if (!validateRequiredString(drop.name)) {
         errors.push(`${prefix}.name is invalid`);
     }
+    if (!validateOptionalStrictlyPositiveInt(drop.displayPriority)) {
+        errors.push(`${prefix}.displayPriority is invalid`);
+    }
     if (!validateOptionalUrl(drop.pictureUrl)) {
         errors.push(`${prefix}.pictureUrl is invalid`);
     }
@@ -93,7 +103,7 @@ export const validateLootDrop = (drop: Maybe<LootDrop>, selfIndex: number, expec
     if (!validateRequiredDropRate(drop.dropRate)) {
         errors.push(`${prefix}.dropRate is invalid`);
     }
-    if (!validateRequiredPositiveInt(drop.amount)) {
+    if (!validateRequiredStrictlyPositiveInt(drop.amount)) {
         errors.push(`${prefix}.amount is invalid`);
     }
     if (expectSubstitute) {
@@ -188,19 +198,19 @@ export const validateLootbox = (box: Lootbox, selfIndex: number): string[] => {
     if (!validateRequiredBoolean(box.purchasable)) {
         errors.push(`${prefix}.purchasable is invalid`);
     }
-    if (!validateOptionalPositiveInt(box.mainPrizeHardPity)) {
+    if (!validateOptionalStrictlyPositiveInt(box.mainPrizeHardPity)) {
         errors.push(`${prefix}.mainPrizeHardPity is invalid`);
     }
-    if (!validateOptionalPositiveInt(box.mainPrizeSoftPity)) {
+    if (!validateOptionalStrictlyPositiveInt(box.mainPrizeSoftPity)) {
         errors.push(`${prefix}.mainPrizeSoftPity is invalid`);
     }
     if (box.mainPrizeSoftPity && !box.mainPrizeHardPity) {
         errors.push(`${prefix}.mainPrizeSoftPity is not expected`);
     }
-    if (!validateOptionalPositiveInt(box.secondaryPrizeHardPity)) {
+    if (!validateOptionalStrictlyPositiveInt(box.secondaryPrizeHardPity)) {
         errors.push(`${prefix}.secondaryPrizeHardPity is invalid`);
     }
-    if (!validateOptionalPositiveInt(box.secondaryPrizeSoftPity)) {
+    if (!validateOptionalStrictlyPositiveInt(box.secondaryPrizeSoftPity)) {
         errors.push(`${prefix}.secondaryPrizeSoftPity is invalid`);
     }
     if (box.secondaryPrizeSoftPity && !box.secondaryPrizeHardPity) {
@@ -312,9 +322,14 @@ export const validateLootTable = (table: LootTable): string[] => {
         errors.push(`${prefix}.lootboxes should only contain 1 entry`);
     }
 
+    let foundPurchaseable = false;
     table.lootboxes?.forEach((box, index) => {
         errors.push(...validateLootbox(box, index).map((error) => `${prefix}.${error}`));
+        foundPurchaseable = foundPurchaseable || box.purchasable;
     });
+    if (!foundPurchaseable) {
+        errors.push(`${prefix}.lootboxes should contain at least one purchasable lootbox`);
+    }
 
     return errors;
 };

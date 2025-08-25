@@ -5,8 +5,8 @@ import { useState } from 'react';
 import type { OpeningSession, SessionConfiguration } from './types/state';
 import type { Maybe } from './types/utils';
 import { Container } from 'react-bootstrap';
-import { newSession, openOneAndUpdateState } from './scripts/openingSessionManager.ts';
-import type { Lootbox } from './types/lootTable';
+import { handleDuplicationRules, newSession, openOneAndUpdateState } from './scripts/openingSessionManager.ts';
+import type { Lootbox, LootDrop, LootGroup, LootSlot } from './types/lootTable';
 import InfoHeader from './components/InfoHeader/InfoHeader.tsx';
 import ButtonsFooter from './components/ButtonsFooter/ButtonsFooter.tsx';
 import LootboxSelector from './components/LootboxSelector/LootboxSelector.tsx';
@@ -33,7 +33,49 @@ export default function App() {
         const initialSession = newSession(rawTable, checksum);
         if (simulatorConfig) {
             initialSession.simulatorConfig = simulatorConfig;
-            // TODO: update other fields as needed
+            // Apply duplication rules on pre-owned content
+            initialSession.dynamicLootTable.lootboxes.forEach((lootbox: Lootbox) => {
+                // Main prizes
+                const refMainLootGroup: LootGroup = initialSession.referenceLootTable.lootboxes
+                    .find((box: Lootbox) => box.name === lootbox.name)!
+                    .lootSlots.find((slot: LootSlot) => slot.contentType === 'main')!.lootGroups[0];
+                const availableMainPrizesInBox = refMainLootGroup.lootDrops.map((drop: LootDrop) => drop.name);
+                const dynamicMainLootGroup = lootbox.lootSlots.find((slot) => slot.contentType === 'main')!
+                    .lootGroups[0];
+                simulatorConfig.preOwnedPrizes
+                    .filter((prize) => prize.type === 'main')
+                    .map((prize) => prize.name)
+                    .filter((prize) => availableMainPrizesInBox.includes(prize))
+                    .forEach((prize) => {
+                        lootbox.mainPrizeDuplicates = handleDuplicationRules(
+                            prize,
+                            refMainLootGroup,
+                            dynamicMainLootGroup,
+                            lootbox.mainPrizeDuplicates,
+                            lootbox.mainPrizeSubstitute,
+                        );
+                    });
+                // Secondary prizes
+                const refSecondaryLootGroup = initialSession.referenceLootTable.lootboxes
+                    .find((box: Lootbox) => box.name === lootbox.name)!
+                    .lootSlots.find((slot: LootSlot) => slot.contentType === 'secondary')?.lootGroups[0];
+                const availableSecondaryPrizesInBox = refMainLootGroup.lootDrops.map((drop: LootDrop) => drop.name);
+                const dynamicSecondaryLootGroup = lootbox.lootSlots.find((slot) => slot.contentType === 'secondary')
+                    ?.lootGroups[0];
+                simulatorConfig.preOwnedPrizes
+                    .filter((prize) => prize.type === 'secondary')
+                    .map((prize) => prize.name)
+                    .filter((prize) => availableSecondaryPrizesInBox.includes(prize))
+                    .forEach((prize) => {
+                        lootbox.mainPrizeDuplicates = handleDuplicationRules(
+                            prize,
+                            refSecondaryLootGroup,
+                            dynamicSecondaryLootGroup!,
+                            lootbox.secondaryPrizeDuplicates,
+                            lootbox.secondaryPrizeSubstitute,
+                        );
+                    });
+            });
         }
         console.log('Initialized session:', initialSession);
         setSession(initialSession);
@@ -78,8 +120,12 @@ export default function App() {
     // CALLBACKS
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    const onApplySimulatorConfig = (simulatorConfig: SessionConfiguration): void =>
-        initSession(JSON.stringify(session!.referenceLootTable), simulatorConfig.lootTableChecksum, simulatorConfig);
+    const onApplySimulatorConfig = (simulatorConfig?: SessionConfiguration): void =>
+        initSession(
+            JSON.stringify(session!.referenceLootTable),
+            simulatorConfig?.lootTableChecksum || session!.simulatorConfig.lootTableChecksum,
+            simulatorConfig,
+        );
 
     const onTableLoaded = (rawTable: string) => {
         crypto.subtle
@@ -176,7 +222,7 @@ export default function App() {
                         session={session}
                         displaySettingsModal={showSettings}
                         onCloseSettingsModal={onCloseSettingsModal}
-                        onApplySettings={onApplySimulatorConfig}
+                        onApplyConfig={onApplySimulatorConfig}
                     />
                 </Container>
             )}

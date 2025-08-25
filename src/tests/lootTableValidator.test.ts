@@ -31,6 +31,7 @@ describe('LootTableValidator', () => {
             'LootTable.lootboxes[0].lootSlots[0].lootGroups has an invalid total dropRate of 0.5',
             'LootTable.lootboxes[0].lootSlots has an invalid number of non-filler slots',
             'LootTable.lootboxes[1].lootSlots[1].lootGroups has an invalid total dropRate of 0.34',
+            'LootTable.lootboxes should contain at least one purchasable lootbox',
         ];
 
         const errors = validateLootTable(lootTable);

@@ -1,1 +1,3 @@
 - 'public/favicon.png': created by Freepik at https://www.flaticon.com/free-icon/loot-box_4176144?related_id=4176144
+- 'public/default-loot-box.png': created by Freepik at https://www.flaticon.com/free-icon/loot-box_4176145?related_id=4176237
+- 'public/default-loot-icon.png': created by Freepik at https://www.flaticon.com/free-icon/mystery_6726753?related_id=6726753

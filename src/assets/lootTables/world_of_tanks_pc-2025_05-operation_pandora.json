@@ -182,60 +182,70 @@
                             "lootDrops": [
                                 {
                                     "name": "Kpz. 3 GST Turm",
+                                    "displayPriority": 8,
                                     "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/germany-G174_Kpz3_GST_Turm.png",
                                     "dropRate": 0.13,
                                     "amount": 1
                                 },
                                 {
                                     "name": "CC-46 Pancernik",
+                                    "displayPriority": 9,
                                     "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/poland-Pl26_Czolg_P_Wz_46.png",
                                     "dropRate": 0.08,
                                     "amount": 1
                                 },
                                 {
                                     "name": "AMBT",
+                                    "displayPriority": 8,
                                     "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/usa-A149_AMBT.png",
                                     "dropRate": 0.08,
                                     "amount": 1
                                 },
                                 {
                                     "name": "SDP wz 66 Grom",
+                                    "displayPriority": 8,
                                     "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/poland-Pl27_SDP_Wz_66T.png",
                                     "dropRate": 0.13,
                                     "amount": 1
                                 },
                                 {
                                     "name": "Jagdtiger Prototype",
+                                    "displayPriority": 8,
                                     "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/germany-G44_JagdTigerH.png",
                                     "dropRate": 0.08,
                                     "amount": 1
                                 },
                                 {
                                     "name": "T-44-100",
+                                    "displayPriority": 8,
                                     "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/ussr-R122_T44_100.png",
                                     "dropRate": 0.08,
                                     "amount": 1
                                 },
                                 {
                                     "name": "AAT60",
+                                    "displayPriority": 8,
                                     "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/usa-A155_AAT60.png",
                                     "dropRate": 0.08,
                                     "amount": 1
                                 },
                                 {
                                     "name": "VCS 6X6 TS 90",
+                                    "displayPriority": 9,
                                     "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/france-F122_VCS_6x6_TS90.png",
                                     "dropRate": 0.13,
                                     "amount": 1
                                 },
                                 {
                                     "name": "EMIL 1951",
+                                    "displayPriority": 8,
                                     "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/sweden-S25_EMIL_51.png",
                                     "dropRate": 0.13,
                                     "amount": 1
                                 },
                                 {
                                     "name": "T77",
+                                    "displayPriority": 8,
                                     "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/usa-A132_T77.png",
                                     "dropRate": 0.08,
                                     "amount": 1
@@ -486,30 +496,35 @@
                             "lootDrops": [
                                 {
                                     "name": "UDES 03 Alt 3",
+                                    "displayPriority": 9,
                                     "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/sweden-S30_UDES_03_Alt_3.png",
                                     "dropRate": 0.35,
                                     "amount": 1
                                 },
                                 {
                                     "name": "Kpz. Erich Konzept I",
+                                    "displayPriority": 9,
                                     "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/germany-G165_Erich_Konzept_I.png",
                                     "dropRate": 0.15,
                                     "amount": 1
                                 },
                                 {
                                     "name": "BZ-72-1",
+                                    "displayPriority": 10,
                                     "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/china-Ch54_BZ_72_1.png",
                                     "dropRate": 0.05,
                                     "amount": 1
                                 },
                                 {
                                     "name": "Vz. 58 Medvěd",
+                                    "displayPriority": 9,
                                     "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/czech-Cz32_Vz_58_Koncept.png",
                                     "dropRate": 0.10,
                                     "amount": 1
                                 },
                                 {
                                     "name": "E 77",
+                                    "displayPriority": 9,
                                     "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/germany-G171_E77.png",
                                     "dropRate": 0.35,
                                     "amount": 1
@@ -784,18 +799,21 @@
                             "lootDrops": [
                                 {
                                     "name": "Vercingétorix",
+                                    "displayPriority": 9,
                                     "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/france-F132_Vercingetorix.png",
                                     "dropRate": 0.20,
                                     "amount": 1
                                 },
                                 {
                                     "name": "MBT-B",
+                                    "displayPriority": 10,
                                     "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/usa-A150_MBT_B.png",
                                     "dropRate": 0.40,
                                     "amount": 1
                                 },
                                 {
                                     "name": "Chieftain Mk. 6",
+                                    "displayPriority": 10,
                                     "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/uk-GB84_Chieftain_Mk6.png",
                                     "dropRate": 0.40,
                                     "amount": 1

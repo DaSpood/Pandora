@@ -12,7 +12,7 @@ export default function ResultDisplay({ session }: { session: OpeningSession }) 
                                 className={`h-100 d-flex flex-column justify-content-between p-2 bg-gradient rounded text-center ${drop.rarityInUi === 'main' ? 'border border-warning' : ''} ${drop.rarityInUi === 'secondary' ? 'border border-info' : ''}`}
                             >
                                 <Image
-                                    src={session.lootTableUniqueDrops[drop.name]?.pictureUrl}
+                                    src={session.lootTableUniqueDrops[drop.name]?.pictureUrl || 'default-loot-icon.png'}
                                     alt={drop.name}
                                     className="object-fit-contain flex-grow-1"
                                 />
