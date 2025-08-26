@@ -281,54 +281,53 @@ export const validateLootbox = (box: Lootbox, selfIndex: number): string[] => {
 };
 
 export const validateLootTable = (table: LootTable): string[] => {
-    const prefix = `LootTable`;
-    if (!table) return [`${prefix} is null`];
+    if (!table) return [`LootTable is null`];
     const errors = [];
 
     if (!validateRequiredString(table.game)) {
-        errors.push(`${prefix}.game is invalid`);
+        errors.push(`game is invalid`);
     }
     if (!validateRequiredString(table.eventName)) {
-        errors.push(`${prefix}.eventName is invalid`);
+        errors.push(`eventName is invalid`);
     }
     if (!validateRequiredDate(table.startDate)) {
-        errors.push(`${prefix}.startDate is invalid`);
+        errors.push(`startDate is invalid`);
     }
     if (!validateRequiredDate(table.endDate)) {
-        errors.push(`${prefix}.endDate is invalid`);
+        errors.push(`endDate is invalid`);
     }
     if (!validateRequiredBoolean(table.recursive)) {
-        errors.push(`${prefix}.recursive is invalid`);
+        errors.push(`recursive is invalid`);
     }
     if (!validateRequiredBoolean(table.autoOpenRecursive)) {
-        errors.push(`${prefix}.autoOpenRecursive is invalid`);
+        errors.push(`autoOpenRecursive is invalid`);
     }
     if (table.autoOpenRecursive && !table.recursive) {
-        errors.push(`${prefix}.autoOpenRecursive is cannot be true if ${prefix}.recursive is false`);
+        errors.push(`autoOpenRecursive is cannot be true if recursive is false`);
     }
     if (!validateRequiredString(table.author)) {
-        errors.push(`${prefix}.author is invalid`);
+        errors.push(`author is invalid`);
     }
     if (!validateRequiredString(table.source)) {
-        errors.push(`${prefix}.source is invalid`);
+        errors.push(`source is invalid`);
     }
     if (!validateOptionalString(table.notes)) {
-        errors.push(`${prefix}.notes is invalid`);
+        errors.push(`notes is invalid`);
     }
     if (!validateRequiredArray(table.lootboxes)) {
-        errors.push(`${prefix}.lootboxes is invalid`);
+        errors.push(`lootboxes is invalid`);
     }
     if (!table.recursive && table.lootboxes?.length > 1) {
-        errors.push(`${prefix}.lootboxes should only contain 1 entry`);
+        errors.push(`lootboxes should only contain 1 entry`);
     }
 
     let foundPurchaseable = false;
     table.lootboxes?.forEach((box, index) => {
-        errors.push(...validateLootbox(box, index).map((error) => `${prefix}.${error}`));
+        errors.push(...validateLootbox(box, index).map((error) => `${error}`));
         foundPurchaseable = foundPurchaseable || box.purchasable;
     });
     if (!foundPurchaseable) {
-        errors.push(`${prefix}.lootboxes should contain at least one purchasable lootbox`);
+        errors.push(`lootboxes should contain at least one purchasable lootbox`);
     }
 
     return errors;

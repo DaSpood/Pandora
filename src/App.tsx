@@ -1,11 +1,17 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import LootTableLoader from './components/LootTableLoader/LootTableLoader.tsx';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { OpeningSession, SessionConfiguration } from './types/state';
 import type { Maybe } from './types/utils';
 import { Container } from 'react-bootstrap';
-import { handleDuplicationRules, newSession, openOneAndUpdateState } from './scripts/openingSessionManager.ts';
+import {
+    findNextLootboxInInventory,
+    handleDuplicationRules,
+    newSession,
+    openAllInInventory,
+    openOneAndUpdateState,
+} from './scripts/openingSessionManager.ts';
 import type { Lootbox, LootDrop, LootGroup, LootSlot } from './types/lootTable';
 import InfoHeader from './components/InfoHeader/InfoHeader.tsx';
 import ButtonsFooter from './components/ButtonsFooter/ButtonsFooter.tsx';
@@ -23,9 +29,78 @@ export default function App() {
     const [showHistory, setShowHistory] = useState<boolean>(false);
     const [showPurchase, setShowPurchase] = useState<boolean>(false);
     const [showSettings, setShowSettings] = useState<boolean>(false);
+    const [currentlyAutoOpening, setCurrentlyAutoOpening] = useState<boolean>(false);
+    const [currentlyOpeningAll, setCurrentlyOpeningAll] = useState<boolean>(false);
+    const [currentlySimulating, setCurrentlySimulating] = useState<boolean>(false);
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // ACTIONS
+    // BACKGROUND ACTIONS
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    /**
+     * "Auto-open 1 by 1" in `budget` mode will open one box and update the state every 1.5s until either the
+     * auto-opening is disabled, the session is reset, or the inventory is empty.
+     *
+     * The delay is here to let the UI display the result every box. For instant clearing of the inventory, use the
+     * "Auto-open everything" button instead.
+     */
+    useEffect(() => {
+        let autoOpeningInterval: string | number | NodeJS.Timeout | undefined = undefined;
+        if (session && currentlyAutoOpening) {
+            autoOpeningInterval = setInterval(() => {
+                const selectedBox = findNextLootboxInInventory(session);
+                if (!selectedBox) {
+                    setCurrentlyAutoOpening(false);
+                    return;
+                }
+                const passedState = JSON.parse(JSON.stringify(session)) as OpeningSession;
+                const newState = openOneAndUpdateState(passedState, selectedBox);
+                setSession(newState);
+            }, 1_500);
+        } else {
+            clearInterval(autoOpeningInterval);
+        }
+        return () => clearInterval(autoOpeningInterval);
+    }, [currentlyAutoOpening, session]);
+
+    /**
+     * "Auto-open everything" in `budget` mode will open every box remaining in the inventory, including ones that may
+     * be obtained during the opening process.
+     *
+     * The UI will lock until the process is complete. For a "1 by 1" auto-opening that can be interrupted, use the
+     * "Auto-open 1 by 1" button instead.
+     */
+    useEffect(() => {
+        if (session && currentlyOpeningAll) {
+            const passedState = JSON.parse(JSON.stringify(session)) as OpeningSession;
+            const newState = openAllInInventory(passedState);
+            setSession(newState);
+            setCurrentlyOpeningAll(false);
+            setShowStats(true); // Don't want to do a special result screen so show the stats instead.
+        }
+    }, [currentlyOpeningAll, session]);
+
+    /**
+     * TODO
+     * Simulation in `until` mode will keep auto-purchasing and opening boxes until the target drops are obtained.
+     *
+     * The UI will lock until the process is complete.
+     */
+    useEffect(() => {
+        let simulationTimeout: string | number | NodeJS.Timeout | undefined;
+        if (currentlySimulating) {
+            simulationTimeout = setTimeout(() => {
+                console.log('simulationTimeout');
+                setCurrentlySimulating(false);
+            }, 10_000);
+        } else {
+            clearTimeout(simulationTimeout);
+        }
+        return () => clearTimeout(simulationTimeout);
+    }, [currentlySimulating]);
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // DIRECT ACTIONS
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     /** Reinitialize the state's session using the given LootTable and SessionConfiguration */
@@ -88,18 +163,17 @@ export default function App() {
         setShowHistory(false);
         setShowPurchase(false);
         setShowSettings(false);
+        setCurrentlyAutoOpening(false);
+        setCurrentlySimulating(false);
     };
 
     const openSelectedLootbox = () => {
         if (!session) return;
         const selectedBox = selectedLootboxName || session?.referenceLootTable.lootboxes[0].name;
 
-        // Costly but necessary for the session that's displayed. Won't clone every opening for auto sessions
         const passedState = JSON.parse(JSON.stringify(session)) as OpeningSession;
 
-        // If no box left in the inventory, purchase a new one.
-        // Note: works for now, maybe we'll want to only enable the 'open' button if there is inventory, and add a
-        //  purchase button for refills. And only bypass the restriction if a specific setting is enabled.
+        // Auto-purchase new box in 'unlimited' mode.
         if (passedState.lootboxPendingCounters[selectedBox] === 0) {
             if (session.simulatorConfig.openingMode === 'unlimited') {
                 passedState.lootboxPurchasedCounters[selectedBox]++;
@@ -117,15 +191,8 @@ export default function App() {
     };
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // CALLBACKS
+    // ACTION CALLBACKS
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    const onApplySimulatorConfig = (simulatorConfig?: SessionConfiguration): void =>
-        initSession(
-            JSON.stringify(session!.referenceLootTable),
-            simulatorConfig?.lootTableChecksum || session!.simulatorConfig.lootTableChecksum,
-            simulatorConfig,
-        );
 
     const onTableLoaded = (rawTable: string) => {
         crypto.subtle
@@ -146,6 +213,45 @@ export default function App() {
             .then((checksum) => initSession(rawTable, checksum));
     };
 
+    const onApplySimulatorConfig = (simulatorConfig?: SessionConfiguration): void =>
+        initSession(
+            JSON.stringify(session!.referenceLootTable),
+            simulatorConfig?.lootTableChecksum || session!.simulatorConfig.lootTableChecksum,
+            simulatorConfig,
+        );
+
+    const onPurchase = (purchases: Record<string, number>) => {
+        const newPurchased = JSON.parse(JSON.stringify(session!.lootboxPurchasedCounters)) as Record<string, number>;
+        const newPending = JSON.parse(JSON.stringify(session!.lootboxPendingCounters)) as Record<string, number>;
+
+        Object.keys(purchases).forEach((lootboxName) => {
+            // This fuckass language recognizes purchases[lootboxName] as a number but still defaults to a string concat
+            newPurchased[lootboxName] += Number(purchases[lootboxName]);
+            newPending[lootboxName] += Number(purchases[lootboxName]);
+        });
+        setSession((prevState) => ({
+            ...prevState!,
+            lootboxPurchasedCounters: newPurchased,
+            lootboxPendingCounters: newPending,
+        }));
+    };
+
+    const onSelectedLootboxNameChanged = (newName: string) => setSelectedLootboxName(newName);
+
+    const onOpenSelectedLootbox = () => openSelectedLootbox();
+
+    const onAutoOpen = () => setCurrentlyAutoOpening(true);
+
+    const onStopAutoOpen = () => setCurrentlyAutoOpening(false);
+
+    const onOpenAll = () => setCurrentlyOpeningAll(true);
+
+    const onSimulate = () => setCurrentlySimulating(true);
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // LAYOUT CALLBACKS
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     const onOpenStatsPanel = () => setShowStats(true);
 
     const onCloseStatsPanel = () => setShowStats(false);
@@ -161,10 +267,6 @@ export default function App() {
     const onOpenSettingsModal = () => setShowSettings(true);
 
     const onCloseSettingsModal = () => setShowSettings(false);
-
-    const onSelectedLootboxNameChanged = (newName: string) => setSelectedLootboxName(newName);
-
-    const onOpenSelectedLootbox = () => openSelectedLootbox();
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // MAIN LAYOUT RENDER
@@ -191,15 +293,23 @@ export default function App() {
                             session={session}
                             selectedLootboxName={selectedLootboxName}
                             onSelectedLootboxNameChanged={onSelectedLootboxNameChanged}
+                            locked={currentlyAutoOpening || currentlyOpeningAll || currentlySimulating}
                         />
                     </Container>
                     <Container fluid className="d-flex align-items-center">
                         <ButtonsFooter
                             session={session}
                             selectedLootboxName={selectedLootboxName}
+                            currentlyAutoOpening={currentlyAutoOpening}
+                            currentlyOpeningAll={currentlyOpeningAll}
+                            currentlySimulating={currentlySimulating}
                             onOpenPurchaseModal={onOpenPurchaseModal}
                             onOpenSettingsModal={onOpenSettingsModal}
                             onOpenSelectedLootbox={onOpenSelectedLootbox}
+                            onAutoOpen={onAutoOpen}
+                            onStopAutoOpen={onStopAutoOpen}
+                            onOpenAll={onOpenAll}
+                            onSimulate={onSimulate}
                         />
                     </Container>
                     {/* Dynamic layout */}
@@ -217,6 +327,7 @@ export default function App() {
                         session={session}
                         displayPurchaseModal={showPurchase}
                         onClosePurchaseModal={onClosePurchaseModal}
+                        onPurchase={onPurchase}
                     />
                     <SettingsModal
                         session={session}

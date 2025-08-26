@@ -484,7 +484,7 @@ const openOne = (lootbox: Lootbox): OpeningResultDrop[] => {
  *  immediately. Since it will involve its own set of state changes, should be a recursive call to this same function
  *  and should probably take place at the end.
  *
- * @param session The current opening session state. This object will be modified without cloning and returned.
+ * @param session The current opening session state. This object **WILL** be modified without cloning, and returned.
  *                The session is assumed to be in a valid state, there will be NO error handling for potentially missing
  *                or invalid expected values.
  * @param lootboxName The `name` of the lootbox to open.
@@ -545,4 +545,46 @@ export const openOneAndUpdateState = (session: OpeningSession, lootboxName: stri
     }
 
     return session;
+};
+
+/**
+ * Opens every lootbox available in the inventory, including the ones that may be obtained during this process.
+ *
+ * @param initialSession The initial state of the session, before the opening starts. This object **WILL** be modified
+ *                       without cloning, and returned.
+ *                       The session is assumed to be in a valid state, there will be NO error handling for potentially
+ *                       missing or invalid expected values.
+ * @returns The final state of the session, after the opening ends.
+ */
+export const openAllInInventory = (initialSession: OpeningSession): OpeningSession => {
+    let session = initialSession;
+    let nextLootbox: string | null = findNextLootboxInInventory(session);
+    while ((nextLootbox = findNextLootboxInInventory(session, nextLootbox ?? undefined))) {
+        while (session.lootboxPendingCounters[nextLootbox] > 0) {
+            session = openOneAndUpdateState(session, nextLootbox);
+        }
+    }
+    return session;
+};
+
+/**
+ * Finds the next lootbox in the session with inventory left.
+ *
+ * @param session The current opening session state. This object will not be modified.
+ * @param lootboxName The `name` of the currently selected lootbox to use as the starting point for the search.
+ * @returns The `name` of the next lootbox with some inventory left, or null if the inventory is empty.
+ */
+export const findNextLootboxInInventory = (session: OpeningSession, lootboxName?: string): string | null => {
+    const availableLootboxes = Object.keys(session.lootboxPendingCounters);
+    let lootboxIndex =
+        lootboxName && availableLootboxes.includes(lootboxName)
+            ? availableLootboxes.findIndex((availableName) => availableName === lootboxName)
+            : 0;
+    while (lootboxIndex < availableLootboxes.length) {
+        if (session.lootboxPendingCounters[availableLootboxes[lootboxIndex]] > 0) {
+            return availableLootboxes[lootboxIndex];
+        }
+        lootboxIndex++;
+    }
+    return null;
 };

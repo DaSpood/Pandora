@@ -52,7 +52,7 @@ export default function LootTableLoader({ onTableLoaded }: { onTableLoaded: (sub
 
     return (
         <Container fluid className="d-flex h-100 align-items-center px-0 py-4 mx-0 my-auto">
-            <Container className="d-flex flex-column gap-4 w-auto p-4 bg-gradient rounded">
+            <Container className="d-flex mh-100 overflow-y-auto flex-column gap-4 w-auto p-4 bg-gradient rounded">
                 <Container>
                     <FormLabel>Load a loot table</FormLabel>
                     <InputGroup>
@@ -73,7 +73,7 @@ export default function LootTableLoader({ onTableLoaded }: { onTableLoaded: (sub
                             type="button"
                             onClick={() => setSubmittedTable(selectedTable)}
                         >
-                            LET'S GO GAMBLING!
+                            Load
                         </Button>
                     </InputGroup>
                 </Container>
@@ -91,7 +91,7 @@ export default function LootTableLoader({ onTableLoaded }: { onTableLoaded: (sub
                             disabled={!uploadedTable}
                             onClick={() => submitUploadedFile()}
                         >
-                            LET'S GO GAMBLING!
+                            Load
                         </Button>
                     </InputGroup>
                 </Container>
@@ -101,8 +101,7 @@ export default function LootTableLoader({ onTableLoaded }: { onTableLoaded: (sub
                             <AccordionItem eventKey="0">
                                 <AccordionHeader>Validation Errors</AccordionHeader>
                                 <AccordionBody className="p-0">
-                                    <ListGroup className="list-group-flush text-start m-0">
-                                        <ListGroupItem>Aw dang it!</ListGroupItem>
+                                    <ListGroup className="list-group-flush text-start m-0 text-wrap text-break">
                                         {validationErrors.map((error, idx) => (
                                             <ListGroupItem key={idx}>{error}</ListGroupItem>
                                         ))}

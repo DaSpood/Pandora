@@ -20,6 +20,26 @@ history and visualize your rewards and other statistics.
 Pandora supports common lootbox mechanics like pity, duplicate prevention/compensation, and of course, "tiered" (aka
 "recursive" or "matryoshka") lootboxes ! Why is that a thing ? Go ask Wargaming !
 
+Current status of planned features:
+
+- Loot table loading: **OK**
+- "Unlimited" mode: **OK**
+- "Budget" mode: **OK**
+- "Until" mode: **not implemented yet**
+- Settings: mode selector and pre-owned rewards **OK**, import/export **not implemented yet**
+- Session stats: **raw JSON dump**
+- Opening history: **raw JSON dump**
+
+Next WIP (in order):
+
+- prettier session stats and JSON export (v0.4.0)
+- prettier opening history and JSON export (v0.4.0)
+- "Until" mode in single-iteration (v0.5.0)
+- "Until" mode in multi-iterations (v1.0.0)
+- Dedicated stats for "Until" mode in multi-iterations (v1.0.0)
+- Settings import/export as JSON (v1.0.0)
+- Improve mobile experience (after v1.0.0)
+
 ## Context
 
 The simulator was originally created to study lootboxes from the game World Of Tanks PC during the OPERATION PANDORA
@@ -38,8 +58,7 @@ providing loot tables myself when possible.
 
 ## Where to use
 
-You can try the simulator online at https://daspood.github.io/. **CURRENT STATUS: ONLY 'UNLIMITED MODE' IS FUNCTIONAL,
-SESSION STATS ARE RAW JSON.**
+You can try the simulator online at https://daspood.github.io/.
 
 You can also run the code locally by cloning the repository and check the scripts in the [package.json](package.json)
 file.

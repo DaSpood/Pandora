@@ -1,3 +1,12 @@
+# v0.3.0
+
+- Add purchase modal
+    - User can "purchase" a set number of lootboxes when in `budget` opening mode
+    - Purchased boxes will be added to the inventory for opening
+    - User can choose to bypass loot table rules and still purchase non-purchasable boxes
+- Add "Auto-open 1 by 1" and "Auto-open everything" options for `budget` opening mode
+    - "Auto-open everything" will open the stats after completion, there is no special result screen for now
+
 # v0.2.0
 
 - Add settings modal
