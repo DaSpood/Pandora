@@ -18,7 +18,6 @@ import ButtonsFooter from './components/ButtonsFooter/ButtonsFooter.tsx';
 import LootboxSelector from './components/LootboxSelector/LootboxSelector.tsx';
 import ResultDisplay from './components/ResultDisplay/ResultDisplay.tsx';
 import StatsLeftPanel from './components/StatsLeftPanel/StatsLeftPanel.tsx';
-import HistoryRightPanel from './components/HistoryRightPanel/HistoryRightPanel.tsx';
 import SettingsModal from './components/SettingsModal/SettingsModal.tsx';
 import PurchaseModal from './components/PurchaseModal/PurchaseModal.tsx';
 
@@ -26,7 +25,6 @@ export default function App() {
     const [session, setSession] = useState<Maybe<OpeningSession>>(null);
     const [selectedLootboxName, setSelectedLootboxName] = useState<string>('');
     const [showStats, setShowStats] = useState<boolean>(false);
-    const [showHistory, setShowHistory] = useState<boolean>(false);
     const [showPurchase, setShowPurchase] = useState<boolean>(false);
     const [showSettings, setShowSettings] = useState<boolean>(false);
     const [currentlyAutoOpening, setCurrentlyAutoOpening] = useState<boolean>(false);
@@ -160,7 +158,6 @@ export default function App() {
             initialSession.referenceLootTable.lootboxes.filter((box: Lootbox) => box.purchasable)[0].name,
         );
         setShowStats(false);
-        setShowHistory(false);
         setShowPurchase(false);
         setShowSettings(false);
         setCurrentlyAutoOpening(false);
@@ -256,10 +253,6 @@ export default function App() {
 
     const onCloseStatsPanel = () => setShowStats(false);
 
-    const onOpenHistoryPanel = () => setShowHistory(true);
-
-    const onCloseHistoryPanel = () => setShowHistory(false);
-
     const onOpenPurchaseModal = () => setShowPurchase(true);
 
     const onClosePurchaseModal = () => setShowPurchase(false);
@@ -279,11 +272,7 @@ export default function App() {
                 <Container fluid className="d-flex flex-column h-100 p-0 m-0">
                     {/* Static layout */}
                     <Container fluid className="d-flex align-items-center">
-                        <InfoHeader
-                            session={session}
-                            onOpenStatsPanel={onOpenStatsPanel}
-                            onOpenHistoryPanel={onOpenHistoryPanel}
-                        />
+                        <InfoHeader session={session} onOpenStatsPanel={onOpenStatsPanel} />
                     </Container>
                     <Container fluid className="d-flex align-items-center flex-grow-1">
                         <ResultDisplay session={session} />
@@ -317,11 +306,6 @@ export default function App() {
                         session={session}
                         displayStatsPanel={showStats}
                         onCloseStatsPanel={onCloseStatsPanel}
-                    />
-                    <HistoryRightPanel
-                        session={session}
-                        displayHistoryPanel={showHistory}
-                        onCloseHistoryPanel={onCloseHistoryPanel}
                     />
                     <PurchaseModal
                         session={session}

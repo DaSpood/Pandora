@@ -1,3 +1,17 @@
+# v0.4.0
+
+- Rework stats panel
+    - Prettier layout with collapsable categories
+        - Lootboxes stats: session state for each lootbox (pity, amount opened, amount purchased, amount in
+          inventory...)
+        - Obtained rewards: self-explanatory (can include unobtained rewards)
+        - Opening history: self-explanatory
+    - Button to download JSON containing a dump of the session state object, in case anyone would want it
+- Remove history panel (merged with stats panel)
+- Return github-redirect button to replace history panel button
+- Fix opening history bug where the wrong box name was used
+- Fix auto-open-everything bug where opening would end without looping back on "previous tier" boxes first
+
 # v0.3.0
 
 - Add purchase modal

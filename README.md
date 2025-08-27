@@ -27,18 +27,16 @@ Current status of planned features:
 - "Budget" mode: **OK**
 - "Until" mode: **not implemented yet**
 - Settings: mode selector and pre-owned rewards **OK**, import/export **not implemented yet**
-- Session stats: **raw JSON dump**
-- Opening history: **raw JSON dump**
+- Session stats and opening history: **OK**
 
-Next WIP (in order):
+Roadmap:
 
-- prettier session stats and JSON export (v0.4.0)
-- prettier opening history and JSON export (v0.4.0)
 - "Until" mode in single-iteration (v0.5.0)
 - "Until" mode in multi-iterations (v1.0.0)
-- Dedicated stats for "Until" mode in multi-iterations (v1.0.0)
 - Settings import/export as JSON (v1.0.0)
+- Dedicated stats for "Until" mode in multi-iterations (v1.0.0)
 - Improve mobile experience (after v1.0.0)
+- Handle "logical" (instant-open) recursive lootboxes (after v1.0.0, I will need more non-WoT loot tables to test it)
 
 ## Context
 
@@ -60,7 +58,7 @@ providing loot tables myself when possible.
 
 You can try the simulator online at https://daspood.github.io/.
 
-You can also run the code locally by cloning the repository and check the scripts in the [package.json](package.json)
+You can also run the code locally by cloning the repository and checking the scripts in the [package.json](package.json)
 file.
 
 Note that, in both cases, everything runs on your browser, there is no server, so keep that in mind before launching

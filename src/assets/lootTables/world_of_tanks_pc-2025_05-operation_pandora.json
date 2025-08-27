@@ -18,6 +18,7 @@
             "secondaryPrizeDuplicates": "allowed",
             "mainPrizeSubstitute": {
                 "name": "Raumfalte Prime",
+                "displayPriority": 7,
                 "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/raumfalte_prime_small.png",
                 "amount": 1
             },
@@ -150,18 +151,21 @@
                             "lootDrops": [
                                 {
                                     "name": "Raumfalte Proto",
+                                    "displayPriority": 5,
                                     "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/raumfalte_proto_small.png",
                                     "dropRate": 0.23,
                                     "amount": 1
                                 },
                                 {
                                     "name": "Raumfalte Alpha",
+                                    "displayPriority": 6,
                                     "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/raumfalte_alpha_small.png",
                                     "dropRate": 0.75,
                                     "amount": 1
                                 },
                                 {
                                     "name": "Raumfalte Prime",
+                                    "displayPriority": 7,
                                     "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/raumfalte_prime_small.png",
                                     "overrideRarityInUi": "main",
                                     "dropRate": 0.02,
@@ -265,6 +269,7 @@
             "secondaryPrizeDuplicates": "allowed",
             "mainPrizeSubstitute": {
                 "name": "Raumfalte Prime",
+                "displayPriority": 7,
                 "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/raumfalte_prime_small.png",
                 "amount": 1
             },
@@ -409,18 +414,21 @@
                             "lootDrops": [
                                 {
                                     "name": "Raumfalte Proto",
+                                    "displayPriority": 5,
                                     "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/raumfalte_proto_small.png",
                                     "dropRate": 0.02,
                                     "amount": 1
                                 },
                                 {
                                     "name": "Raumfalte Alpha",
+                                    "displayPriority": 6,
                                     "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/raumfalte_alpha_small.png",
                                     "dropRate": 0.23,
                                     "amount": 1
                                 },
                                 {
                                     "name": "Raumfalte Prime",
+                                    "displayPriority": 7,
                                     "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/raumfalte_prime_small.png",
                                     "overrideRarityInUi": "main",
                                     "dropRate": 0.75,
@@ -544,6 +552,7 @@
             "secondaryPrizeDuplicates": "allowed",
             "mainPrizeSubstitute": {
                 "name": "Raumfalte Prime",
+                "displayPriority": 7,
                 "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/raumfalte_prime_small.png",
                 "amount": 1
             },
@@ -767,18 +776,21 @@
                             "lootDrops": [
                                 {
                                     "name": "Raumfalte Proto",
+                                    "displayPriority": 5,
                                     "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/raumfalte_proto_small.png",
                                     "dropRate": 0.75,
                                     "amount": 1
                                 },
                                 {
                                     "name": "Raumfalte Alpha",
+                                    "displayPriority": 6,
                                     "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/raumfalte_alpha_small.png",
                                     "dropRate": 0.23,
                                     "amount": 1
                                 },
                                 {
                                     "name": "Raumfalte Prime",
+                                    "displayPriority": 7,
                                     "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/raumfalte_prime_small.png",
                                     "overrideRarityInUi": "main",
                                     "dropRate": 0.02,

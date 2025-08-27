@@ -36,7 +36,7 @@ export interface LootTable {
      */
     recursive: boolean;
     /**
-     * Whether recursively-dropped lootboxes are auto-opened instantly.
+     * Whether recursively-dropped lootboxes are auto-opened instantly. WARNING: NOT IMPLEMENTED YET.
      *
      * Can only be true if `recursive` is also true.
      *

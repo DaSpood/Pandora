@@ -1,15 +1,13 @@
 import { Button, Col, Container, Row } from 'react-bootstrap';
-import { BsClockHistory, BsJournalText } from 'react-icons/bs';
+import { BsGithub, BsJournalText } from 'react-icons/bs';
 import type { OpeningSession } from '../../types/state';
 
 export default function InfoHeader({
     session,
     onOpenStatsPanel,
-    onOpenHistoryPanel,
 }: {
     session: OpeningSession;
     onOpenStatsPanel: () => void;
-    onOpenHistoryPanel: () => void;
 }) {
     return (
         <Container fluid className="px-0 py-2">
@@ -25,12 +23,6 @@ export default function InfoHeader({
                     </h2>
                 </Col>
                 <Col className="col-auto">
-                    <Button variant="outline-primary" type="button" onClick={onOpenHistoryPanel} className="w-100">
-                        <BsClockHistory />
-                    </Button>
-                </Col>
-                {/*
-                <Col className="col-auto">
                     <Button
                         variant="outline-primary"
                         type="button"
@@ -40,7 +32,6 @@ export default function InfoHeader({
                         <BsGithub />
                     </Button>
                 </Col>
-                */}
             </Row>
         </Container>
     );

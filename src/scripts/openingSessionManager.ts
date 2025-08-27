@@ -482,7 +482,9 @@ const openOne = (lootbox: Lootbox): OpeningResultDrop[] => {
  *
  * TODO: handle `autoOpenRecursive`: exclude recursive boxes from the results and replace them with their own content
  *  immediately. Since it will involve its own set of state changes, should be a recursive call to this same function
- *  and should probably take place at the end.
+ *  and should probably take place at the end (while remembering to undo the stats updates of the cancelled box). These
+ *  boxes also need to be excluded from all UI places containing lootboxes (e.g. rewards, selector...) with no bypass as
+ *  these are strictly logical boxes.
  *
  * @param session The current opening session state. This object **WILL** be modified without cloning, and returned.
  *                The session is assumed to be in a valid state, there will be NO error handling for potentially missing
@@ -501,7 +503,7 @@ export const openOneAndUpdateState = (session: OpeningSession, lootboxName: stri
     const resultDrops = openOne(lootbox);
     const result: OpeningResult = {
         sessionOpeningNumber: session.history.length + 1,
-        boxName: session?.dynamicLootTable?.lootboxes[0].name,
+        boxName: lootbox.name,
         boxOpeningNumber: session.lootboxOpenedCounters[lootbox.name] + 1,
         boxMainPity: session.pityCounters[lootbox.name].mainPity,
         boxSecondaryPity: session.pityCounters[lootbox.name].secondaryPity,
@@ -580,6 +582,12 @@ export const findNextLootboxInInventory = (session: OpeningSession, lootboxName?
         lootboxName && availableLootboxes.includes(lootboxName)
             ? availableLootboxes.findIndex((availableName) => availableName === lootboxName)
             : 0;
+
+    // In case of re-entry, restart the loop if current box is done to check for re-drops of previous boxes
+    if (lootboxIndex > 0 && session.lootboxPendingCounters[availableLootboxes[lootboxIndex]] === 0) {
+        lootboxIndex = 0;
+    }
+
     while (lootboxIndex < availableLootboxes.length) {
         if (session.lootboxPendingCounters[availableLootboxes[lootboxIndex]] > 0) {
             return availableLootboxes[lootboxIndex];
