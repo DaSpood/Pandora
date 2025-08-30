@@ -33,30 +33,29 @@ export default function LootboxSelector({
                     )}
                 </Container>
                 <Row className="d-flex justify-content-center">
-                    {Object.keys(session.lootboxPendingCounters).map((lootboxName, idx) => (
-                        <Col key={idx} className="col-3 col-lg-2 col-xxl-1">
-                            <Container
-                                className={`h-100 d-flex flex-column justify-content-between p-2 ${selectedLootboxName === lootboxName ? 'bg-gradient' : ''} rounded text-center`}
-                                style={{ cursor: locked ? 'default' : 'pointer' }}
-                                onClick={() => (locked ? () => {} : onSelectedLootboxNameChanged(lootboxName))}
-                            >
-                                <Image
-                                    src={
-                                        session.referenceLootTable.lootboxes.find(
-                                            (box: Lootbox) => box.name === lootboxName,
-                                        )!.pictureUrl || 'default-loot-box.png'
-                                    }
-                                    alt={lootboxName}
-                                    className="object-fit-contain flex-grow-1"
-                                />
-                                {!session.referenceLootTable.lootboxes.find((box: Lootbox) => box.name === lootboxName)!
-                                    .pictureUrl && <p>{lootboxName}</p>}
-                                {session.simulatorConfig.openingMode === 'budget' && (
-                                    <p>x{session.lootboxPendingCounters[lootboxName]}</p>
-                                )}
-                            </Container>
-                        </Col>
-                    ))}
+                    {session.referenceLootTable.lootboxes
+                        .filter((box: Lootbox) =>
+                            session.referenceLootTable.autoOpenRecursive ? box.purchasable : true,
+                        )
+                        .map((box: Lootbox, idx: number) => (
+                            <Col key={idx} className="col-3 col-lg-2 col-xxl-1">
+                                <Container
+                                    className={`h-100 d-flex flex-column justify-content-between p-2 ${selectedLootboxName === box.name ? 'bg-gradient' : ''} rounded text-center`}
+                                    style={{ cursor: locked ? 'default' : 'pointer' }}
+                                    onClick={() => (locked ? () => {} : onSelectedLootboxNameChanged(box.name))}
+                                >
+                                    <Image
+                                        src={box.pictureUrl || 'default-loot-box.png'}
+                                        alt={box.name}
+                                        className="object-fit-contain flex-grow-1"
+                                    />
+                                    {!box.pictureUrl && <p>{box.name}</p>}
+                                    {session.simulatorConfig.openingMode === 'budget' && (
+                                        <p>x{session.lootboxPendingCounters[box.name]}</p>
+                                    )}
+                                </Container>
+                            </Col>
+                        ))}
                 </Row>
             </Container>
         )

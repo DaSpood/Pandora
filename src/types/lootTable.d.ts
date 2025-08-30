@@ -36,17 +36,21 @@ export interface LootTable {
      */
     recursive: boolean;
     /**
-     * Whether recursively-dropped lootboxes are auto-opened instantly. WARNING: NOT IMPLEMENTED YET.
+     * Whether recursively-dropped lootboxes are auto-opened instantly.
      *
      * Can only be true if `recursive` is also true.
      *
-     * If true, all non-purchasable lootboxes will be hidden from the UI (unless restrictions are bypassed) and
-     * auto-opened immediately when dropped (their resulting drops will be included as if they belong to the parent box)
+     * If true, all non-purchasable lootboxes will be hidden from the UI, and all boxes will be auto-opened immediately
+     * when dropped from another box (their resulting drops will be included as if they belong to the parent box, but
+     * drops of the same item won't be combined into one).
      *
      * This can be used to hide logically-tiered lootboxes that only exist to represent deeper systems. For example,
      * Genshin Impact's 50/50 mechanic means the default lootbox's "5 star" (main prize) drop is a recursive lootbox, in
      * which two slots exist: secondary (permanent banner) rewards and main (event banner) rewards, with a hard pity of
      * 1.
+     *
+     * Note: This feature was not tested very thoroughly. It should work, but there may be edge cases or state
+     *       corruptions that I didn't catch. Open an issue if you find a bug.
      */
     autoOpenRecursive: boolean;
     /**
