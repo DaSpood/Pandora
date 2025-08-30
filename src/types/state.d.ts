@@ -133,6 +133,12 @@ export interface SessionConfiguration {
      * List of prizes which the simulator should obtain before stopping in 'unlimited' mode.
      */
     targetPrizes: { name: string; type: LootDropType }[];
-
-    // `slowOpening: boolean` for auto-opening modes to display each result in the UI with a slight delay or only display final results?
+    /**
+     * How many simulator workers will run in parallel. Not lower than 1.
+     */
+    simulatorThreads: number;
+    /**
+     * How many simulations will run in each worker. Not lower than 1.
+     */
+    simulatorIterationsPerThread: number;
 }

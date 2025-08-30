@@ -81,7 +81,7 @@ export default function ButtonsFooter({
                                 currentlySimulating ||
                                 (!currentlyAutoOpening &&
                                     session.lootboxPendingCounters[selectedLootboxName] === 0 &&
-                                    session.simulatorConfig.openingMode !== 'unlimited')
+                                    session.simulatorConfig.openingMode === 'budget')
                             }
                         >
                             {getOpenButtonLabel()}
