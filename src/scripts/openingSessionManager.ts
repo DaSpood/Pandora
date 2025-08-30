@@ -152,6 +152,8 @@ export const newSession = (rawTable: string, checksum: string): OpeningSession =
             openingMode: 'unlimited',
             preOwnedPrizes: [],
             targetPrizes: [],
+            simulatorThreads: 1,
+            simulatorIterationsPerThread: 1,
         },
     };
 };
