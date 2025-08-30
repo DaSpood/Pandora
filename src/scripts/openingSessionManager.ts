@@ -480,12 +480,6 @@ const openOne = (lootbox: Lootbox): OpeningResultDrop[] => {
 /**
  * Opens a single selected Lootbox and updates the session after handling
  *
- * TODO: handle `autoOpenRecursive`: exclude recursive boxes from the results and replace them with their own content
- *  immediately. Since it will involve its own set of state changes, should be a recursive call to this same function
- *  and should probably take place at the end (while remembering to undo the stats updates of the cancelled box). These
- *  boxes also need to be excluded from all UI places containing lootboxes (e.g. rewards, selector...) with no bypass as
- *  these are strictly logical boxes.
- *
  * @param session The current opening session state. This object **WILL** be modified without cloning, and returned.
  *                The session is assumed to be in a valid state, there will be NO error handling for potentially missing
  *                or invalid expected values.
@@ -544,6 +538,26 @@ export const openOneAndUpdateState = (session: OpeningSession, lootboxName: stri
             lootbox.secondaryPrizeDuplicates,
             lootbox.secondaryPrizeSubstitute,
         );
+    }
+
+    // Handle recursive boxes
+    if (session.referenceLootTable.autoOpenRecursive) {
+        for (const drop of resultDrops) {
+            if (Object.keys(session.lootboxOpenedCounters).includes(drop.name)) {
+                // Undo history push and remove the box from the results
+                session.history.pop();
+                result.drops = result.drops.filter((resultDrop) => JSON.stringify(resultDrop) !== JSON.stringify(drop));
+                // Recursively open that box
+                session = openOneAndUpdateState(session, drop.name);
+                // Merge the results with the recursion ones
+                const recursiveResult = session.history.pop();
+                recursiveResult!.drops.forEach((resultDrop) => {
+                    result.drops.push(resultDrop);
+                });
+                // Re-push the updated results to history
+                session.history.push(result);
+            }
+        }
     }
 
     return session;

@@ -62,12 +62,14 @@ export default function PurchaseModal({
             </ModalHeader>
             <ModalBody>
                 <Container className="d-flex flex-column gap-4 p-0 overflow-y-auto">
-                    <FormCheck
-                        type="switch"
-                        label="Show non-purchasable lootboxes"
-                        checked={displayNonPurchasable}
-                        onChange={(e) => setDisplayNonPurchasable(e.target.checked)}
-                    />
+                    {!session.referenceLootTable.autoOpenRecursive && (
+                        <FormCheck
+                            type="switch"
+                            label="Show non-purchasable lootboxes"
+                            checked={displayNonPurchasable}
+                            onChange={(e) => setDisplayNonPurchasable(e.target.checked)}
+                        />
+                    )}
                     <ListGroup>
                         {session.referenceLootTable.lootboxes
                             .filter((lootbox: Lootbox) => (displayNonPurchasable ? true : lootbox.purchasable))

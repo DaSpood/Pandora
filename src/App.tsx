@@ -274,7 +274,7 @@ export default function App() {
                     <Container fluid className="d-flex align-items-center">
                         <InfoHeader session={session} onOpenStatsPanel={onOpenStatsPanel} />
                     </Container>
-                    <Container fluid className="d-flex align-items-center flex-grow-1">
+                    <Container fluid className="d-flex align-items-center flex-grow-1 overflow-y-auto">
                         <ResultDisplay session={session} />
                     </Container>
                     <Container fluid className="d-flex align-items-center">
