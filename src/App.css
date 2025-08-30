@@ -18,3 +18,13 @@ body, html {
 p {
     margin: 0 !important;
 }
+
+button {
+}
+
+.icon-button {
+    display: inline-flex !important;
+    align-items: center !important;
+    line-height: 22px !important;
+    padding: 12px !important;
+}

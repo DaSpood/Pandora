@@ -63,13 +63,13 @@ export default function ButtonsFooter({
                         variant="outline-primary"
                         type="button"
                         onClick={onOpenPurchaseModal}
-                        className="w-100"
+                        className="icon-button"
                         disabled={currentlyAutoOpening || currentlyOpeningAll}
                     >
                         <BsCartPlus />
                     </Button>
                 </Col>
-                <Col className="col-4">
+                <Col className="col-4 d-inline-flex">
                     <Dropdown as={ButtonGroup} className="w-100">
                         <Button
                             variant="primary"
@@ -107,7 +107,12 @@ export default function ButtonsFooter({
                     </Dropdown>
                 </Col>
                 <Col className="col-auto">
-                    <Button variant="outline-primary" type="button" onClick={onOpenSettingsModal} className="w-100">
+                    <Button
+                        variant="outline-primary"
+                        type="button"
+                        onClick={onOpenSettingsModal}
+                        className="icon-button"
+                    >
                         <BsGear />
                     </Button>
                 </Col>
