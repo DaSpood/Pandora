@@ -11,6 +11,7 @@ import {
     newSession,
     openAllInInventory,
     openOneAndUpdateState,
+    openUntilOneIteration,
 } from './scripts/openingSessionManager.ts';
 import type { Lootbox, LootDrop, LootGroup, LootSlot } from './types/lootTable';
 import InfoHeader from './components/InfoHeader/InfoHeader.tsx';
@@ -30,72 +31,9 @@ export default function App() {
     const [currentlyAutoOpening, setCurrentlyAutoOpening] = useState<boolean>(false);
     const [currentlyOpeningAll, setCurrentlyOpeningAll] = useState<boolean>(false);
     const [currentlySimulating, setCurrentlySimulating] = useState<boolean>(false);
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // BACKGROUND ACTIONS
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    /**
-     * "Auto-open 1 by 1" in `budget` mode will open one box and update the state every 1.5s until either the
-     * auto-opening is disabled, the session is reset, or the inventory is empty.
-     *
-     * The delay is here to let the UI display the result every box. For instant clearing of the inventory, use the
-     * "Auto-open everything" button instead.
-     */
-    useEffect(() => {
-        let autoOpeningInterval: string | number | NodeJS.Timeout | undefined = undefined;
-        if (session && currentlyAutoOpening) {
-            autoOpeningInterval = setInterval(() => {
-                const selectedBox = findNextLootboxInInventory(session);
-                if (!selectedBox) {
-                    setCurrentlyAutoOpening(false);
-                    return;
-                }
-                const passedState = JSON.parse(JSON.stringify(session)) as OpeningSession;
-                const newState = openOneAndUpdateState(passedState, selectedBox);
-                setSession(newState);
-            }, 1_500);
-        } else {
-            clearInterval(autoOpeningInterval);
-        }
-        return () => clearInterval(autoOpeningInterval);
-    }, [currentlyAutoOpening, session]);
-
-    /**
-     * "Auto-open everything" in `budget` mode will open every box remaining in the inventory, including ones that may
-     * be obtained during the opening process.
-     *
-     * The UI will lock until the process is complete. For a "1 by 1" auto-opening that can be interrupted, use the
-     * "Auto-open 1 by 1" button instead.
-     */
-    useEffect(() => {
-        if (session && currentlyOpeningAll) {
-            const passedState = JSON.parse(JSON.stringify(session)) as OpeningSession;
-            const newState = openAllInInventory(passedState);
-            setSession(newState);
-            setCurrentlyOpeningAll(false);
-            setShowStats(true); // Don't want to do a special result screen so show the stats instead.
-        }
-    }, [currentlyOpeningAll, session]);
-
-    /**
-     * TODO
-     * Simulation in `until` mode will keep auto-purchasing and opening boxes until the target drops are obtained.
-     *
-     * The UI will lock until the process is complete.
-     */
-    useEffect(() => {
-        let simulationTimeout: string | number | NodeJS.Timeout | undefined;
-        if (currentlySimulating) {
-            simulationTimeout = setTimeout(() => {
-                console.log('simulationTimeout');
-                setCurrentlySimulating(false);
-            }, 10_000);
-        } else {
-            clearTimeout(simulationTimeout);
-        }
-        return () => clearTimeout(simulationTimeout);
-    }, [currentlySimulating]);
+    const [workers, setWorkers] = useState<Maybe<Worker>[]>([]);
+    const [workerResults, setWorkersResults] = useState<Maybe<number[]>[]>([]);
+    const [simulationResult, setSimulationResult] = useState<Maybe<number[]>>(undefined);
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // DIRECT ACTIONS
@@ -150,7 +88,6 @@ export default function App() {
                     });
             });
         }
-        console.log('Initialized session:', initialSession);
         setSession(initialSession);
 
         // Reset UI state
@@ -162,6 +99,9 @@ export default function App() {
         setShowSettings(false);
         setCurrentlyAutoOpening(false);
         setCurrentlySimulating(false);
+        setWorkers([]);
+        setWorkersResults([]);
+        setSimulationResult(undefined);
     };
 
     const openSelectedLootbox = () => {
@@ -241,9 +181,142 @@ export default function App() {
 
     const onStopAutoOpen = () => setCurrentlyAutoOpening(false);
 
-    const onOpenAll = () => setCurrentlyOpeningAll(true);
+    const onOpenAll = () => {
+        if (!session) return;
 
-    const onSimulate = () => setCurrentlySimulating(true);
+        const passedState = JSON.parse(JSON.stringify(session)) as OpeningSession;
+        const newState = openAllInInventory(passedState);
+        setCurrentlyOpeningAll(false);
+        setSession(newState);
+        setShowStats(true);
+    };
+
+    const onSimulateOnce = () => {
+        if (!session) return;
+
+        const passedState = JSON.parse(JSON.stringify(session)) as OpeningSession;
+        const newState = openUntilOneIteration(passedState);
+        setCurrentlySimulating(false);
+        setSession(newState);
+        setShowStats(true);
+    };
+
+    const onSimulateMany = () => {
+        if (!session) return;
+        // Pre-allocate results to update them instead of pushing them as they come
+        // The listener below will detect this allocation and start the workers
+        const newWorkerResults = [];
+        for (let i = 0; i < session.simulatorConfig.simulatorThreads; i++) {
+            newWorkerResults.push(undefined);
+        }
+        setWorkersResults(newWorkerResults);
+    };
+
+    const onSimulate = () => {
+        if (!session) return;
+        setCurrentlySimulating(true);
+        setSimulationResult(undefined);
+
+        if (
+            session.simulatorConfig.simulatorThreads === 1 &&
+            session.simulatorConfig.simulatorIterationsPerThread === 1
+        ) {
+            onSimulateOnce();
+        } else {
+            onSimulateMany();
+        }
+    };
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // ACTION LISTENERS
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    /**
+     * Listener to "auto-open 1 by 1" in `budget` mode to start and stop the opening depending on the state.
+     *
+     * The delay is here to let the UI display the result every box. For instant clearing of the inventory, use the
+     * "Auto-open everything" button instead.
+     */
+    useEffect(() => {
+        let autoOpeningInterval: string | number | NodeJS.Timeout | undefined = undefined;
+        if (session && currentlyAutoOpening) {
+            autoOpeningInterval = setInterval(() => {
+                const selectedBox = findNextLootboxInInventory(session);
+                if (!selectedBox) {
+                    setCurrentlyAutoOpening(false);
+                    return;
+                }
+                const passedState = JSON.parse(JSON.stringify(session)) as OpeningSession;
+                const newState = openOneAndUpdateState(passedState, selectedBox);
+                setSession(newState);
+            }, 1_500);
+        } else {
+            clearInterval(autoOpeningInterval);
+        }
+        return () => clearInterval(autoOpeningInterval);
+    }, [currentlyAutoOpening, session]);
+
+    /**
+     * Listener to `until` mode worker updates to stop the simulation and aggregate results once all workers are done.
+     */
+    useEffect(() => {
+        if (!session || !currentlySimulating || !workers.length || !workerResults.length) return;
+
+        // Filter out pre-allocated results
+        const obtainedResults = workerResults.filter((result) => !!result);
+
+        // Check that all workers have finished
+        if (obtainedResults.length !== workers.length) return;
+
+        // Stop simulation and aggregate
+        setCurrentlySimulating(false);
+        setWorkersResults([]);
+        workers.forEach((worker) => worker?.terminate());
+        setWorkers([]);
+        setSimulationResult(
+            obtainedResults
+                .reduce((acc, result) => {
+                    result.forEach((elt) => acc.push(elt));
+                    return acc;
+                }, [])
+                .toSorted((a, b) => a - b),
+        );
+    }, [currentlySimulating, session, workerResults, workers]);
+
+    /**
+     * Listener to `until` mode state init to start the simulation once the state is ready to receive updates.
+     */
+    useEffect(() => {
+        if (!session || !currentlySimulating || !workerResults.length || workers.length > 0) return;
+
+        // Check for pre-allocation of results (all undefined)
+        if (workerResults.filter((result) => result === undefined).length !== workerResults.length) return;
+
+        // Worker update callback - declared here for readability, can't be outside of the useEffect though
+        const onWorkerResult = (event: MessageEvent) => {
+            const { workerId, result } = event.data;
+            setWorkersResults((prevState) => {
+                const newState = [...prevState];
+                newState[workerId] = result;
+                return newState;
+            });
+        };
+
+        // Initialize workers
+        const passedState = JSON.stringify(session);
+        const newWorkers: Worker[] = [];
+        for (let i = 0; i < session.simulatorConfig.simulatorThreads; i++) {
+            const newWorker = new Worker(new URL('./scripts/openingWorker.ts', import.meta.url), { type: 'module' });
+            newWorker.onmessage = onWorkerResult;
+            newWorker.postMessage({
+                rawInitialSession: passedState,
+                iterations: session.simulatorConfig.simulatorIterationsPerThread,
+                workerId: i,
+            });
+            newWorkers.push(newWorker);
+        }
+        setWorkers(newWorkers);
+    }, [currentlySimulating, session, workerResults, workers]);
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // LAYOUT CALLBACKS
@@ -275,7 +348,7 @@ export default function App() {
                         <InfoHeader session={session} onOpenStatsPanel={onOpenStatsPanel} />
                     </Container>
                     <Container fluid className="d-flex align-items-center flex-grow-1 overflow-y-auto">
-                        <ResultDisplay session={session} />
+                        <ResultDisplay session={session} simulationResult={simulationResult} />
                     </Container>
                     <Container fluid className="d-flex align-items-center">
                         <LootboxSelector

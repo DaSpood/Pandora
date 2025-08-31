@@ -91,6 +91,11 @@ export interface Lootbox {
      *
      * By default, except in "unlimited" mode, the simulator will only let you open purchasable boxes, though you can
      * choose to bypass this restriction if wanted.
+     *
+     * In "until" mode, if multiple lootboxes are "purchasable", the simulator will use the first one it finds.
+     * Note: this could probably be configurable, but I don't think there is any known game where a *single* loot table
+     *       contains multiple purchasable boxes that aren't effectively the same with a minor difference that could be
+     *       abstracted anyway (WoT holiday ops boxes with filler materials, Genshin "banner character"...).
      */
     purchasable: boolean;
     /**
