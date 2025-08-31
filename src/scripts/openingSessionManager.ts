@@ -158,6 +158,34 @@ export const newSession = (rawTable: string, checksum: string): OpeningSession =
     };
 };
 
+/**
+ * Finds the next lootbox in the session with inventory left.
+ *
+ * @param session The current opening session state. This object will not be modified.
+ * @param lootboxName The `name` of the currently selected lootbox to use as the starting point for the search.
+ * @returns The `name` of the next lootbox with some inventory left, or null if the inventory is empty.
+ */
+export const findNextLootboxInInventory = (session: OpeningSession, lootboxName?: string): string | null => {
+    const availableLootboxes = Object.keys(session.lootboxPendingCounters);
+    let lootboxIndex =
+        lootboxName && availableLootboxes.includes(lootboxName)
+            ? availableLootboxes.findIndex((availableName) => availableName === lootboxName)
+            : 0;
+
+    // In case of re-entry, restart the loop if current box is done to check for re-drops of previous boxes
+    if (lootboxIndex > 0 && session.lootboxPendingCounters[availableLootboxes[lootboxIndex]] === 0) {
+        lootboxIndex = 0;
+    }
+
+    while (lootboxIndex < availableLootboxes.length) {
+        if (session.lootboxPendingCounters[availableLootboxes[lootboxIndex]] > 0) {
+            return availableLootboxes[lootboxIndex];
+        }
+        lootboxIndex++;
+    }
+    return null;
+};
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // MATH
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -586,29 +614,53 @@ export const openAllInInventory = (initialSession: OpeningSession): OpeningSessi
 };
 
 /**
- * Finds the next lootbox in the session with inventory left.
+ * Purchases and opens lootboxes until a given goal is reached.
  *
- * @param session The current opening session state. This object will not be modified.
- * @param lootboxName The `name` of the currently selected lootbox to use as the starting point for the search.
- * @returns The `name` of the next lootbox with some inventory left, or null if the inventory is empty.
+ * @param session The initial state of the session, where goals are properly set in the configuration. This object
+ *                **WILL** be modified without cloning, and returned.
+ * @returns The final state of the session after the goal has been reached.
  */
-export const findNextLootboxInInventory = (session: OpeningSession, lootboxName?: string): string | null => {
-    const availableLootboxes = Object.keys(session.lootboxPendingCounters);
-    let lootboxIndex =
-        lootboxName && availableLootboxes.includes(lootboxName)
-            ? availableLootboxes.findIndex((availableName) => availableName === lootboxName)
-            : 0;
+export const openUntilOneIteration = (session: OpeningSession): OpeningSession => {
+    if (!session.simulatorConfig.targetPrizes.length) return session;
 
-    // In case of re-entry, restart the loop if current box is done to check for re-drops of previous boxes
-    if (lootboxIndex > 0 && session.lootboxPendingCounters[availableLootboxes[lootboxIndex]] === 0) {
-        lootboxIndex = 0;
+    const goals = session.simulatorConfig.targetPrizes.map((item) => item.name);
+    const purchasableBox: string = session.referenceLootTable.lootboxes.find((box: Lootbox) => box.purchasable)!.name;
+
+    // Pre-init in case simulate was pressed again after already fulfilling the goal
+    let allObtained =
+        Object.entries(session.aggregatedResults).filter(([key, value]) => goals.includes(key) && value > 0).length ===
+        goals.length;
+
+    while (!allObtained) {
+        // Buy a box
+        session.lootboxPurchasedCounters[purchasableBox]++;
+        session.lootboxPendingCounters[purchasableBox]++;
+        // Open all
+        session = openAllInInventory(session);
+        // Check results
+        allObtained =
+            Object.entries(session.aggregatedResults).filter(([key, value]) => goals.includes(key) && value > 0)
+                .length === goals.length;
     }
 
-    while (lootboxIndex < availableLootboxes.length) {
-        if (session.lootboxPendingCounters[availableLootboxes[lootboxIndex]] > 0) {
-            return availableLootboxes[lootboxIndex];
-        }
-        lootboxIndex++;
+    return session;
+};
+
+/**
+ * Purchases and opens lootboxes until a given goal is reached. Repeats the experiment multiple time to obtain statistics.
+ *
+ * @param rawInitialSession The initial state of the session, in JSON string form, where goals are properly set in the
+ *                          configuration.
+ * @param iterations The number of simulations to run
+ * @returns The number of boxes purchased before the goal was reached, for each iteration
+ */
+export const openUntilMultipleIterations = (rawInitialSession: string, iterations: number): number[] => {
+    const iterationPurchases: number[] = [];
+
+    for (let i = 0; i < iterations; i++) {
+        const iterationResult = openUntilOneIteration(JSON.parse(rawInitialSession) as OpeningSession);
+        iterationPurchases.push(Object.values(iterationResult.lootboxPurchasedCounters).find((val) => val > 0) || 0);
     }
-    return null;
+
+    return iterationPurchases;
 };

@@ -267,10 +267,10 @@ export default function SettingsModal({
                                     <AccordionBody className="d-flex flex-column gap-2">
                                         <InputGroup className="d-flex flex-row justify-content-start text-start">
                                             <Col className="col-auto col-md-3 d-flex flex-column justify-content-center">
-                                                <FormLabel>Parallel instances:</FormLabel>
+                                                <FormLabel>Instances:</FormLabel>
                                             </Col>
                                             <Col className="col-1 d-md-none flex-grow-1 flex-md-grow-0" />
-                                            <Col className="col-2 col-md-1 d-flex flex-column justify-content-center">
+                                            <Col className="col-4 col-md-2 d-flex flex-column justify-content-center">
                                                 <FormControl
                                                     type="number"
                                                     value={threads}
@@ -282,10 +282,10 @@ export default function SettingsModal({
                                         </InputGroup>
                                         <InputGroup className="d-flex flex-row justify-content-start text-start">
                                             <Col className="col-auto col-md-3 d-flex flex-column justify-content-center gap-2">
-                                                <FormLabel>Simulations per instance:</FormLabel>
+                                                <FormLabel>Iterations:</FormLabel>
                                             </Col>
                                             <Col className="col-1 d-md-none flex-grow-1 flex-md-grow-0" />
-                                            <Col className="col-2 col-md-1 d-flex flex-column justify-content-center">
+                                            <Col className="col-4 col-md-2 d-flex flex-column justify-content-center">
                                                 <FormControl
                                                     type="number"
                                                     value={iterationsPerThread}
@@ -297,8 +297,11 @@ export default function SettingsModal({
                                         </InputGroup>
                                         <p className="text-muted">
                                             <i>
-                                                Number of parallel instances should not exceed your CPU's core count for
-                                                ideal performances.
+                                                The app will run "instances" simulators in parallel, each running
+                                                "iterations" attempts to obtain your goal. The more total attempts you
+                                                run, the more accurate the stats will be (it is recommended to run at
+                                                least 8000). If only 1 attempt is run, the result will be saved in the
+                                                stats panel.
                                             </i>
                                         </p>
                                     </AccordionBody>
