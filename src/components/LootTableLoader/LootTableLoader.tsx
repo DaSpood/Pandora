@@ -25,7 +25,13 @@ export default function LootTableLoader({ onTableLoaded }: { onTableLoaded: (sub
                     import: 'default',
                     eager: true,
                 }),
-            ),
+            ).toSorted(
+                (a: unknown, b: unknown) =>
+                    // Z > A (WoT first)
+                    (b as LootTable).game.localeCompare((a as LootTable).game) ||
+                    // Most recent first
+                    (b as LootTable).startDate.localeCompare((a as LootTable).startDate),
+            ) as LootTable[],
         [],
     );
 

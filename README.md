@@ -3,40 +3,22 @@
 Pandora is a lootbox-opening simulator.
 
 It supports custom loot tables, allowing you to enjoy free gambling for any game you want (as long as you are willing to
-write some JSON first if that game is not World Of Tanks).
+write some JSON first).
 
 It offers 3 opening "modes":
 
-- "unlimited": open the boxes you want one at a time and see what you get
-- "budget": pick a set amount of starting boxes, and open them until you run out (or let the simulator quickly open
+- "Unlimited": open the boxes you want one at a time and see what you get
+- "Budget": pick a set amount of starting boxes, and open them until you run out (or let the simulator quickly open
   everything to see the results)
-- "until": set your goal prize(s) and let the simulator purchase boxes one by one until your goal is reached. You can
-  run thousands of iterations of this simulation to generate "best case", "average" and "worst case" **estimates**
-  (never take these numbers as definite requirements, it's still just statistics, your mileage WILL vary).
+- "Until...": set your goal prize(s) and let the simulator purchase boxes one by one until your goal is reached. You can
+  run multiple iterations of this simulation in parallel to generate "best case", "average" and "worst case"
+  **estimates** (never take these numbers as definite requirements, it's still just statistics, your mileage WILL vary).
 
 The UI lets you easily setup your session, eliminate rewards you already own from the loot pool, see your opening
 history and visualize your rewards and other statistics.
 
 Pandora supports common lootbox mechanics like pity, duplicate prevention/compensation, and of course, "tiered" (aka
 "recursive" or "matryoshka") lootboxes ! Why is that a thing ? Go ask Wargaming !
-
-Current status of planned features:
-
-- Loot table loading: **OK**
-- "Unlimited" mode: **OK**
-- "Budget" mode: **OK**
-- "Until" mode: **not implemented yet**
-- Settings: mode selector and pre-owned rewards **OK**, import/export **not implemented yet**
-- Session stats and opening history: **OK**
-
-Roadmap:
-
-- "Until" mode in single-iteration (v0.5.0)
-- "Until" mode in multi-iterations (v1.0.0)
-- Settings import/export as JSON (v1.0.0)
-- Dedicated stats for "Until" mode in multi-iterations (v1.0.0)
-- Improve mobile experience (after v1.0.0)
-- Handle "logical" (instant-open) recursive lootboxes (after v1.0.0, I will need more non-WoT loot tables to test it)
 
 ## Context
 
@@ -61,25 +43,41 @@ You can try the simulator online at https://daspood.github.io/.
 You can also run the code locally by cloning the repository and checking the scripts in the [package.json](package.json)
 file.
 
-Note that, in both cases, everything runs on your browser, there is no server, so keep that in mind before launching
+Note that, in both cases, everything runs in your browser, there is no server, so keep that in mind before launching
 tens of thousands of simulations in parallel. Your CPU will scream, not mine.
 
 ## How to use
 
-I hope the UI is clear enough for now. I will add a more detailed explanation once it is closer to completion.
+Once a loot table is loaded:
+
+- Top-left button opens a "stats" panel giving you info about your session (rewards obtained, lootboxes opened, opening
+  history...).
+- Top-right button redirects you to this GitHub repository where you can view the source code and open issues.
+- Bottom-left button, only available in "budget" mode, allows you to "purchase" the lootboxes you will then open.
+- Bottom-middle button allows you to open one box. In "budget" mode, you can also let the simulator open boxes
+  automatically one by one, or all at once.
+- Bottom-right button opens a "settings" menu where you can select the opening mode, rewards you already own (to treat
+  them as duplicates from the start), what the stopping point is for "until" mode, export/import settings as JSON, and
+  reset the session stats.
+- Above the "open" button, you can select the lootbox you wish to open (useful for tiered-lootboxes scenarios)
+- In the center of the screen, you will see the content of the last lootbox that was opened.
 
 ## Technical details
 
 ### Loot table
 
-The algorithm will use a specified loot table to handle everything in a rolling session. The loot table format is very
-specific, and well documented in [this file](src/types/lootTable.d.ts), you can find provided samples in
-[this directory](src/assets/lootTables). Everything the algorithm does, including how it handles its configuration,
-depends on the loaded loot table.
+The algorithm will use a specified loot table to handle everything in a rolling session. Everything the algorithm does,
+including how it handles its configuration, depends on the loaded loot table.
+
+The loot table format is very specific, and well documented in [this file](src/types/lootTable.d.ts), you can find
+provided samples in [this directory](src/assets/lootTables). The format should now be stable, any future change will
+hopefully be optional and not break existing loot tables. If breaking changes eventually happen, I will try to have
+backwards compatibility one way or another.
 
 The loaded loot table will be fully validated and type checked to make sure it will work with the simulator. The
 validator, available [here](src/scripts/lootTableValidator.ts), only checks that the expected (documented) fields are
-valid, but ignores undocumented fields, so check for typos yourself.
+valid, but ignores undocumented fields, so check for typos yourself. Everything else in the app assumes the loaded loot
+table is valid, things **will** break if it's not.
 
 If you want to write your own loot table for a game with somewhat complicated lootbox mechanics, take the time to really
 think about what these mechanics imply and how you can "translate" them into more common mechanics. For example:
@@ -100,14 +98,6 @@ think about what these mechanics imply and how you can "translate" them into mor
 
 Overall, try to keep it simple. Some mechanics are overly complicated, but can either be dumbed down to a more simple
 mechanic, or ignored because the details aren't that important.
-
-***WARNING: THE LOOT TABLE FORMAT IS NOT YET FINALIZED AND MAY STILL CHANGE UNEXPECTEDLY AS I FIGURE OUT HOW TO PROPERLY
-HANDLE EVERYTHING. THIS WARNING WILL BE REMOVED ONCE IT'S STABLE.***
-
-### Config
-
-The simulator will let you save and load configs to not have to manually pick every parameter every time. This section
-will be expanded when that feature is ready.
 
 ### Opening algorithm
 

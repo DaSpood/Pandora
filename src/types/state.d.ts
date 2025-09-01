@@ -1,9 +1,34 @@
-import type { LootDropType } from './lootTable';
+import type { Lootbox, LootDrop, LootDropSubstitute, LootDropType, LootGroup, LootSlot } from './lootTable';
+
+/**
+ * All the metadata of a "branch" of a loot table, associating each leaf (drop) with its chain of parent objects,
+ * as well as some computed metadata to simplify checks.
+ */
+export interface LootTableBranch {
+    /** The "leaf" drop */
+    drop: LootDrop | LootDropSubstitute;
+    /** For a substitute: the original drop. Otherwise: undefined */
+    parentDrop: LootDrop | undefined;
+    /** The parent group, only undefined for box-level substitutes which are not subject to dupe rules */
+    parentGroup: LootGroup | undefined;
+    /** The parent slot, only undefined for box-level substitutes which are not subject to dupe rules */
+    parentSlot: LootSlot | undefined;
+    /** The parent box */
+    parentBox: Lootbox;
+    /** The drop's contentType */
+    type: LootDropType;
+    /** The drop's priority in UI */
+    priority: number;
+    /** Whether the drop is a substitute */
+    isSubstitute: boolean;
+    /** Whether the drop is subject to duplication rules */
+    isSubjectToDuplicationRules: boolean;
+}
 
 /**
  * The interface holding the state of an opening session in the simulator.
  */
-interface OpeningSession {
+export interface OpeningSession {
     /**
      * The LootTable loaded for this session.
      *
@@ -20,20 +45,11 @@ interface OpeningSession {
     /**
      * Cache associating each LootDrop's name with metadata of the corresponding object in the `referenceLootTable`.
      *
-     * The goal here is to allow easy access when displaying filters to the user (mainly for selecting pre-owned
-     * main/secondary drops and setting the stop-condition of the "open until" mode) or accessing pictures.
+     * The goal here is to allow easy access to each item's loot table "branch" without having to chain
+     * `.filter.map.find` all the time. You do that awful traversal once and that's it (unless you also have to find it
+     * in the dynamic loot table).
      */
-    lootTableUniqueDrops: Record<
-        string,
-        {
-            name: string;
-            type: LootDropType;
-            isSubstitute: boolean;
-            priority: number;
-            isSubjectToDuplicationRules: boolean;
-            pictureUrl?: string;
-        }
-    >;
+    referenceLootTableUniqueDrops: Record<string, LootTableBranch>;
     /**
      * For each Lootbox's name, how many boxes have been opened during the session.
      */
@@ -94,14 +110,12 @@ export interface OpeningResult {
  * Simplified form of a LootDrop obtained in an opened box.
  */
 export interface OpeningResultDrop {
-    /** Content type of the LootDrop's parent LootSlot (for pity handling) */
-    type: LootDropType;
-    /** Name of the LootDrop */
-    name: string;
     /** Amount dropped */
     amount: number;
     /** UI highlight */
     rarityInUi: LootDropType;
+    /** The "branch" leading to this drop, excluding substitute-related info */
+    lootTableBranch: LootTableBranch;
 }
 
 /**

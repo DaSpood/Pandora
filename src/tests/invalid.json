@@ -14,7 +14,7 @@
             "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/raumfalte_proto_small.png",
             "purchasable": false,
             "pity": 0,
-            "mainPrizeDuplicates": "remove_prop",
+            "mainPrizeDuplicates": "remove",
             "mainPrizeSubstitute": {
                 "name": "Raumfalte Prime",
                 "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/raumfalte_prime_small.png",
@@ -257,8 +257,8 @@
             "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/raumfalte_alpha_small.png",
             "purchasable": false,
             "pity": 40,
-            "mainPrizeDuplicates": "remove_prop",
-            "secondaryPrizeDuplicates": "remove_prop",
+            "mainPrizeDuplicates": "remove",
+            "secondaryPrizeDuplicates": "remove",
             "lootSlots": [
                 {
                     "alias": "Guaranteed slot 1 (Free XP)",

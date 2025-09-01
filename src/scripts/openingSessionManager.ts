@@ -3,12 +3,12 @@ import type {
     Lootbox,
     LootDrop,
     LootDropSubstitute,
-    LootDropType,
     LootGroup,
+    LootSlot,
     LootTable,
 } from '../types/lootTable';
-import type { OpeningResult, OpeningResultDrop, OpeningSession } from '../types/state';
-import type { Maybe } from '../types/utils'; ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+import type { LootTableBranch, OpeningResult, OpeningResultDrop, OpeningSession } from '../types/state';
+import type { Maybe } from '../types/utils';
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // SESSION
@@ -25,40 +25,41 @@ export const newSession = (rawTable: string, checksum: string): OpeningSession =
     const refTable = JSON.parse(rawTable) as LootTable;
 
     // This piece of shit object is worth it, I swear, it's a surprise tool that will help us later
-    const allLootDrops: {
-        drop: LootDrop | LootDropSubstitute;
-        type: LootDropType;
-        isSubstitute: boolean;
-        duplicateHandlingMode: DuplicateHandlingMode;
-    }[] = refTable.lootboxes.flatMap((box) =>
+    const allLootDrops: LootTableBranch[] = refTable.lootboxes.flatMap((box) =>
         box.lootSlots.flatMap((slot) =>
-            slot.lootGroups.flatMap((groups) =>
-                groups.lootDrops.flatMap((lootDrop) => {
+            slot.lootGroups.flatMap((group) =>
+                group.lootDrops.flatMap((drop) => {
+                    const contentType = slot.contentType ?? group.contentType!;
                     const duplicateHandlingMode =
-                        slot.contentType === 'main'
+                        contentType === 'main'
                             ? box.mainPrizeDuplicates
-                            : slot.contentType === 'secondary'
+                            : contentType === 'secondary'
                               ? box.secondaryPrizeDuplicates
                               : 'allowed';
-                    const toAdd: {
-                        drop: LootDrop | LootDropSubstitute;
-                        type: LootDropType;
-                        isSubstitute: boolean;
-                        duplicateHandlingMode: DuplicateHandlingMode;
-                    }[] = [
+                    const toAdd: LootTableBranch[] = [
                         {
-                            drop: lootDrop,
-                            type: slot.contentType,
+                            drop: drop,
+                            parentDrop: undefined,
+                            parentGroup: group,
+                            parentSlot: slot,
+                            parentBox: box,
+                            type: contentType,
+                            priority: drop.displayPriority ?? 0,
                             isSubstitute: false,
-                            duplicateHandlingMode: duplicateHandlingMode,
+                            isSubjectToDuplicationRules: duplicateHandlingMode !== 'allowed',
                         },
                     ];
-                    if (lootDrop.substitute)
+                    if (drop.substitute)
                         toAdd.push({
-                            drop: lootDrop.substitute,
-                            type: slot.contentType,
+                            drop: drop.substitute,
+                            parentDrop: drop,
+                            parentGroup: group,
+                            parentSlot: slot,
+                            parentBox: box,
+                            type: contentType,
+                            priority: drop.substitute.displayPriority ?? 0,
                             isSubstitute: true,
-                            duplicateHandlingMode: 'allowed',
+                            isSubjectToDuplicationRules: false,
                         });
                     return toAdd;
                 }),
@@ -69,17 +70,27 @@ export const newSession = (rawTable: string, checksum: string): OpeningSession =
         if (box.mainPrizeSubstitute) {
             allLootDrops.push({
                 drop: box.mainPrizeSubstitute,
+                parentDrop: undefined,
+                parentGroup: undefined,
+                parentSlot: undefined,
+                parentBox: box,
                 type: 'main',
+                priority: box.mainPrizeSubstitute.displayPriority ?? 0,
                 isSubstitute: true,
-                duplicateHandlingMode: 'allowed',
+                isSubjectToDuplicationRules: false,
             });
         }
         if (box.secondaryPrizeSubstitute) {
             allLootDrops.push({
                 drop: box.secondaryPrizeSubstitute,
+                parentDrop: undefined,
+                parentGroup: undefined,
+                parentSlot: undefined,
+                parentBox: box,
                 type: 'secondary',
+                priority: box.secondaryPrizeSubstitute.displayPriority ?? 0,
                 isSubstitute: true,
-                duplicateHandlingMode: 'allowed',
+                isSubjectToDuplicationRules: false,
             });
         }
     });
@@ -87,29 +98,19 @@ export const newSession = (rawTable: string, checksum: string): OpeningSession =
     return {
         referenceLootTable: refTable,
         dynamicLootTable: JSON.parse(rawTable) as LootTable,
-        lootTableUniqueDrops: allLootDrops.reduce(
+        // The reduce does mean that the last occurrence of a value will override previous ones but at this point I
+        // assume the loot table is smart enough to not apply 10 different rules to 10 different occurrences of the same
+        // drop. If that doesn't work, give each variant a unique name. The only thing that should change between
+        // two LootDrop of the same name is the drop-specific `amount` / `dropRate` / `overrideRarityInUi`, NOT metadata
+        referenceLootTableUniqueDrops: allLootDrops.reduce(
             (acc, drop) => {
-                acc[drop.drop.name] = {
-                    name: drop.drop.name,
-                    type: drop.type,
-                    isSubstitute: drop.isSubstitute,
-                    priority: drop.drop.displayPriority ?? 0,
-                    isSubjectToDuplicationRules: drop.duplicateHandlingMode !== 'allowed',
-                    pictureUrl: drop.drop.pictureUrl,
-                };
+                // Don't override metadata of base drop with substitute to avoid losing branch info.
+                // We only want to save substitutes if their content is exclusive to substitutes.
+                if (Object.keys(acc).includes(drop.drop.name) && drop.isSubstitute) return acc;
+                acc[drop.drop.name] = drop;
                 return acc;
             },
-            {} as Record<
-                string,
-                {
-                    name: string;
-                    type: LootDropType;
-                    isSubstitute: boolean;
-                    priority: number;
-                    isSubjectToDuplicationRules: boolean;
-                    pictureUrl?: string;
-                }
-            >,
+            {} as Record<string, LootTableBranch>,
         ),
         lootboxOpenedCounters: refTable.lootboxes.reduce(
             (acc, box) => {
@@ -186,6 +187,33 @@ export const findNextLootboxInInventory = (session: OpeningSession, lootboxName?
     return null;
 };
 
+/**
+ * Finds the LootSlot and (if applicable) LootGroup containing the requested non-filler type in a given Lootbox.
+ * @param lootbox The Lootbox to explore.
+ * @param type The non-filler LootDropType to find.
+ * @returns the found slot/group, or undefined if none is found (in the case of secondary groups usually)
+ */
+export const findSpecialSlotAndGroup = (
+    lootbox: Lootbox,
+    type: 'main' | 'secondary',
+): { slot: LootSlot; group: LootGroup | undefined } | undefined => {
+    return lootbox.lootSlots
+        .map((slot) => {
+            if (slot.contentType === type) return { slot, group: undefined };
+            if (!slot.contentType) {
+                const group =
+                    slot.lootGroups
+                        .map((group) => (group.contentType === type ? group : undefined))
+                        .filter((group) => !!group)
+                        .pop() ?? undefined;
+                if (group) return { slot, group };
+            }
+            return { slot: undefined, group: undefined };
+        })
+        .filter((object) => !!object.slot)
+        .pop();
+};
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // MATH
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -212,61 +240,126 @@ const pickWeightedRandom = <T extends { dropRate: number }>(items: T[]): T => {
 };
 
 /**
- * Distributes the `distributedDropRate` to a given `recipientDropRate` according to the chosen `strategy`.
+ * Distributes the `distributedDropRate` to a given `recipientDropRate` proportionally.
  */
-const distributeDropRate = (
-    recipientDropRate: number,
-    distributedDropRate: number,
-    strategy: 'remove_even' | 'remove_prop',
-    recipientCount: number,
-): number => {
-    return strategy === 'remove_even'
-        ? recipientDropRate + distributedDropRate / recipientCount
-        : recipientDropRate + (recipientDropRate / (1 - distributedDropRate)) * distributedDropRate;
+const distributeDropRate = (recipientDropRate: number, distributedDropRate: number): number => {
+    return recipientDropRate + (recipientDropRate / (1 - distributedDropRate)) * distributedDropRate;
+};
+
+/**
+ * "Steals" the `targetDropRate` from a given `sourceDropRate` proportionally, to give it to a `recipientDropRate`.
+ */
+const stealDropRate = (sourceDropRate: number, targetDropRate: number, recipientDropRate: number): number => {
+    return sourceDropRate - (sourceDropRate / (1 - recipientDropRate)) * targetDropRate;
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // PITY HANDLING
+// This is hell but only because I support a bunch of options. It would be cleaner if gambling was simpler.
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /**
- * Updates the dropRate of the non-filler slots of a given Lootbox according to its pity status. To be called right
- * before the lootbox gets opened.
+ * Updates the dropRate of the non-filler slots/group of a given Lootbox according to its pity status. To be called
+ * right before the lootbox gets opened.
  *
  * @param session The opening session.
  * @param refLootbox The reference object of the opened Lootbox.
  * @param lootbox The opened dynamic Lootbox.
  */
 const preOpenPityHandling = (session: OpeningSession, refLootbox: Lootbox, lootbox: Lootbox): void => {
-    // Main prize slot
-    if (session.pityCounters[lootbox.name].mainPity === refLootbox.mainPrizeHardPity) {
-        lootbox.lootSlots.find((slot) => slot.contentType === 'main')!.dropRate = 1;
+    // Main prize slot/group
+    const mainSlotAndGroup = findSpecialSlotAndGroup(lootbox, 'main')!;
+    const refMainSlotAndGroup = findSpecialSlotAndGroup(refLootbox, 'main')!;
+
+    // Update main dropRate if needed
+    if (refLootbox.mainPrizeHardPity && session.pityCounters[lootbox.name].mainPity >= refLootbox.mainPrizeHardPity) {
+        // Hard Pity
+        if (mainSlotAndGroup.group) {
+            mainSlotAndGroup.slot.lootGroups.forEach(
+                (group) => (group.dropRate = group.contentType === 'main' ? 1 : 0),
+            );
+        } else {
+            mainSlotAndGroup.slot.dropRate = 1;
+        }
     } else if (
         refLootbox.mainPrizeSoftPity &&
         session.pityCounters[lootbox.name].mainPity >= refLootbox.mainPrizeSoftPity
     ) {
-        lootbox.lootSlots.find((slot) => slot.contentType === 'main')!.dropRate +=
-            (1 - refLootbox.lootSlots.find((slot) => slot.contentType === 'main')!.dropRate) /
-            (refLootbox.mainPrizeHardPity! - refLootbox.mainPrizeSoftPity!);
+        // Soft Pity
+        if (mainSlotAndGroup.group) {
+            const dropRateDiff =
+                (1 - refMainSlotAndGroup.group!.dropRate) /
+                (refLootbox.mainPrizeHardPity! - refLootbox.mainPrizeSoftPity!);
+            const recipientDropRateMain = mainSlotAndGroup.group.dropRate;
+            mainSlotAndGroup.slot.lootGroups.forEach(
+                (group) =>
+                    (group.dropRate =
+                        group.contentType === 'main'
+                            ? group.dropRate + dropRateDiff
+                            : stealDropRate(group.dropRate, dropRateDiff, recipientDropRateMain)),
+            );
+        } else {
+            mainSlotAndGroup.slot.dropRate +=
+                (1 - refMainSlotAndGroup.slot.dropRate) /
+                (refLootbox.mainPrizeHardPity! - refLootbox.mainPrizeSoftPity!);
+        }
     }
 
-    // Secondary prize slot
-    if (session.pityCounters[lootbox.name].secondaryPity === refLootbox.secondaryPrizeHardPity) {
-        lootbox.lootSlots.find((slot) => slot.contentType === 'secondary')!.dropRate = 1;
+    // Secondary prize slot/group
+    const secondarySlotAndGroup = findSpecialSlotAndGroup(lootbox, 'secondary');
+    const refSecondarySlotAndGroup = findSpecialSlotAndGroup(refLootbox, 'secondary');
+    if (!secondarySlotAndGroup || !refSecondarySlotAndGroup) return;
+
+    // Update secondary dropRate if needed
+    if (
+        refLootbox.secondaryPrizeHardPity &&
+        session.pityCounters[lootbox.name].secondaryPity >= refLootbox.secondaryPrizeHardPity
+    ) {
+        // Hard Pity
+        // "Skip" secondary hard pity if it's a group in the same slot as the main prize, and main hard pity is reached
+        if (
+            JSON.stringify(secondarySlotAndGroup.slot) !== JSON.stringify(mainSlotAndGroup.slot) ||
+            session.pityCounters[lootbox.name].mainPity === refLootbox.mainPrizeHardPity
+        ) {
+            if (secondarySlotAndGroup.group) {
+                secondarySlotAndGroup.slot.lootGroups.forEach(
+                    (group) => (group.dropRate = group.contentType === 'secondary' ? 1 : 0),
+                );
+            } else {
+                secondarySlotAndGroup.slot.dropRate = 1;
+            }
+        }
     } else if (
         refLootbox.secondaryPrizeSoftPity &&
         session.pityCounters[lootbox.name].secondaryPity >= refLootbox.secondaryPrizeSoftPity
     ) {
-        lootbox.lootSlots.find((slot) => slot.contentType === 'secondary')!.dropRate +=
-            (1 - refLootbox.lootSlots.find((slot) => slot.contentType === 'secondary')!.dropRate) /
-            (refLootbox.secondaryPrizeHardPity! - refLootbox.secondaryPrizeSoftPity!);
+        // Soft Pity
+        // We don't run the risk of overlapping with main-prize soft pity because this scenario is forbidden in the
+        // LootTable validator.
+        if (secondarySlotAndGroup.group) {
+            const dropRateDiff =
+                (1 - refSecondarySlotAndGroup.group!.dropRate) /
+                (refLootbox.secondaryPrizeHardPity! - refLootbox.secondaryPrizeSoftPity!);
+            const recipientDropRateSecondary = secondarySlotAndGroup.group.dropRate;
+            secondarySlotAndGroup.slot.lootGroups.forEach(
+                (group) =>
+                    (group.dropRate =
+                        group.contentType === 'secondary'
+                            ? group.dropRate + dropRateDiff
+                            : stealDropRate(group.dropRate, dropRateDiff, recipientDropRateSecondary)),
+            );
+        } else {
+            secondarySlotAndGroup.slot.dropRate +=
+                (1 - refSecondarySlotAndGroup.slot.dropRate) /
+                (refLootbox.secondaryPrizeHardPity! - refLootbox.secondaryPrizeSoftPity!);
+        }
     }
 };
 
 /**
  * Updates pity counters after opening a Lootbox. To be called right after the lootbox was opened.
  *
- * If a pity gets reset, the corresponding slot's dropRate will also be reset.
+ * If a pity gets reset, the corresponding slot/group's dropRate will also be reset.
  *
  * @param session The opening session.
  * @param refLootbox The reference object of the opened Lootbox.
@@ -281,27 +374,35 @@ const postOpenPityHandling = (
 ): void => {
     // Main prize slot
     session.pityCounters[lootbox.name].mainPity++;
-    if (
-        (refLootbox.mainPrizeHardPity && session.pityCounters[lootbox.name].mainPity > refLootbox.mainPrizeHardPity) ||
-        result.drops.find((drop) => drop.type === 'main')
-    ) {
+    if (result.drops.find((drop) => drop.lootTableBranch.type === 'main')) {
         session.pityCounters[lootbox.name].mainPity = 1;
-        lootbox.lootSlots.find((slot) => slot.contentType === 'main')!.dropRate = refLootbox.lootSlots.find(
-            (slot) => slot.contentType === 'main',
-        )!.dropRate;
+        // Reset altered dropRates
+        const mainSlotAndGroup = findSpecialSlotAndGroup(lootbox, 'main')!;
+        const refMainSlotAndGroup = findSpecialSlotAndGroup(refLootbox, 'main')!;
+        if (mainSlotAndGroup.group) {
+            for (let i = 0; i < mainSlotAndGroup.slot.lootGroups.length; i++) {
+                mainSlotAndGroup.slot.lootGroups[i].dropRate = refMainSlotAndGroup.slot.lootGroups[i].dropRate;
+            }
+        } else {
+            mainSlotAndGroup.slot.dropRate = refMainSlotAndGroup.slot.dropRate;
+        }
     }
 
     // Secondary prize slot
     session.pityCounters[lootbox.name].secondaryPity++;
-    if (
-        (refLootbox.secondaryPrizeHardPity &&
-            session.pityCounters[lootbox.name].secondaryPity > refLootbox.secondaryPrizeHardPity) ||
-        result.drops.find((drop) => drop.type === 'secondary')
-    ) {
+    if (result.drops.find((drop) => drop.lootTableBranch.type === 'secondary')) {
         session.pityCounters[lootbox.name].secondaryPity = 1;
-        lootbox.lootSlots.find((slot) => slot.contentType === 'secondary')!.dropRate = refLootbox.lootSlots.find(
-            (slot) => slot.contentType === 'secondary',
-        )!.dropRate;
+        // Reset altered dropRates
+        const secondarySlotAndGroup = findSpecialSlotAndGroup(lootbox, 'secondary')!;
+        const refSecondarySlotAndGroup = findSpecialSlotAndGroup(refLootbox, 'secondary')!;
+        if (secondarySlotAndGroup.group) {
+            for (let i = 0; i < secondarySlotAndGroup.slot.lootGroups.length; i++) {
+                secondarySlotAndGroup.slot.lootGroups[i].dropRate =
+                    refSecondarySlotAndGroup.slot.lootGroups[i].dropRate;
+            }
+        } else {
+            secondarySlotAndGroup.slot.dropRate = refSecondarySlotAndGroup.slot.dropRate;
+        }
     }
 };
 
@@ -393,15 +494,13 @@ const handleReplaceAllDuplicationRule = (
  * @param group The LootGroup to which the rule must be applied.
  * @param globalSubstitute The lootbox-level substitute for this LootGroup. If missing, individual `LootDrop.substitute`
  *                         will be used instead.
- * @param rule Rule used to pick the distribution strategy between even and proportional.
- * @returns The new rule to save for the dynamic Lootbox (`rule` by default, 'allowed' once all drops are removed).
+ * @returns The new rule to save for the dynamic Lootbox ('remove' by default, 'allowed' once all drops are removed).
  */
 const handleRemoveDuplicateRule = (
     result: string,
     refGroup: LootGroup,
     group: LootGroup,
     globalSubstitute: Maybe<LootDropSubstitute>,
-    rule: 'remove_even' | 'remove_prop',
 ): DuplicateHandlingMode => {
     // Remove matching loot table drop and distribute its dropRate amongst remaining drops.
     const excludedDrop = group.lootDrops.find((drop) => drop.name === result)!;
@@ -410,14 +509,14 @@ const handleRemoveDuplicateRule = (
         if (drop.name !== result) remainingDrops.push(drop);
     });
     remainingDrops.forEach((drop) => {
-        drop.dropRate = distributeDropRate(drop.dropRate, excludedDrop.dropRate, rule, remainingDrops.length);
+        drop.dropRate = distributeDropRate(drop.dropRate, excludedDrop.dropRate);
     });
 
     // Check if all group drops have been handled
     if (remainingDrops.length) {
         // There are still original drops
         group.lootDrops = remainingDrops;
-        return rule;
+        return 'remove';
     }
     // All drops have been dropped, reset drops and replace with substitutes, duplicate handling no longer required
     refGroup.lootDrops.forEach((drop) => {
@@ -466,10 +565,8 @@ export const handleDuplicationRules = (
             return handleReplaceIndividualDuplicateRule(result, group);
         case 'replace_all':
             return handleReplaceAllDuplicationRule(result, group, globalSubstitute!);
-        case 'remove_even':
-            return handleRemoveDuplicateRule(result, refGroup, group, globalSubstitute, 'remove_even');
-        case 'remove_prop':
-            return handleRemoveDuplicateRule(result, refGroup, group, globalSubstitute, 'remove_prop');
+        case 'remove':
+            return handleRemoveDuplicateRule(result, refGroup, group, globalSubstitute);
         case 'allowed':
         default:
             // Nothing to do
@@ -497,11 +594,27 @@ const openOne = (lootbox: Lootbox): OpeningResultDrop[] => {
         if (slot.dropRate <= Math.random()) return;
         const pickedGroup = pickWeightedRandom(slot.lootGroups);
         const pickedDrop = pickWeightedRandom(pickedGroup.lootDrops);
+        const duplicateHandlingMode =
+            slot.contentType === 'main'
+                ? lootbox.mainPrizeDuplicates
+                : slot.contentType === 'secondary'
+                  ? lootbox.secondaryPrizeDuplicates
+                  : 'allowed';
         results.push({
-            type: slot.contentType,
-            name: pickedDrop.name,
             amount: pickedDrop.amount,
-            rarityInUi: pickedDrop.overrideRarityInUi || slot.contentType,
+            rarityInUi: pickedDrop.overrideRarityInUi || (slot.contentType ?? pickedGroup.contentType!),
+            lootTableBranch: {
+                drop: pickedDrop,
+                parentGroup: pickedGroup,
+                parentSlot: slot,
+                parentBox: lootbox,
+                type: slot.contentType ?? pickedGroup.contentType!,
+                priority: pickedDrop.displayPriority ?? 0,
+                isSubjectToDuplicationRules: duplicateHandlingMode !== 'allowed',
+                // Can't know substitute details here, but should also not matter for the upcoming handling.
+                parentDrop: undefined,
+                isSubstitute: false,
+            },
         });
     });
     return results;
@@ -542,29 +655,29 @@ export const openOneAndUpdateState = (session: OpeningSession, lootboxName: stri
     session.lootboxOpenedCounters[lootbox.name]++;
     session.lootboxPendingCounters[lootbox.name]--;
     resultDrops.forEach((result) => {
-        session.aggregatedResults[result.name] += result.amount;
-        if (Object.keys(session.lootboxPendingCounters).includes(result.name)) {
-            session.lootboxPendingCounters[result.name]++;
+        session.aggregatedResults[result.lootTableBranch.drop.name] += result.amount;
+        if (Object.keys(session.lootboxPendingCounters).includes(result.lootTableBranch.drop.name)) {
+            session.lootboxPendingCounters[result.lootTableBranch.drop.name]++;
         }
     });
 
     // Handle duplication rules
-    const mainPrizeResult = result.drops.find((resultDrop) => resultDrop.type === 'main')?.name;
+    const mainPrizeResult = result.drops.find((resultDrop) => resultDrop.lootTableBranch.type === 'main');
     if (mainPrizeResult) {
         lootbox.mainPrizeDuplicates = handleDuplicationRules(
-            mainPrizeResult,
-            refLootbox.lootSlots.find((slot) => slot.contentType === 'main')!.lootGroups[0],
-            lootbox.lootSlots.find((slot) => slot.contentType === 'main')!.lootGroups[0],
+            mainPrizeResult.lootTableBranch.drop.name,
+            session.referenceLootTableUniqueDrops[mainPrizeResult.lootTableBranch.drop.name].parentGroup!,
+            mainPrizeResult.lootTableBranch.parentGroup!,
             lootbox.mainPrizeDuplicates,
             lootbox.mainPrizeSubstitute,
         );
     }
-    const secondaryPrizeResult = result.drops.find((resultDrop) => resultDrop.type === 'secondary')?.name;
+    const secondaryPrizeResult = result.drops.find((resultDrop) => resultDrop.lootTableBranch.type === 'secondary');
     if (secondaryPrizeResult) {
         lootbox.secondaryPrizeDuplicates = handleDuplicationRules(
-            secondaryPrizeResult,
-            refLootbox.lootSlots.find((slot) => slot.contentType === 'secondary')!.lootGroups[0],
-            lootbox.lootSlots.find((slot) => slot.contentType === 'secondary')!.lootGroups[0],
+            secondaryPrizeResult.lootTableBranch.drop.name,
+            session.referenceLootTableUniqueDrops[secondaryPrizeResult.lootTableBranch.drop.name].parentGroup!,
+            secondaryPrizeResult.lootTableBranch.parentGroup!,
             lootbox.secondaryPrizeDuplicates,
             lootbox.secondaryPrizeSubstitute,
         );
@@ -573,12 +686,12 @@ export const openOneAndUpdateState = (session: OpeningSession, lootboxName: stri
     // Handle recursive boxes
     if (session.referenceLootTable.autoOpenRecursive) {
         for (const drop of resultDrops) {
-            if (Object.keys(session.lootboxOpenedCounters).includes(drop.name)) {
+            if (Object.keys(session.lootboxOpenedCounters).includes(drop.lootTableBranch.drop.name)) {
                 // Undo history push and remove the box from the results
                 session.history.pop();
                 result.drops = result.drops.filter((resultDrop) => JSON.stringify(resultDrop) !== JSON.stringify(drop));
                 // Recursively open that box
-                session = openOneAndUpdateState(session, drop.name);
+                session = openOneAndUpdateState(session, drop.lootTableBranch.drop.name);
                 // Merge the results with the recursion ones
                 const recursiveResult = session.history.pop();
                 recursiveResult!.drops.forEach((resultDrop) => {

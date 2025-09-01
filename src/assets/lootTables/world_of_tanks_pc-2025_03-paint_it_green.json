@@ -1,0 +1,298 @@
+{
+    "game": "World Of Tanks PC",
+    "eventName": "Paint It GREEN!",
+    "startDate": "2025-03-13",
+    "endDate": "2025-03-19",
+    "recursive": false,
+    "autoOpenRecursive": false,
+    "author": "DaSpood",
+    "source": "'https://worldoftanks.asia/ko/news/specials/emerald-chests-2025/', hidden below the list of drops",
+    "notes": "3D attachments bundled into 1 drop type because nobody cares about them.",
+    "lootboxes": [
+        {
+            "name": "Emerald Chest",
+            "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/lootboxes_system_base_boxes_arts_600x450.png",
+            "purchasable": true,
+            "mainPrizeHardPity": 50,
+            "mainPrizeDuplicates": "remove",
+            "secondaryPrizeDuplicates": "allowed",
+            "lootSlots": [
+                {
+                    "alias": "Guaranteed slot 1 (Premium account, Personal xp reserves)",
+                    "dropRate": 1,
+                    "contentType": "filler",
+                    "lootGroups": [
+                        {
+                            "alias": "Premium account, Personal xp reserves",
+                            "dropRate": 1,
+                            "lootDrops": [
+                                {
+                                    "name": "days of premium account",
+                                    "pictureUrl": "https://na-wotp.wgcdn.co/dcont/fb/image/440_wot_premium.png",
+                                    "dropRate": 0.33,
+                                    "amount": 1
+                                },
+                                {
+                                    "name": "days of premium account",
+                                    "pictureUrl": "https://na-wotp.wgcdn.co/dcont/fb/image/440_wot_premium.png",
+                                    "dropRate": 0.01,
+                                    "amount": 3
+                                },
+                                {
+                                    "name": "personal reserve: +100% combat xp",
+                                    "pictureUrl": "https://content-wg.gcdn.co/locdoc/rich-article/15th-anniversary-hub/img/bp_pr_credits.6e9500.png",
+                                    "dropRate": 0.32,
+                                    "amount": 1
+                                },
+                                {
+                                    "name": "personal reserve: +100% combat xp",
+                                    "pictureUrl": "https://content-wg.gcdn.co/locdoc/rich-article/15th-anniversary-hub/img/bp_pr_credits.6e9500.png",
+                                    "dropRate": 0.01,
+                                    "amount": 3
+                                },
+                                {
+                                    "name": "personal reserve: +300% free & crew xp",
+                                    "pictureUrl": "https://tanki-media-content.tanki.su/tanki-media/images/stronghold/awards/7.png",
+                                    "dropRate": 0.32,
+                                    "amount": 1
+                                },
+                                {
+                                    "name": "personal reserve: +300% free & crew xp",
+                                    "pictureUrl": "https://tanki-media-content.tanki.su/tanki-media/images/stronghold/awards/7.png",
+                                    "dropRate": 0.01,
+                                    "amount": 3
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "alias": "Guaranteed slot 2 (Credits, Personal credit reserves, Crew books)",
+                    "dropRate": 1,
+                    "contentType": "filler",
+                    "lootGroups": [
+                        {
+                            "alias": "Credits, Personal credit reserves, Crew books",
+                            "dropRate": 1,
+                            "lootDrops": [
+                                {
+                                    "name": "credits",
+                                    "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/new_credits_icon_440x440_png.png",
+                                    "dropRate": 0.45,
+                                    "amount": 50000
+                                },
+                                {
+                                    "name": "credits",
+                                    "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/new_credits_icon_440x440_png.png",
+                                    "dropRate": 0.05,
+                                    "amount": 100000
+                                },
+                                {
+                                    "name": "credits",
+                                    "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/new_credits_icon_440x440_png.png",
+                                    "dropRate": 0.01,
+                                    "amount": 250000
+                                },
+                                {
+                                    "name": "personal reserve: +50% credits",
+                                    "pictureUrl": "https://tanki-media-content.tanki.su/tanki-media/images/stronghold/awards/6.png",
+                                    "dropRate": 0.325,
+                                    "amount": 1
+                                },
+                                {
+                                    "name": "personal reserve: +50% credits",
+                                    "pictureUrl": "https://tanki-media-content.tanki.su/tanki-media/images/stronghold/awards/6.png",
+                                    "dropRate": 0.01,
+                                    "amount": 3
+                                },
+                                {
+                                    "name": "crew book: training booklet (random country)",
+                                    "pictureUrl": "https://content-wg.gcdn.co/locdoc/lootboxes_ep3/patrick-25/img/training-booklet.4feab5.png",
+                                    "dropRate": 0.15,
+                                    "amount": 1
+                                },
+                                {
+                                    "name": "crew book: universal manual",
+                                    "pictureUrl": "https://content-wg.gcdn.co/locdoc/book-cards/img/universalBook1.png",
+                                    "dropRate": 0.005,
+                                    "amount": 1
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "alias": "Filler slot 1 (Free XP)",
+                    "dropRate": 0.15,
+                    "contentType": "filler",
+                    "lootGroups": [
+                        {
+                            "alias": "Free XP",
+                            "dropRate": 1,
+                            "lootDrops": [
+                                {
+                                    "name": "free xp",
+                                    "pictureUrl": "https://na-wotp.wgcdn.co/dcont/fb/image/wot_xpicon_freexp_164x157.png",
+                                    "dropRate": 0.74,
+                                    "amount": 5000
+                                },
+                                {
+                                    "name": "free xp",
+                                    "pictureUrl": "https://na-wotp.wgcdn.co/dcont/fb/image/wot_xpicon_freexp_164x157.png",
+                                    "dropRate": 0.20,
+                                    "amount": 15000
+                                },
+                                {
+                                    "name": "free xp",
+                                    "pictureUrl": "https://na-wotp.wgcdn.co/dcont/fb/image/wot_xpicon_freexp_164x157.png",
+                                    "dropRate": 0.03,
+                                    "amount": 35000
+                                },
+                                {
+                                    "name": "free xp",
+                                    "pictureUrl": "https://na-wotp.wgcdn.co/dcont/fb/image/wot_xpicon_freexp_164x157.png",
+                                    "dropRate": 0.025,
+                                    "amount": 75000
+                                },
+                                {
+                                    "name": "free xp",
+                                    "pictureUrl": "https://na-wotp.wgcdn.co/dcont/fb/image/wot_xpicon_freexp_164x157.png",
+                                    "dropRate": 0.005,
+                                    "amount": 250000
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "alias": "Filler slot 2 (3D attachments)",
+                    "dropRate": 0.10,
+                    "contentType": "filler",
+                    "lootGroups": [
+                        {
+                            "alias": "3D attachments",
+                            "dropRate": 1,
+                            "lootDrops": [
+                                {
+                                    "name": "3D attachment",
+                                    "pictureUrl": "https://clan.akamai.steamstatic.com/images//39263509/fc34c8de5cfc7f4a2b4ef270dce8ad8f8a2011e2.png",
+                                    "dropRate": 1,
+                                    "amount": 1
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "alias": "Tanks",
+                    "dropRate": 0.02,
+                    "contentType": "main",
+                    "lootGroups": [
+                        {
+                            "alias": "Tanks",
+                            "dropRate": 1,
+                            "lootDrops": [
+                                {
+                                    "name": "Prototipo 6",
+                                    "displayPriority": 8,
+                                    "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/italy-It33_Prototipo_6.png",
+                                    "dropRate": 0.06,
+                                    "amount": 1,
+                                    "substitute": {
+                                        "name": "gold",
+                                        "pictureUrl": "https://discoff.net/image/cache/catalog/2500_gold-600x600.png",
+                                        "amount": 9400
+                                    }
+                                },
+                                {
+                                    "name": "Object 168 German",
+                                    "displayPriority": 8,
+                                    "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/ussr-R203_Object_168N.png",
+                                    "dropRate": 0.07,
+                                    "amount": 1,
+                                    "substitute": {
+                                        "name": "gold",
+                                        "pictureUrl": "https://discoff.net/image/cache/catalog/2500_gold-600x600.png",
+                                        "amount": 9100
+                                    }
+                                },
+                                {
+                                    "name": "Lätt Stridsfordon 120",
+                                    "displayPriority": 9,
+                                    "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/sweden-S33_Latt_Stridsfordon_120.png",
+                                    "dropRate": 0.07,
+                                    "amount": 1,
+                                    "substitute": {
+                                        "name": "gold",
+                                        "pictureUrl": "https://discoff.net/image/cache/catalog/2500_gold-600x600.png",
+                                        "amount": 11950
+                                    }
+                                },
+                                {
+                                    "name": "Char Mle. 75",
+                                    "displayPriority": 9,
+                                    "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/france-F118_Char_Mle_75.png",
+                                    "dropRate": 0.16,
+                                    "amount": 1,
+                                    "substitute": {
+                                        "name": "gold",
+                                        "pictureUrl": "https://discoff.net/image/cache/catalog/2500_gold-600x600.png",
+                                        "amount": 9500
+                                    }
+                                },
+                                {
+                                    "name": "K-2",
+                                    "displayPriority": 8,
+                                    "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/ussr-R192_K_2.png",
+                                    "dropRate": 0.16,
+                                    "amount": 1,
+                                    "substitute": {
+                                        "name": "gold",
+                                        "pictureUrl": "https://discoff.net/image/cache/catalog/2500_gold-600x600.png",
+                                        "amount": 10500
+                                    }
+                                },
+                                {
+                                    "name": "Turtle Mk. I",
+                                    "displayPriority": 8,
+                                    "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/uk-GB99_Turtle_Mk1.png",
+                                    "dropRate": 0.16,
+                                    "amount": 1,
+                                    "substitute": {
+                                        "name": "gold",
+                                        "pictureUrl": "https://discoff.net/image/cache/catalog/2500_gold-600x600.png",
+                                        "amount": 8700
+                                    }
+                                },
+                                {
+                                    "name": "T 54D",
+                                    "displayPriority": 9,
+                                    "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/germany-G169_T_54D.png",
+                                    "dropRate": 0.16,
+                                    "amount": 1,
+                                    "substitute": {
+                                        "name": "gold",
+                                        "pictureUrl": "https://discoff.net/image/cache/catalog/2500_gold-600x600.png",
+                                        "amount": 11000
+                                    }
+                                },
+                                {
+                                    "name": "Object 752",
+                                    "displayPriority": 9,
+                                    "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/ussr-R172_Object_752.png",
+                                    "dropRate": 0.16,
+                                    "amount": 1,
+                                    "substitute": {
+                                        "name": "gold",
+                                        "pictureUrl": "https://discoff.net/image/cache/catalog/2500_gold-600x600.png",
+                                        "amount": 13000
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
