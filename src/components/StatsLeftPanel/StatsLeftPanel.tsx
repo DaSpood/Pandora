@@ -108,8 +108,8 @@ export default function StatsLeftPanel({
                         {Object.keys(session.aggregatedResults)
                             .sort(
                                 (a, b) =>
-                                    session.lootTableUniqueDrops[b].priority -
-                                        session.lootTableUniqueDrops[a].priority || a.localeCompare(b),
+                                    session.referenceLootTableUniqueDrops[b].priority -
+                                        session.referenceLootTableUniqueDrops[a].priority || a.localeCompare(b),
                             )
                             .filter((rewardName) =>
                                 displayUnobtainedRewards ? true : session.aggregatedResults[rewardName] > 0,
@@ -122,7 +122,7 @@ export default function StatsLeftPanel({
                                     <Col className="col-2">
                                         <Image
                                             src={
-                                                session.lootTableUniqueDrops[rewardName].pictureUrl ||
+                                                session.referenceLootTableUniqueDrops[rewardName].drop.pictureUrl ||
                                                 'default-loot-drop.png'
                                             }
                                             alt={rewardName}
@@ -208,7 +208,7 @@ export default function StatsLeftPanel({
                                                     {new Intl.NumberFormat('en-US')
                                                         .format(drop.amount)
                                                         .replaceAll(',', ' ')}
-                                                    x {drop.name}
+                                                    x {drop.lootTableBranch.drop.name}
                                                 </span>
                                             </li>
                                         ))}

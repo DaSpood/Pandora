@@ -115,7 +115,12 @@ export const validateLootDrop = (drop: Maybe<LootDrop>, selfIndex: number, expec
     return errors;
 };
 
-export const validateLootGroup = (group: LootGroup, selfIndex: number, expectSubstitute: boolean): string[] => {
+export const validateLootGroup = (
+    group: LootGroup,
+    selfIndex: number,
+    expectSubstitute: boolean,
+    expectContentType: boolean,
+): string[] => {
     const prefix = `lootGroups[${selfIndex}]`;
     if (!group) return [`${prefix} is null`];
     const errors = [];
@@ -126,13 +131,20 @@ export const validateLootGroup = (group: LootGroup, selfIndex: number, expectSub
     if (!validateRequiredDropRate(group.dropRate)) {
         errors.push(`${prefix}.dropRate is invalid`);
     }
+    if (expectContentType && !validateRequiredEnum(group.contentType, ['main', 'secondary', 'filler'])) {
+        errors.push(`${prefix}.contentType is invalid`);
+    }
     if (!validateRequiredArray(group.lootDrops)) {
         errors.push(`${prefix}.lootDrops is invalid`);
     }
 
+    const actualExpectSubstitute = expectContentType
+        ? expectSubstitute && (group.contentType === 'main' || group.contentType === 'secondary')
+        : expectSubstitute;
+
     let dropRatesTotal = 0;
     group.lootDrops?.forEach((drop, index) => {
-        errors.push(...validateLootDrop(drop, index, expectSubstitute).map((error) => `${prefix}.${error}`));
+        errors.push(...validateLootDrop(drop, index, actualExpectSubstitute).map((error) => `${prefix}.${error}`));
         dropRatesTotal += drop.dropRate ?? 0;
     });
     if (Number(dropRatesTotal.toFixed(6)) !== 1) {
@@ -147,6 +159,7 @@ export const validateLootSlot = (
     selfIndex: number,
     expectMainSubstitute: boolean,
     expectSecSubstitute: boolean,
+    expectSlotLevelContentType: boolean,
 ): string[] => {
     const prefix = `lootSlots[${selfIndex}]`;
     if (!slot) return [`${prefix} is null`];
@@ -158,7 +171,11 @@ export const validateLootSlot = (
     if (!validateRequiredDropRate(slot.dropRate)) {
         errors.push(`${prefix}.dropRate is invalid`);
     }
-    if (!validateRequiredEnum(slot.contentType, ['main', 'secondary', 'filler'])) {
+    if (
+        expectSlotLevelContentType
+            ? !validateRequiredEnum(slot.contentType, ['main', 'secondary', 'filler'])
+            : !validateOptionalEnum(slot.contentType, ['main', 'secondary', 'filler'])
+    ) {
         errors.push(`${prefix}.contentType is invalid`);
     }
     if (!validateRequiredArray(slot.lootGroups)) {
@@ -166,18 +183,23 @@ export const validateLootSlot = (
     }
 
     let dropRatesTotal = 0;
+    const expectContentType = !expectSlotLevelContentType && !slot.contentType;
     const expectSubstitute =
-        (expectMainSubstitute && slot.contentType === 'main') ||
-        (expectSecSubstitute && slot.contentType === 'secondary');
+        (expectMainSubstitute && (expectContentType || slot.contentType === 'main')) ||
+        (expectSecSubstitute && (expectContentType || slot.contentType === 'secondary'));
     slot.lootGroups?.forEach((group, index) => {
-        errors.push(...validateLootGroup(group, index, expectSubstitute).map((error) => `${prefix}.${error}`));
+        errors.push(
+            ...validateLootGroup(group, index, expectSubstitute, expectContentType).map(
+                (error) => `${prefix}.${error}`,
+            ),
+        );
         dropRatesTotal += group.dropRate ?? 0;
     });
     if (Number(dropRatesTotal.toFixed(6)) !== 1) {
         errors.push(`${prefix}.lootGroups has an invalid total dropRate of ${dropRatesTotal}`);
     }
 
-    if (['main', 'secondary'].includes(slot.contentType) && slot.lootGroups?.length > 1) {
+    if (!expectContentType && ['main', 'secondary'].includes(slot.contentType!) && slot.lootGroups?.length > 1) {
         errors.push(`${prefix}.lootGroups should only contain 1 element for a '${slot.contentType}' slot`);
     }
 
@@ -216,15 +238,7 @@ export const validateLootbox = (box: Lootbox, selfIndex: number): string[] => {
     if (box.secondaryPrizeSoftPity && !box.secondaryPrizeHardPity) {
         errors.push(`${prefix}.secondaryPrizeSoftPity is not expected`);
     }
-    if (
-        !validateRequiredEnum(box.mainPrizeDuplicates, [
-            'allowed',
-            'replace_individual',
-            'replace_all',
-            'remove_even',
-            'remove_prop',
-        ])
-    ) {
+    if (!validateRequiredEnum(box.mainPrizeDuplicates, ['allowed', 'replace_individual', 'replace_all', 'remove'])) {
         errors.push(`${prefix}.mainPrizeDuplicates is invalid`);
     }
     if (box.mainPrizeDuplicates === 'replace_all') {
@@ -235,13 +249,7 @@ export const validateLootbox = (box: Lootbox, selfIndex: number): string[] => {
         );
     }
     if (
-        !validateRequiredEnum(box.secondaryPrizeDuplicates, [
-            'allowed',
-            'replace_individual',
-            'replace_all',
-            'remove_even',
-            'remove_prop',
-        ])
+        !validateRequiredEnum(box.secondaryPrizeDuplicates, ['allowed', 'replace_individual', 'replace_all', 'remove'])
     ) {
         errors.push(`${prefix}.secondaryPrizeDuplicates is invalid`);
     }
@@ -260,18 +268,21 @@ export const validateLootbox = (box: Lootbox, selfIndex: number): string[] => {
     let secondaryPrizeSlots = 0;
     const expectMainSubstitute =
         box.mainPrizeDuplicates === 'replace_individual' ||
-        (['remove_even', 'remove_prop'].includes(box.mainPrizeDuplicates) && !box.mainPrizeSubstitute);
+        (box.mainPrizeDuplicates === 'remove' && !box.mainPrizeSubstitute);
     const expectSecSubstitute =
         box.mainPrizeDuplicates === 'replace_individual' ||
-        (['remove_even', 'remove_prop'].includes(box.secondaryPrizeDuplicates) && !box.secondaryPrizeSubstitute);
+        (box.secondaryPrizeDuplicates === 'remove' && !box.secondaryPrizeSubstitute);
+    const expectSlotLevelContentType = !!box.mainPrizeSoftPity && !!box.secondaryPrizeSoftPity;
     box.lootSlots?.forEach((slot, index) => {
         errors.push(
-            ...validateLootSlot(slot, index, expectMainSubstitute, expectSecSubstitute).map(
+            ...validateLootSlot(slot, index, expectMainSubstitute, expectSecSubstitute, expectSlotLevelContentType).map(
                 (error) => `${prefix}.${error}`,
             ),
         );
         if (slot.contentType === 'main') mainPrizeSlots++;
+        mainPrizeSlots += slot.lootGroups?.filter((group) => group.contentType === 'main')?.length || 0;
         if (slot.contentType === 'secondary') secondaryPrizeSlots++;
+        secondaryPrizeSlots += slot.lootGroups?.filter((group) => group.contentType === 'secondary')?.length || 0;
     });
     if (mainPrizeSlots !== 1 || secondaryPrizeSlots > 1) {
         errors.push(`${prefix}.lootSlots has an invalid number of non-filler slots`);

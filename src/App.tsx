@@ -7,13 +7,14 @@ import type { Maybe } from './types/utils';
 import { Container } from 'react-bootstrap';
 import {
     findNextLootboxInInventory,
+    findSpecialSlotAndGroup,
     handleDuplicationRules,
     newSession,
     openAllInInventory,
     openOneAndUpdateState,
     openUntilOneIteration,
 } from './scripts/openingSessionManager.ts';
-import type { Lootbox, LootDrop, LootGroup, LootSlot } from './types/lootTable';
+import type { Lootbox, LootDrop, LootGroup } from './types/lootTable';
 import InfoHeader from './components/InfoHeader/InfoHeader.tsx';
 import ButtonsFooter from './components/ButtonsFooter/ButtonsFooter.tsx';
 import LootboxSelector from './components/LootboxSelector/LootboxSelector.tsx';
@@ -47,12 +48,16 @@ export default function App() {
             // Apply duplication rules on pre-owned content
             initialSession.dynamicLootTable.lootboxes.forEach((lootbox: Lootbox) => {
                 // Main prizes
-                const refMainLootGroup: LootGroup = initialSession.referenceLootTable.lootboxes
-                    .find((box: Lootbox) => box.name === lootbox.name)!
-                    .lootSlots.find((slot: LootSlot) => slot.contentType === 'main')!.lootGroups[0];
+                const refMainLootSlotAndGroup = findSpecialSlotAndGroup(
+                    initialSession.referenceLootTable.lootboxes.find((box: Lootbox) => box.name === lootbox.name)!,
+                    'main',
+                )!;
+                const refMainLootGroup: LootGroup =
+                    refMainLootSlotAndGroup.group ?? refMainLootSlotAndGroup.slot.lootGroups[0];
                 const availableMainPrizesInBox = refMainLootGroup.lootDrops.map((drop: LootDrop) => drop.name);
-                const dynamicMainLootGroup = lootbox.lootSlots.find((slot) => slot.contentType === 'main')!
-                    .lootGroups[0];
+                const dynamicMainLootSlotAndGroup = findSpecialSlotAndGroup(lootbox, 'main')!;
+                const dynamicMainLootGroup =
+                    dynamicMainLootSlotAndGroup.group ?? dynamicMainLootSlotAndGroup.slot.lootGroups[0];
                 simulatorConfig.preOwnedPrizes
                     .filter((prize) => prize.type === 'main')
                     .map((prize) => prize.name)
@@ -67,25 +72,33 @@ export default function App() {
                         );
                     });
                 // Secondary prizes
-                const refSecondaryLootGroup = initialSession.referenceLootTable.lootboxes
-                    .find((box: Lootbox) => box.name === lootbox.name)!
-                    .lootSlots.find((slot: LootSlot) => slot.contentType === 'secondary')?.lootGroups[0];
-                const availableSecondaryPrizesInBox = refMainLootGroup.lootDrops.map((drop: LootDrop) => drop.name);
-                const dynamicSecondaryLootGroup = lootbox.lootSlots.find((slot) => slot.contentType === 'secondary')
-                    ?.lootGroups[0];
-                simulatorConfig.preOwnedPrizes
-                    .filter((prize) => prize.type === 'secondary')
-                    .map((prize) => prize.name)
-                    .filter((prize) => availableSecondaryPrizesInBox.includes(prize))
-                    .forEach((prize) => {
-                        lootbox.mainPrizeDuplicates = handleDuplicationRules(
-                            prize,
-                            refSecondaryLootGroup,
-                            dynamicSecondaryLootGroup!,
-                            lootbox.secondaryPrizeDuplicates,
-                            lootbox.secondaryPrizeSubstitute,
-                        );
-                    });
+                const refSecondaryLootSlotAndGroup = findSpecialSlotAndGroup(
+                    initialSession.referenceLootTable.lootboxes.find((box: Lootbox) => box.name === lootbox.name)!,
+                    'secondary',
+                );
+                if (refSecondaryLootSlotAndGroup) {
+                    const refSecondaryLootGroup: LootGroup =
+                        refSecondaryLootSlotAndGroup.group ?? refSecondaryLootSlotAndGroup.slot.lootGroups[0];
+                    const availableSecondaryPrizesInBox = refSecondaryLootGroup.lootDrops.map(
+                        (drop: LootDrop) => drop.name,
+                    );
+                    const dynamicSecondaryLootSlotAndGroup = findSpecialSlotAndGroup(lootbox, 'secondary')!;
+                    const dynamicSecondaryLootGroup =
+                        dynamicSecondaryLootSlotAndGroup.group ?? dynamicSecondaryLootSlotAndGroup.slot.lootGroups[0];
+                    simulatorConfig.preOwnedPrizes
+                        .filter((prize) => prize.type === 'secondary')
+                        .map((prize) => prize.name)
+                        .filter((prize) => availableSecondaryPrizesInBox.includes(prize))
+                        .forEach((prize) => {
+                            lootbox.mainPrizeDuplicates = handleDuplicationRules(
+                                prize,
+                                refSecondaryLootGroup,
+                                dynamicSecondaryLootGroup!,
+                                lootbox.secondaryPrizeDuplicates,
+                                lootbox.secondaryPrizeSubstitute,
+                            );
+                        });
+                }
             });
         }
         setSession(initialSession);

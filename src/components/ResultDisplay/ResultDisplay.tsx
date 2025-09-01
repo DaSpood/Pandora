@@ -122,12 +122,15 @@ export default function ResultDisplay({
                                 className={`h-100 d-flex flex-column justify-content-between p-2 bg-gradient rounded text-center ${drop.rarityInUi === 'main' ? 'border border-warning' : ''} ${drop.rarityInUi === 'secondary' ? 'border border-info' : ''}`}
                             >
                                 <Image
-                                    src={session.lootTableUniqueDrops[drop.name]?.pictureUrl || 'default-loot-icon.png'}
-                                    alt={drop.name}
+                                    src={
+                                        session.referenceLootTableUniqueDrops[drop.lootTableBranch.drop.name]?.drop
+                                            .pictureUrl || 'default-loot-icon.png'
+                                    }
+                                    alt={drop.lootTableBranch.drop.name}
                                     className="object-fit-contain flex-grow-1"
                                 />
                                 <p>
-                                    {drop.amount}x {drop.name}
+                                    {drop.amount}x {drop.lootTableBranch.drop.name}
                                 </p>
                             </Container>
                         </Col>

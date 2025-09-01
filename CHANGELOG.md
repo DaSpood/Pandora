@@ -1,3 +1,17 @@
+# v1.0.0
+
+- Add `until` opening mode and associated settings
+- Add JSON export / import of settings
+    - Importing settings with a loot table checksum mismatch will cause a warning but won't block the import
+    - Incompatible settings will simply be ignored. Re-exporting loaded settings will update them to "fit" the current
+      loot table
+- Add support for "logical" recursive boxes (auto-opening them immediately when dropped, and adding their content to the
+  original box's result)
+- Add loot table for WoT PC's Holiday Ops 2024 event
+- Add loot table for WoT PC's Paint It GREEN! event
+- Loot table format is now considered stable. If it needs to be modified, the modification should be new optional fields
+  only, and breaking changes should be handled with backwards compatibility.
+
 # v0.4.0
 
 - Rework stats panel

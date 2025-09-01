@@ -84,9 +84,9 @@ export default function SettingsModal({
             setThreads(Math.abs(loadedConfig.simulatorThreads ?? 0) || 1);
             setIterationsPerThread(Math.abs(loadedConfig.simulatorIterationsPerThread ?? 0) || 1);
 
-            const acceptedDropNames: string[] = Object.values(session.lootTableUniqueDrops)
+            const acceptedDropNames: string[] = Object.values(session.referenceLootTableUniqueDrops)
                 .filter((drop) => drop.type !== 'filler')
-                .map((drop) => drop.name);
+                .map((drop) => drop.drop.name);
             const loadedPreOwnedPrizes = loadedConfig.preOwnedPrizes.reduce(
                 (acc, prize) => {
                     acc[prize.name] = { name: prize.name, type: prize.type };
@@ -176,27 +176,27 @@ export default function SettingsModal({
         }
     };
 
-    const mainDropsSubjectToDuplicationRules = Object.values(session.lootTableUniqueDrops)
+    const mainDropsSubjectToDuplicationRules = Object.values(session.referenceLootTableUniqueDrops)
         .filter((drop) => drop.type === 'main')
         .filter((drop) => !drop.isSubstitute)
         .filter((drop) => drop.isSubjectToDuplicationRules)
-        .toSorted((a, b) => b.priority - a.priority || a.name.localeCompare(b.name));
+        .toSorted((a, b) => b.priority - a.priority || a.drop.name.localeCompare(b.drop.name));
 
-    const secondaryDropsSubjectToDuplicationRules = Object.values(session.lootTableUniqueDrops)
+    const secondaryDropsSubjectToDuplicationRules = Object.values(session.referenceLootTableUniqueDrops)
         .filter((drop) => drop.type === 'secondary')
         .filter((drop) => !drop.isSubstitute)
         .filter((drop) => drop.isSubjectToDuplicationRules)
-        .toSorted((a, b) => b.priority - a.priority || a.name.localeCompare(b.name));
+        .toSorted((a, b) => b.priority - a.priority || a.drop.name.localeCompare(b.drop.name));
 
-    const targettableMainDrops = Object.values(session.lootTableUniqueDrops)
+    const targettableMainDrops = Object.values(session.referenceLootTableUniqueDrops)
         .filter((drop) => drop.type === 'main')
         .filter((drop) => !drop.isSubstitute)
-        .toSorted((a, b) => b.priority - a.priority || a.name.localeCompare(b.name));
+        .toSorted((a, b) => b.priority - a.priority || a.drop.name.localeCompare(b.drop.name));
 
-    const targettableSecondaryDrops = Object.values(session.lootTableUniqueDrops)
+    const targettableSecondaryDrops = Object.values(session.referenceLootTableUniqueDrops)
         .filter((drop) => drop.type === 'secondary')
         .filter((drop) => !drop.isSubstitute)
-        .toSorted((a, b) => b.priority - a.priority || a.name.localeCompare(b.name));
+        .toSorted((a, b) => b.priority - a.priority || a.drop.name.localeCompare(b.drop.name));
 
     const renderBody = () => {
         return (
@@ -321,10 +321,14 @@ export default function SettingsModal({
                                                 <Col key={`targetMain_${idx}`} className="col-6 col-lg-3">
                                                     <FormCheck
                                                         type="checkbox"
-                                                        label={drop.name}
-                                                        checked={Object.keys(targetPrizes).includes(drop.name)}
+                                                        label={drop.drop.name}
+                                                        checked={Object.keys(targetPrizes).includes(drop.drop.name)}
                                                         onChange={(e) =>
-                                                            onCheckChangeTarget(drop.name, drop.type, e.target.checked)
+                                                            onCheckChangeTarget(
+                                                                drop.drop.name,
+                                                                drop.type,
+                                                                e.target.checked,
+                                                            )
                                                         }
                                                     />
                                                 </Col>
@@ -347,10 +351,14 @@ export default function SettingsModal({
                                                 <Col key={`targetSec_${idx}`} className="col-6 col-lg-3">
                                                     <FormCheck
                                                         type="checkbox"
-                                                        label={drop.name}
-                                                        checked={Object.keys(targetPrizes).includes(drop.name)}
+                                                        label={drop.drop.name}
+                                                        checked={Object.keys(targetPrizes).includes(drop.drop.name)}
                                                         onChange={(e) =>
-                                                            onCheckChangeTarget(drop.name, drop.type, e.target.checked)
+                                                            onCheckChangeTarget(
+                                                                drop.drop.name,
+                                                                drop.type,
+                                                                e.target.checked,
+                                                            )
                                                         }
                                                     />
                                                 </Col>
@@ -373,11 +381,11 @@ export default function SettingsModal({
                                                 <Col key={`preOwnedMain_${idx}`} className="col-6 col-lg-3">
                                                     <FormCheck
                                                         type="checkbox"
-                                                        label={drop.name}
-                                                        checked={Object.keys(preOwnedPrizes).includes(drop.name)}
+                                                        label={drop.drop.name}
+                                                        checked={Object.keys(preOwnedPrizes).includes(drop.drop.name)}
                                                         onChange={(e) =>
                                                             onCheckChangePreOwned(
-                                                                drop.name,
+                                                                drop.drop.name,
                                                                 drop.type,
                                                                 e.target.checked,
                                                             )
@@ -403,11 +411,11 @@ export default function SettingsModal({
                                                 <Col key={`preOwnedSec_${idx}`} className="col-6 col-lg-3">
                                                     <FormCheck
                                                         type="checkbox"
-                                                        label={drop.name}
-                                                        checked={Object.keys(preOwnedPrizes).includes(drop.name)}
+                                                        label={drop.drop.name}
+                                                        checked={Object.keys(preOwnedPrizes).includes(drop.drop.name)}
                                                         onChange={(e) =>
                                                             onCheckChangePreOwned(
-                                                                drop.name,
+                                                                drop.drop.name,
                                                                 drop.type,
                                                                 e.target.checked,
                                                             )

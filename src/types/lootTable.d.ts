@@ -1,4 +1,4 @@
-export type DuplicateHandlingMode = 'allowed' | 'replace_individual' | 'replace_all' | 'remove_even' | 'remove_prop';
+export type DuplicateHandlingMode = 'allowed' | 'replace_individual' | 'replace_all' | 'remove';
 
 export type LootDropType = 'main' | 'secondary' | 'filler';
 
@@ -125,6 +125,9 @@ export interface Lootbox {
     mainPrizeSoftPity?: number;
     /**
      * Same mechanic as `mainPrizeHardPity` but applies to secondary prizes.
+     *
+     * If both main and secondary reward are part of the same Slot and reach hard pity at the same time, main prize will
+     * take priority and secondary pity will be delayed until the next box (Genshin Impact handling).
      */
     secondaryPrizeHardPity?: number;
     /**
@@ -146,20 +149,10 @@ export interface Lootbox {
      * If "replace_all": future occurrences will be replaced with another item, defined in the `mainPrizeSubstitute`
      *                   field.
      *
-     * If "remove_even": once a LootDrop has dropped, it will be removed from the loot table and its drop rate will be
-     *                   redistributed EVENLY to other items of the same group (`See LootGroup structure` part of the
-     *                   documentation). Once all items are removed, any new main-prize drop will be replaced with
-     *                   `mainPrizeSubstitute` or the LootDrop's `substitute`.
-     *
-     * If "remove_prop": once a LootDrop has dropped, it will be removed from the loot table and its drop rate will be
-     *                   redistributed to other items of the same group PROPORTIONALLY to their current drop rate
-     *                   (`See LootGroup structure` part of the documentation). Once all items are removed, any new
-     *                   main-prize drop will be replaced with `mainPrizeSubstitute` or the LootDrop's `substitute`.
-     *
-     * WARNING: The choice of redistribution method for the "remove" scenario will have an impact on the accuracy of
-     *          results when opening a small number of boxes, or if there are many other items with varying operates
-     *          in the same group. For simulating large numbers of boxes, though, this will not matter, as you are bound
-     *          to obtain every reward eventually.
+     * If "remove": once a LootDrop has dropped, it will be removed from the loot table and its drop rate will be
+     *              redistributed to other items of the same group proportionally to their current drop rate
+     *              (`See LootGroup structure` part of the documentation). Once all items are removed, any new
+     *              main-prize drop will be replaced with `mainPrizeSubstitute` or the LootDrop's `substitute`.
      */
     mainPrizeDuplicates: DuplicateHandlingMode;
     /**
@@ -173,10 +166,9 @@ export interface Lootbox {
      *
      * If `mainPrizeDuplicates` === 'replace_all', this field is mandatory.
      *
-     * If `mainPrizeDuplicates` === 'remove_even' || `mainPrizeDuplicates` === 'remove_prop', this field OR
-     * `LootDrop.substitute` are mandatory. Only one of the two can exist simultaneously, and `LootDrop.substitute` must
-     * exist for all LootDrops if it is chosen (in case neither are present, validation errors will mention
-     * `LootDrop.substitute`).
+     * If `mainPrizeDuplicates` === 'remove', this field OR `LootDrop.substitute` are mandatory. Only one of the two can
+     * exist simultaneously, and `LootDrop.substitute` must exist for all LootDrops if it is chosen (in case neither are
+     * present, validation errors will mention `LootDrop.substitute`).
      */
     mainPrizeSubstitute?: LootDropSubstitute;
     /**
@@ -216,6 +208,11 @@ export interface LootSlot {
     /**
      * A tag to help the algorithm identify special slots to handle duplicates, pity and recursive boxes.
      *
+     * If not provided here, must be provided in every LootGroup. The two are mutually exclusive.
+     *
+     * It **CANNOT** be provided at the LootGroup level if both main and secondary prizes have a soft pity because I
+     * do NOT want to deal with keeping track of the drop rates in this scenario. Do that in your own fork if you must.
+     *
      * "main": the slot contains the main prizes of this lootbox. Exactly one LootSlot per Lootbox should have this
      *         contentType value.
      *
@@ -227,7 +224,7 @@ export interface LootSlot {
      *
      * "filler": the slot contains filler rewards that require no special handling.
      */
-    contentType: LootDropType;
+    contentType?: LootDropType;
     /**
      * The list of loot "groups" available in the slot.
      *
@@ -260,6 +257,26 @@ export interface LootGroup {
      */
     dropRate: number;
     /**
+     * A tag to help the algorithm identify special slots to handle duplicates, pity and recursive boxes.
+     *
+     * If not provided here, must be provided in the parent LootSlot. The two are mutually exclusive.
+     *
+     * It **CANNOT** be provided at the LootGroup level if both main and secondary prizes have a soft pity because I
+     * do NOT want to deal with keeping track of the drop rates in this scenario. Do that in your own fork if you must.
+     *
+     * "main": the slot contains the main prizes of this lootbox. Exactly one LootSlot per Lootbox should have this
+     *         contentType value.
+     *
+     * "secondary": the slot contains a secondary prize, also subject to anti-duplication and pity but separate from the
+     *              main prize. Zero or one (for now) LootSlot per Lootbox should have this contentType value.
+     *              If no specific handling of duplicates or pity is required, **prefer using "filler" instead**,
+     *              regardless of the perceived value of the drop, this label is mostly here for technical reasons.
+     *              If you just want a special highlight for a drop in the UI use `LootDrop.overrideRarityInUi` instead.
+     *
+     * "filler": the slot contains filler rewards that require no special handling.
+     */
+    contentType?: LootDropType;
+    /**
      * The list of items available in this group. Items should be of the same nature.
      */
     lootDrops: LootDrop[];
@@ -288,6 +305,10 @@ export interface LootDrop {
      *
      * This will also be used to properly handle recursive lootbox drops, as each lootbox is identified by its `name`.
      * So be careful with typos and case sensitivity !
+     *
+     * The only fields that should change between multiple LootDrop and LootDropSubstitute of the same name are
+     * `dropRate`, `overrideRarityInUi`, `amount` and `substitute`. Everything else should be the same, or risk being
+     * overridden in the cache.
      */
     name: string;
     /**
@@ -332,10 +353,9 @@ export interface LootDrop {
      *
      * If `*PrizeDuplicates` === 'replace_individual', this field is mandatory.
      *
-     * If `Lootbox.*PrizeDuplicates` === 'remove_even' || `Lootbox.*PrizeDuplicates` === 'remove_prop', this field
-     * OR `Lootbox.*PrizeSubstitute` are mandatory. Only one of the two can exist simultaneously, and `substitute`
-     * must exist for all LootDrops in order to be valid  (in case none are present, validation errors will mention
-     * `substitute`).
+     * If `Lootbox.*PrizeDuplicates` === 'remove', this field OR `Lootbox.*PrizeSubstitute` are mandatory. Only one of
+     * the two can exist simultaneously, and `substitute` must exist for all LootDrops in order to be valid (in case
+     * none are present, validation errors will mention `substitute`).
      *
      * In all cases where `substitute` is not mandatory, it is forbidden.
      */

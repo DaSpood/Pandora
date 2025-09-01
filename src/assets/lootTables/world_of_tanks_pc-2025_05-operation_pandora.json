@@ -7,14 +7,14 @@
     "autoOpenRecursive": false,
     "author": "DaSpood",
     "source": "'https://worldoftanks.asia/ko/news/specials/raumfalte-last-stand-2025-bundles/', bottom of the page, hidden by default",
-    "notes": "Not officially confirmed if duplicates are remove_even or remove_prop, assume the latter. 3D attachments bundled into 1 drop type because nobody cares about them.",
+    "notes": "3D attachments bundled into 1 drop type because nobody cares about them.",
     "lootboxes": [
         {
             "name": "Raumfalte Proto",
             "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/raumfalte_proto_small.png",
             "purchasable": true,
             "mainPrizeHardPity": 50,
-            "mainPrizeDuplicates": "remove_prop",
+            "mainPrizeDuplicates": "remove",
             "secondaryPrizeDuplicates": "allowed",
             "mainPrizeSubstitute": {
                 "name": "Raumfalte Prime",
@@ -265,7 +265,7 @@
             "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/raumfalte_alpha_small.png",
             "purchasable": false,
             "mainPrizeHardPity": 40,
-            "mainPrizeDuplicates": "remove_prop",
+            "mainPrizeDuplicates": "remove",
             "secondaryPrizeDuplicates": "allowed",
             "mainPrizeSubstitute": {
                 "name": "Raumfalte Prime",
@@ -548,7 +548,7 @@
             "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/raumfalte_prime_small.png",
             "purchasable": false,
             "mainPrizeHardPity": 20,
-            "mainPrizeDuplicates": "remove_prop",
+            "mainPrizeDuplicates": "remove",
             "secondaryPrizeDuplicates": "allowed",
             "mainPrizeSubstitute": {
                 "name": "Raumfalte Prime",

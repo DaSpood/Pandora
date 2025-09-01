@@ -1,0 +1,327 @@
+{
+    "game": "World Of Tanks PC",
+    "eventName": "Holiday Ops 2025",
+    "startDate": "2024-12-06",
+    "endDate": "2025-01-13",
+    "recursive": false,
+    "autoOpenRecursive": false,
+    "author": "DaSpood",
+    "source": "'https://worldoftanks.eu/en/news/specials/holiday-ops-large-boxes-december-2024/' for loot slots, 'https://www.13disciple.stream/24-25-loot-box-guide.html' for drop rates in main slot",
+    "notes": "Cosmetics and Holiday Ops stuff not differentiated because no real compensation value. 3D styles too complicated to handle and they're a separate slot anyway so no big deal.",
+    "lootboxes": [
+        {
+            "name": "Large Box",
+            "pictureUrl": "https://content-wg.gcdn.co/locdoc/ops-boxes-2025/img/bundle.0b6310.png",
+            "purchasable": true,
+            "mainPrizeHardPity": 50,
+            "mainPrizeDuplicates": "remove",
+            "secondaryPrizeDuplicates": "remove",
+            "lootSlots": [
+                {
+                    "alias": "Guaranteed slot 1 (Resources)",
+                    "dropRate": 1,
+                    "contentType": "filler",
+                    "lootGroups": [
+                        {
+                            "alias": "Resources",
+                            "dropRate": 1,
+                            "lootDrops": [
+                                {
+                                    "name": "resources",
+                                    "pictureUrl": "https://content-wg.gcdn.co/locdoc/ops-boxes-2025/img/random_resource.b2b880.png",
+                                    "dropRate": 1,
+                                    "amount": 200
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "alias": "Guaranteed slot 2 (Gold)",
+                    "dropRate": 1,
+                    "contentType": "filler",
+                    "lootGroups": [
+                        {
+                            "alias": "Gold",
+                            "dropRate": 1,
+                            "lootDrops": [
+                                {
+                                    "name": "gold",
+                                    "pictureUrl": "https://discoff.net/image/cache/catalog/2500_gold-600x600.png",
+                                    "dropRate": 1,
+                                    "amount": 250
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "alias": "Guaranteed slot 3 (Main reward)",
+                    "dropRate": 1,
+                    "lootGroups": [
+                        {
+                            "alias": "Premium account",
+                            "dropRate": 0.364,
+                            "contentType": "filler",
+                            "lootDrops": [
+                                {
+                                    "name": "days of premium account",
+                                    "pictureUrl": "https://na-wotp.wgcdn.co/dcont/fb/image/440_wot_premium.png",
+                                    "dropRate": 0.80,
+                                    "amount": 1
+                                },
+                                {
+                                    "name": "days of premium account",
+                                    "pictureUrl": "https://na-wotp.wgcdn.co/dcont/fb/image/440_wot_premium.png",
+                                    "dropRate": 0.15,
+                                    "amount": 3
+                                },
+                                {
+                                    "name": "days of premium account",
+                                    "pictureUrl": "https://na-wotp.wgcdn.co/dcont/fb/image/440_wot_premium.png",
+                                    "dropRate": 0.05,
+                                    "amount": 7
+                                }
+                            ]
+                        },
+                        {
+                            "alias": "Gold",
+                            "dropRate": 0.21,
+                            "contentType": "filler",
+                            "lootDrops": [
+                                {
+                                    "name": "gold",
+                                    "pictureUrl": "https://discoff.net/image/cache/catalog/2500_gold-600x600.png",
+                                    "dropRate": 0.80,
+                                    "amount": 250
+                                },
+                                {
+                                    "name": "gold",
+                                    "pictureUrl": "https://discoff.net/image/cache/catalog/2500_gold-600x600.png",
+                                    "dropRate": 0.15,
+                                    "amount": 500
+                                },
+                                {
+                                    "name": "gold",
+                                    "pictureUrl": "https://discoff.net/image/cache/catalog/2500_gold-600x600.png",
+                                    "dropRate": 0.05,
+                                    "amount": 1000
+                                }
+                            ]
+                        },
+                        {
+                            "alias": "Credits",
+                            "dropRate": 0.2854,
+                            "contentType": "filler",
+                            "lootDrops": [
+                                {
+                                    "name": "credits",
+                                    "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/new_credits_icon_440x440_png.png",
+                                    "dropRate": 0.80,
+                                    "amount": 100000
+                                },
+                                {
+                                    "name": "credits",
+                                    "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/new_credits_icon_440x440_png.png",
+                                    "dropRate": 0.20,
+                                    "amount": 500000
+                                }
+                            ]
+                        },
+                        {
+                            "alias": "Low-tier tanks",
+                            "dropRate": 0.1166,
+                            "contentType": "secondary",
+                            "lootDrops": [
+                                {
+                                    "name": "SU-100I",
+                                    "displayPriority": 5,
+                                    "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/ussr-R225_SU_100i.png",
+                                    "dropRate": 0.10,
+                                    "amount": 1,
+                                    "substitute": {
+                                        "name": "gold",
+                                        "pictureUrl": "https://discoff.net/image/cache/catalog/2500_gold-600x600.png",
+                                        "amount": 1500
+                                    }
+                                },
+                                {
+                                    "name": "Pz.Kpfw. 38 (K)",
+                                    "displayPriority": 5,
+                                    "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/germany-G124_Pz_Kpfw_38_K.png",
+                                    "dropRate": 0.10,
+                                    "amount": 1,
+                                    "substitute": {
+                                        "name": "gold",
+                                        "pictureUrl": "https://discoff.net/image/cache/catalog/2500_gold-600x600.png",
+                                        "amount": 1300
+                                    }
+                                },
+                                {
+                                    "name": "Type 1 Ho-Ni II",
+                                    "displayPriority": 4,
+                                    "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/japan-J50_Type_1_Ho_Ni_II.png",
+                                    "dropRate": 0.20,
+                                    "amount": 1,
+                                    "substitute": {
+                                        "name": "gold",
+                                        "pictureUrl": "https://discoff.net/image/cache/catalog/2500_gold-600x600.png",
+                                        "amount": 950
+                                    }
+                                },
+                                {
+                                    "name": "M3A3 Stuart",
+                                    "displayPriority": 3,
+                                    "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/usa-A76_M3_A3.png",
+                                    "dropRate": 0.30,
+                                    "amount": 1,
+                                    "substitute": {
+                                        "name": "gold",
+                                        "pictureUrl": "https://discoff.net/image/cache/catalog/2500_gold-600x600.png",
+                                        "amount": 500
+                                    }
+                                },
+                                {
+                                    "name": "AMR P.103",
+                                    "displayPriority": 2,
+                                    "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/france-F39_AMR_P103.png",
+                                    "dropRate": 0.30,
+                                    "amount": 1,
+                                    "substitute": {
+                                        "name": "gold",
+                                        "pictureUrl": "https://discoff.net/image/cache/catalog/2500_gold-600x600.png",
+                                        "amount": 500
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "alias": "High-tier tanks",
+                            "dropRate": 0.024,
+                            "contentType": "main",
+                            "lootDrops": [
+                                {
+                                    "name": "DZT-159",
+                                    "displayPriority": 9,
+                                    "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/china-Ch61_DZT_159.png",
+                                    "dropRate": 0.15,
+                                    "amount": 1,
+                                    "substitute": {
+                                        "name": "gold",
+                                        "pictureUrl": "https://discoff.net/image/cache/catalog/2500_gold-600x600.png",
+                                        "amount": 11900
+                                    }
+                                },
+                                {
+                                    "name": "Toro",
+                                    "displayPriority": 9,
+                                    "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/italy-It34_Toro.png",
+                                    "dropRate": 0.15,
+                                    "amount": 1,
+                                    "substitute": {
+                                        "name": "gold",
+                                        "pictureUrl": "https://discoff.net/image/cache/catalog/2500_gold-600x600.png",
+                                        "amount": 12450
+                                    }
+                                },
+                                {
+                                    "name": "FV226 Contradictious",
+                                    "displayPriority": 8,
+                                    "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/uk-GB139_FV226_Contradictious.png",
+                                    "dropRate": 0.23,
+                                    "amount": 1,
+                                    "substitute": {
+                                        "name": "gold",
+                                        "pictureUrl": "https://discoff.net/image/cache/catalog/2500_gold-600x600.png",
+                                        "amount": 10200
+                                    }
+                                },
+                                {
+                                    "name": "XM57",
+                                    "displayPriority": 8,
+                                    "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/usa-A168_XM_57.png",
+                                    "dropRate": 0.24,
+                                    "amount": 1,
+                                    "substitute": {
+                                        "name": "gold",
+                                        "pictureUrl": "https://discoff.net/image/cache/catalog/2500_gold-600x600.png",
+                                        "amount": 9400
+                                    }
+                                },
+                                {
+                                    "name": "Vz. 68 Squall",
+                                    "displayPriority": 8,
+                                    "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/czech-Cz33_Vz_68_Squall.png",
+                                    "dropRate": 0.23,
+                                    "amount": 1,
+                                    "substitute": {
+                                        "name": "gold",
+                                        "pictureUrl": "https://discoff.net/image/cache/catalog/2500_gold-600x600.png",
+                                        "amount": 6500
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "alias": "Filler slot 1 (Decorations)",
+                    "dropRate": 0.25,
+                    "contentType": "filler",
+                    "lootGroups": [
+                        {
+                            "alias": "Decorations",
+                            "dropRate": 1,
+                            "lootDrops": [
+                                {
+                                    "name": "decoration",
+                                    "pictureUrl": "https://content-wg.gcdn.co/locdoc/ops-boxes-2025/img/random_decoration.71b6ef.png",
+                                    "dropRate": 1,
+                                    "amount": 1
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "alias": "Filler slot 2 (3D attachments)",
+                    "dropRate": 0.06,
+                    "contentType": "filler",
+                    "lootGroups": [
+                        {
+                            "alias": "3D attachments",
+                            "dropRate": 1,
+                            "lootDrops": [
+                                {
+                                    "name": "3D attachment",
+                                    "pictureUrl": "https://clan.akamai.steamstatic.com/images//39263509/fc34c8de5cfc7f4a2b4ef270dce8ad8f8a2011e2.png",
+                                    "dropRate": 1,
+                                    "amount": 1
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "alias": "Filler slot 3 (3D styles)",
+                    "dropRate": 0.05,
+                    "contentType": "filler",
+                    "lootGroups": [
+                        {
+                            "alias": "3D styles",
+                            "dropRate": 1,
+                            "lootDrops": [
+                                {
+                                    "name": "3D style",
+                                    "pictureUrl": "https://wiki.wgcdn.co/images/thumb/c/c9/WoT-PC-3D-Styles-Icon.png/120px-WoT-PC-3D-Styles-Icon.png",
+                                    "dropRate": 1,
+                                    "amount": 1
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
