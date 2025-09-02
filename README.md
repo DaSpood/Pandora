@@ -48,19 +48,8 @@ tens of thousands of simulations in parallel. Your CPU will scream, not mine.
 
 ## How to use
 
-Once a loot table is loaded:
-
-- Top-left button opens a "stats" panel giving you info about your session (rewards obtained, lootboxes opened, opening
-  history...).
-- Top-right button redirects you to this GitHub repository where you can view the source code and open issues.
-- Bottom-left button, only available in "budget" mode, allows you to "purchase" the lootboxes you will then open.
-- Bottom-middle button allows you to open one box. In "budget" mode, you can also let the simulator open boxes
-  automatically one by one, or all at once.
-- Bottom-right button opens a "settings" menu where you can select the opening mode, rewards you already own (to treat
-  them as duplicates from the start), what the stopping point is for "until" mode, export/import settings as JSON, and
-  reset the session stats.
-- Above the "open" button, you can select the lootbox you wish to open (useful for tiered-lootboxes scenarios)
-- In the center of the screen, you will see the content of the last lootbox that was opened.
+You can find pictures of the interface and explanation for each button in [this directory](docs). The file names are
+self explanatory.
 
 ## Technical details
 
