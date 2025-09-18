@@ -1,3 +1,8 @@
+# v1.0.1
+
+- Add loot table for WoT PC's Waffenträger: Paradox event
+- Fix bug with simulate mode never ending in case some target prizes are also pre-owned
+
 # v1.0.0
 
 - Add `until` opening mode and associated settings

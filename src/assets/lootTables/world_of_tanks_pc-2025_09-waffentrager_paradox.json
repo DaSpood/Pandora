@@ -1,0 +1,285 @@
+{
+    "game": "World Of Tanks PC",
+    "eventName": "Waffenträger: Paradox",
+    "startDate": "2025-09-19",
+    "endDate": "2025-09-30",
+    "recursive": false,
+    "autoOpenRecursive": false,
+    "author": "DaSpood",
+    "source": "'https://worldoftanks.asia/ko/news/specials/waffentrager-september-2025-bundles/', hover mouse over drops",
+    "notes": "",
+    "lootboxes": [
+        {
+            "name": "Paradoxmodul Crate",
+            "pictureUrl": "https://content-wg.gcdn.co/locdoc/rich-article/waffentragger_paradox_2025/img/10.lootbox.727c35.png",
+            "purchasable": true,
+            "mainPrizeHardPity": 50,
+            "mainPrizeDuplicates": "remove",
+            "secondaryPrizeDuplicates": "allowed",
+            "lootSlots": [
+                {
+                    "alias": "Guaranteed slot 1 (Credits, Crew books)",
+                    "dropRate": 1,
+                    "contentType": "filler",
+                    "lootGroups": [
+                        {
+                            "alias": "Credits, Crew books",
+                            "dropRate": 1,
+                            "lootDrops": [
+                                {
+                                    "name": "credits",
+                                    "pictureUrl": "https://content-wg.gcdn.co/locdoc/rich-article/waffentrager-lootboxes-2025/img/silver.2fa5f1.png",
+                                    "dropRate": 0.40,
+                                    "amount": 100000
+                                },
+                                {
+                                    "name": "credits",
+                                    "pictureUrl": "https://content-wg.gcdn.co/locdoc/rich-article/waffentrager-lootboxes-2025/img/silver.2fa5f1.png",
+                                    "dropRate": 0.075,
+                                    "amount": 250000
+                                },
+                                {
+                                    "name": "credits",
+                                    "pictureUrl": "https://content-wg.gcdn.co/locdoc/rich-article/waffentrager-lootboxes-2025/img/silver.2fa5f1.png",
+                                    "dropRate": 0.025,
+                                    "amount": 500000
+                                },
+                                {
+                                    "name": "crew book: universal booklet",
+                                    "pictureUrl": "https://content-wg.gcdn.co/locdoc/rich-article/waffentrager-lootboxes-2025/img/universal-brochure.193fb3.png",
+                                    "dropRate": 0.40,
+                                    "amount": 1
+                                },
+                                {
+                                    "name": "crew book: universal manual",
+                                    "pictureUrl": "https://content-wg.gcdn.co/locdoc/rich-article/waffentrager-lootboxes-2025/img/universal-guide.ea7e38.png",
+                                    "dropRate": 0.075,
+                                    "amount": 1
+                                },
+                                {
+                                    "name": "crew book: universal manual",
+                                    "pictureUrl": "https://content-wg.gcdn.co/locdoc/rich-article/waffentrager-lootboxes-2025/img/universal-book-2.d1ebd7.png",
+                                    "dropRate": 0.025,
+                                    "amount": 1
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "alias": "Guaranteed slot 2 (Personal reserves, Premium account)",
+                    "dropRate": 1,
+                    "contentType": "filler",
+                    "lootGroups": [
+                        {
+                            "alias": "Personal reserves, Premium account",
+                            "dropRate": 1,
+                            "lootDrops": [
+                                {
+                                    "name": "personal reserve: +200% free & crew xp",
+                                    "pictureUrl": "https://content-wg.gcdn.co/locdoc/rich-article/waffentrager-lootboxes-2025/img/pr2_crew&free-exp.8facbc.png",
+                                    "dropRate": 0.32,
+                                    "amount": 1
+                                },
+                                {
+                                    "name": "personal reserve: +50% combat xp",
+                                    "pictureUrl": "https://content-wg.gcdn.co/locdoc/rich-article/waffentrager-lootboxes-2025/img/pr2_battle-exp.ed7a76.png",
+                                    "dropRate": 0.33,
+                                    "amount": 1
+                                },
+                                {
+                                    "name": "personal reserve: +50% credits",
+                                    "pictureUrl": "https://content-wg.gcdn.co/locdoc/rich-article/waffentrager-lootboxes-2025/img/pr2_credits.9307d3.png",
+                                    "dropRate": 0.10,
+                                    "amount": 1
+                                },
+                                {
+                                    "name": "days of premium account",
+                                    "pictureUrl": "https://content-wg.gcdn.co/locdoc/rich-article/waffentrager-lootboxes-2025/img/days_general.2ac423.png",
+                                    "dropRate": 0.18,
+                                    "amount": 1
+                                },
+                                {
+                                    "name": "days of premium account",
+                                    "pictureUrl": "https://content-wg.gcdn.co/locdoc/rich-article/waffentrager-lootboxes-2025/img/days_general.2ac423.png",
+                                    "dropRate": 0.05,
+                                    "amount": 3
+                                },
+                                {
+                                    "name": "days of premium account",
+                                    "pictureUrl": "https://content-wg.gcdn.co/locdoc/rich-article/waffentrager-lootboxes-2025/img/days_general.2ac423.png",
+                                    "dropRate": 0.02,
+                                    "amount": 7
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "alias": "Filler slot 1 (Gold, Free XP)",
+                    "dropRate": 0.20,
+                    "contentType": "filler",
+                    "lootGroups": [
+                        {
+                            "alias": "Gold, Free XP",
+                            "dropRate": 1,
+                            "lootDrops": [
+                                {
+                                    "name": "gold",
+                                    "pictureUrl": "https://content-wg.gcdn.co/locdoc/rich-article/waffentrager-lootboxes-2025/img/gold_coins.e8b946.png",
+                                    "dropRate": 0.30,
+                                    "amount": 250
+                                },
+                                {
+                                    "name": "gold",
+                                    "pictureUrl": "https://content-wg.gcdn.co/locdoc/rich-article/waffentrager-lootboxes-2025/img/gold_coins.e8b946.png",
+                                    "dropRate": 0.15,
+                                    "amount": 500
+                                },
+                                {
+                                    "name": "free xp",
+                                    "pictureUrl": "https://content-wg.gcdn.co/locdoc/rich-article/waffentrager-lootboxes-2025/img/wt-2025-free-xp.bb28a6.png",
+                                    "dropRate": 0.40,
+                                    "amount": 5000
+                                },
+                                {
+                                    "name": "free xp",
+                                    "pictureUrl": "https://content-wg.gcdn.co/locdoc/rich-article/waffentrager-lootboxes-2025/img/wt-2025-free-xp.bb28a6.png",
+                                    "dropRate": 0.134,
+                                    "amount": 15000
+                                },
+                                {
+                                    "name": "free xp",
+                                    "pictureUrl": "https://content-wg.gcdn.co/locdoc/rich-article/waffentrager-lootboxes-2025/img/wt-2025-free-xp.bb28a6.png",
+                                    "dropRate": 0.01,
+                                    "amount": 35000
+                                },
+                                {
+                                    "name": "free xp",
+                                    "pictureUrl": "https://content-wg.gcdn.co/locdoc/rich-article/waffentrager-lootboxes-2025/img/wt-2025-free-xp.bb28a6.png",
+                                    "dropRate": 0.005,
+                                    "amount": 75000
+                                },
+                                {
+                                    "name": "free xp",
+                                    "pictureUrl": "https://content-wg.gcdn.co/locdoc/rich-article/waffentrager-lootboxes-2025/img/wt-2025-free-xp.bb28a6.png",
+                                    "dropRate": 0.001,
+                                    "amount": 250000
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "alias": "Tanks",
+                    "dropRate": 0.02,
+                    "contentType": "main",
+                    "lootGroups": [
+                        {
+                            "alias": "Tanks",
+                            "dropRate": 1,
+                            "lootDrops": [
+                                {
+                                    "name": "SDT-58 Vlkodav",
+                                    "displayPriority": 9,
+                                    "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/czech-Cz37_SDT_58_Vlkodav.png",
+                                    "dropRate": 0.10,
+                                    "amount": 1,
+                                    "substitute": {
+                                        "name": "gold",
+                                        "pictureUrl": "https://discoff.net/image/cache/catalog/2500_gold-600x600.png",
+                                        "amount": 11050
+                                    }
+                                },
+                                {
+                                    "name": "Sentinelle",
+                                    "displayPriority": 9,
+                                    "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/france-F130_Sentinelle.png",
+                                    "dropRate": 0.10,
+                                    "amount": 1,
+                                    "substitute": {
+                                        "name": "gold",
+                                        "pictureUrl": "https://discoff.net/image/cache/catalog/2500_gold-600x600.png",
+                                        "amount": 11500
+                                    }
+                                },
+                                {
+                                    "name": "SZDV Vz. 50",
+                                    "displayPriority": 8,
+                                    "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/czech-Cz38_SZDV_vz50.png",
+                                    "dropRate": 0.15,
+                                    "amount": 1,
+                                    "substitute": {
+                                        "name": "gold",
+                                        "pictureUrl": "https://discoff.net/image/cache/catalog/2500_gold-600x600.png",
+                                        "amount": 9450
+                                    }
+                                },
+                                {
+                                    "name": "Kpz. 3 GST Turm",
+                                    "displayPriority": 8,
+                                    "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/germany-G174_Kpz3_GST_Turm.png",
+                                    "dropRate": 0.15,
+                                    "amount": 1,
+                                    "substitute": {
+                                        "name": "gold",
+                                        "pictureUrl": "https://discoff.net/image/cache/catalog/2500_gold-600x600.png",
+                                        "amount": 8300
+                                    }
+                                },
+                                {
+                                    "name": "SFAC 105",
+                                    "displayPriority": 8,
+                                    "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/france-F128_SFAC_105.png",
+                                    "dropRate": 0.15,
+                                    "amount": 1,
+                                    "substitute": {
+                                        "name": "gold",
+                                        "pictureUrl": "https://discoff.net/image/cache/catalog/2500_gold-600x600.png",
+                                        "amount": 8500
+                                    }
+                                },
+                                {
+                                    "name": "WZ-111 model 6",
+                                    "displayPriority": 8,
+                                    "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/china-Ch58_111_Vz51.png",
+                                    "dropRate": 0.15,
+                                    "amount": 1,
+                                    "substitute": {
+                                        "name": "gold",
+                                        "pictureUrl": "https://discoff.net/image/cache/catalog/2500_gold-600x600.png",
+                                        "amount": 8700
+                                    }
+                                },
+                                {
+                                    "name": "DZT-159",
+                                    "displayPriority": 9,
+                                    "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/china-Ch61_DZT_159.png",
+                                    "dropRate": 0.10,
+                                    "amount": 1,
+                                    "substitute": {
+                                        "name": "gold",
+                                        "pictureUrl": "https://discoff.net/image/cache/catalog/2500_gold-600x600.png",
+                                        "amount": 10300
+                                    }
+                                },
+                                {
+                                    "name": "Object 590",
+                                    "displayPriority": 9,
+                                    "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/ussr-R187_Object_590.png",
+                                    "dropRate": 0.10,
+                                    "amount": 1,
+                                    "substitute": {
+                                        "name": "gold",
+                                        "pictureUrl": "https://discoff.net/image/cache/catalog/2500_gold-600x600.png",
+                                        "amount": 9850
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

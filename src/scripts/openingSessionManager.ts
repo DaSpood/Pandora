@@ -736,7 +736,10 @@ export const openAllInInventory = (initialSession: OpeningSession): OpeningSessi
 export const openUntilOneIteration = (session: OpeningSession): OpeningSession => {
     if (!session.simulatorConfig.targetPrizes.length) return session;
 
-    const goals = session.simulatorConfig.targetPrizes.map((item) => item.name);
+    const preOwned = session.simulatorConfig.preOwnedPrizes.map((item) => item.name);
+    const goals = session.simulatorConfig.targetPrizes
+        .map((item) => item.name)
+        .filter((item) => !preOwned.includes(item));
     const purchasableBox: string = session.referenceLootTable.lootboxes.find((box: Lootbox) => box.purchasable)!.name;
 
     // Pre-init in case simulate was pressed again after already fulfilling the goal
