@@ -1,3 +1,7 @@
+# v1.0.2
+
+- Fix Universal Guide reward for Waffenträger: Paradox loot table
+
 # v1.0.1
 
 - Add loot table for WoT PC's Waffenträger: Paradox event
