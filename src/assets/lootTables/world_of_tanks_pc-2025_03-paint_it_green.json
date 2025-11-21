@@ -11,7 +11,7 @@
     "lootboxes": [
         {
             "name": "Emerald Chest",
-            "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/lootboxes_system_base_boxes_arts_600x450.png",
+            "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/sp_box_600x450_2.png",
             "purchasable": true,
             "mainPrizeHardPity": 50,
             "mainPrizeDuplicates": "remove",
@@ -40,25 +40,25 @@
                                 },
                                 {
                                     "name": "personal reserve: +100% combat xp",
-                                    "pictureUrl": "https://content-wg.gcdn.co/locdoc/rich-article/15th-anniversary-hub/img/bp_pr_credits.6e9500.png",
+                                    "pictureUrl": "https://content-wg.gcdn.co/locdoc/rich-article/waffentrager-lootboxes-2025/img/pr2_battle-exp.ed7a76.png",
                                     "dropRate": 0.32,
                                     "amount": 1
                                 },
                                 {
                                     "name": "personal reserve: +100% combat xp",
-                                    "pictureUrl": "https://content-wg.gcdn.co/locdoc/rich-article/15th-anniversary-hub/img/bp_pr_credits.6e9500.png",
+                                    "pictureUrl": "https://content-wg.gcdn.co/locdoc/rich-article/waffentrager-lootboxes-2025/img/pr2_battle-exp.ed7a76.png",
                                     "dropRate": 0.01,
                                     "amount": 3
                                 },
                                 {
                                     "name": "personal reserve: +300% free & crew xp",
-                                    "pictureUrl": "https://tanki-media-content.tanki.su/tanki-media/images/stronghold/awards/7.png",
+                                    "pictureUrl": "https://content-wg.gcdn.co/locdoc/rich-article/waffentrager-lootboxes-2025/img/pr2_crew&free-exp.8facbc.png",
                                     "dropRate": 0.32,
                                     "amount": 1
                                 },
                                 {
                                     "name": "personal reserve: +300% free & crew xp",
-                                    "pictureUrl": "https://tanki-media-content.tanki.su/tanki-media/images/stronghold/awards/7.png",
+                                    "pictureUrl": "https://content-wg.gcdn.co/locdoc/rich-article/waffentrager-lootboxes-2025/img/pr2_crew&free-exp.8facbc.png",
                                     "dropRate": 0.01,
                                     "amount": 3
                                 }
@@ -95,25 +95,25 @@
                                 },
                                 {
                                     "name": "personal reserve: +50% credits",
-                                    "pictureUrl": "https://tanki-media-content.tanki.su/tanki-media/images/stronghold/awards/6.png",
+                                    "pictureUrl": "https://content-wg.gcdn.co/locdoc/rich-article/waffentrager-lootboxes-2025/img/pr2_credits.9307d3.png",
                                     "dropRate": 0.325,
                                     "amount": 1
                                 },
                                 {
                                     "name": "personal reserve: +50% credits",
-                                    "pictureUrl": "https://tanki-media-content.tanki.su/tanki-media/images/stronghold/awards/6.png",
+                                    "pictureUrl": "https://content-wg.gcdn.co/locdoc/rich-article/waffentrager-lootboxes-2025/img/pr2_credits.9307d3.png",
                                     "dropRate": 0.01,
                                     "amount": 3
                                 },
                                 {
                                     "name": "crew book: training booklet (random country)",
-                                    "pictureUrl": "https://content-wg.gcdn.co/locdoc/lootboxes_ep3/patrick-25/img/training-booklet.4feab5.png",
+                                    "pictureUrl": "https://content-wg.gcdn.co/locdoc/rich-article/waffentrager-lootboxes-2025/img/universal-brochure.193fb3.png",
                                     "dropRate": 0.15,
                                     "amount": 1
                                 },
                                 {
                                     "name": "crew book: universal manual",
-                                    "pictureUrl": "https://content-wg.gcdn.co/locdoc/book-cards/img/universalBook1.png",
+                                    "pictureUrl": "https://content-wg.gcdn.co/locdoc/rich-article/waffentrager-lootboxes-2025/img/universal-book-2.d1ebd7.png",
                                     "dropRate": 0.005,
                                     "amount": 1
                                 }
@@ -139,7 +139,7 @@
                                 {
                                     "name": "free xp",
                                     "pictureUrl": "https://na-wotp.wgcdn.co/dcont/fb/image/wot_xpicon_freexp_164x157.png",
-                                    "dropRate": 0.20,
+                                    "dropRate": 0.2,
                                     "amount": 15000
                                 },
                                 {
@@ -166,7 +166,7 @@
                 },
                 {
                     "alias": "Filler slot 2 (3D attachments)",
-                    "dropRate": 0.10,
+                    "dropRate": 0.1,
                     "contentType": "filler",
                     "lootGroups": [
                         {

@@ -30,12 +30,12 @@
                     "lootGroups": [
                         {
                             "alias": "Credits",
-                            "dropRate": 0.50,
+                            "dropRate": 0.5,
                             "lootDrops": [
                                 {
                                     "name": "credits",
                                     "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/new_credits_icon_440x440_png.png",
-                                    "dropRate": 0.80,
+                                    "dropRate": 0.8,
                                     "amount": 50000
                                 },
                                 {
@@ -54,12 +54,12 @@
                         },
                         {
                             "alias": "Crew books",
-                            "dropRate": 0.50,
+                            "dropRate": 0.5,
                             "lootDrops": [
                                 {
                                     "name": "crew book: universal booklet",
                                     "pictureUrl": "https://content-wg.gcdn.co/locdoc/game_guides/crew_training/universal_brochure.png",
-                                    "dropRate": 0.80,
+                                    "dropRate": 0.8,
                                     "amount": 1
                                 },
                                 {
@@ -89,19 +89,19 @@
                             "lootDrops": [
                                 {
                                     "name": "personal reserve: +200% free & crew xp",
-                                    "pictureUrl": "https://tanki-media-content.tanki.su/tanki-media/images/stronghold/awards/7.png",
+                                    "pictureUrl": "https://content-wg.gcdn.co/locdoc/rich-article/waffentrager-lootboxes-2025/img/pr2_crew&free-exp.8facbc.png",
                                     "dropRate": 0.34,
                                     "amount": 1
                                 },
                                 {
                                     "name": "personal reserve: +50% combat xp",
-                                    "pictureUrl": "https://content-wg.gcdn.co/locdoc/rich-article/15th-anniversary-hub/img/bp_pr_credits.6e9500.png",
+                                    "pictureUrl": "https://content-wg.gcdn.co/locdoc/rich-article/waffentrager-lootboxes-2025/img/pr2_battle-exp.ed7a76.png",
                                     "dropRate": 0.33,
                                     "amount": 1
                                 },
                                 {
                                     "name": "personal reserve: +50% credits",
-                                    "pictureUrl": "https://tanki-media-content.tanki.su/tanki-media/images/stronghold/awards/6.png",
+                                    "pictureUrl": "https://content-wg.gcdn.co/locdoc/rich-article/waffentrager-lootboxes-2025/img/pr2_credits.9307d3.png",
                                     "dropRate": 0.33,
                                     "amount": 1
                                 }
@@ -111,7 +111,7 @@
                 },
                 {
                     "alias": "Filler slot 1 (Premium account)",
-                    "dropRate": 0.50,
+                    "dropRate": 0.5,
                     "contentType": "filler",
                     "lootGroups": [
                         {
@@ -121,7 +121,7 @@
                                 {
                                     "name": "days of premium account",
                                     "pictureUrl": "https://na-wotp.wgcdn.co/dcont/fb/image/440_wot_premium.png",
-                                    "dropRate": 0.80,
+                                    "dropRate": 0.8,
                                     "amount": 1
                                 },
                                 {
@@ -142,7 +142,7 @@
                 },
                 {
                     "alias": "Extra lootboxes",
-                    "dropRate": 0.20,
+                    "dropRate": 0.2,
                     "contentType": "filler",
                     "lootGroups": [
                         {
@@ -286,7 +286,7 @@
                                 {
                                     "name": "free xp",
                                     "pictureUrl": "https://na-wotp.wgcdn.co/dcont/fb/image/wot_xpicon_freexp_164x157.png",
-                                    "dropRate": 0.80,
+                                    "dropRate": 0.8,
                                     "amount": 1500
                                 },
                                 {
@@ -317,7 +317,7 @@
                                 {
                                     "name": "days of premium account",
                                     "pictureUrl": "https://na-wotp.wgcdn.co/dcont/fb/image/440_wot_premium.png",
-                                    "dropRate": 0.80,
+                                    "dropRate": 0.8,
                                     "amount": 3
                                 },
                                 {
@@ -340,19 +340,19 @@
                             "lootDrops": [
                                 {
                                     "name": "personal reserve: +200% free & crew xp",
-                                    "pictureUrl": "https://tanki-media-content.tanki.su/tanki-media/images/stronghold/awards/7.png",
+                                    "pictureUrl": "https://content-wg.gcdn.co/locdoc/rich-article/waffentrager-lootboxes-2025/img/pr2_crew&free-exp.8facbc.png",
                                     "dropRate": 0.34,
                                     "amount": 2
                                 },
                                 {
                                     "name": "personal reserve: +50% combat xp",
-                                    "pictureUrl": "https://content-wg.gcdn.co/locdoc/rich-article/15th-anniversary-hub/img/bp_pr_credits.6e9500.png",
+                                    "pictureUrl": "https://content-wg.gcdn.co/locdoc/rich-article/waffentrager-lootboxes-2025/img/pr2_battle-exp.ed7a76.png",
                                     "dropRate": 0.33,
                                     "amount": 2
                                 },
                                 {
                                     "name": "personal reserve: +50% credits",
-                                    "pictureUrl": "https://tanki-media-content.tanki.su/tanki-media/images/stronghold/awards/6.png",
+                                    "pictureUrl": "https://content-wg.gcdn.co/locdoc/rich-article/waffentrager-lootboxes-2025/img/pr2_credits.9307d3.png",
                                     "dropRate": 0.33,
                                     "amount": 2
                                 }
@@ -365,7 +365,7 @@
                                 {
                                     "name": "crew book: universal guide",
                                     "pictureUrl": "https://content-wg.gcdn.co/locdoc/game_guides/crew_training/universal_guide.png",
-                                    "dropRate": 0.80,
+                                    "dropRate": 0.8,
                                     "amount": 1
                                 },
                                 {
@@ -386,7 +386,7 @@
                 },
                 {
                     "alias": "Filler slot 2 (3D attachments)",
-                    "dropRate": 0.50,
+                    "dropRate": 0.5,
                     "contentType": "filler",
                     "lootGroups": [
                         {
@@ -405,7 +405,7 @@
                 },
                 {
                     "alias": "Extra lootboxes",
-                    "dropRate": 0.20,
+                    "dropRate": 0.2,
                     "contentType": "filler",
                     "lootGroups": [
                         {
@@ -445,12 +445,12 @@
                     "lootGroups": [
                         {
                             "alias": "Experimental components",
-                            "dropRate": 0.50,
+                            "dropRate": 0.5,
                             "lootDrops": [
                                 {
                                     "name": "experimental components",
                                     "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/new_experimental_equipment_components_300x193.png",
-                                    "dropRate": 0.80,
+                                    "dropRate": 0.8,
                                     "amount": 100
                                 },
                                 {
@@ -469,12 +469,12 @@
                         },
                         {
                             "alias": "Missions for x5 XP",
-                            "dropRate": 0.50,
+                            "dropRate": 0.5,
                             "lootDrops": [
                                 {
                                     "name": "missions for x5 XP",
                                     "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/x5_xp_420x283.png",
-                                    "dropRate": 0.80,
+                                    "dropRate": 0.8,
                                     "amount": 3
                                 },
                                 {
@@ -527,7 +527,7 @@
                                     "name": "Vz. 58 Medvěd",
                                     "displayPriority": 9,
                                     "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/czech-Cz32_Vz_58_Koncept.png",
-                                    "dropRate": 0.10,
+                                    "dropRate": 0.1,
                                     "amount": 1
                                 },
                                 {
@@ -569,7 +569,7 @@
                                 {
                                     "name": "gold",
                                     "pictureUrl": "https://discoff.net/image/cache/catalog/2500_gold-600x600.png",
-                                    "dropRate": 0.80,
+                                    "dropRate": 0.8,
                                     "amount": 750
                                 },
                                 {
@@ -619,7 +619,7 @@
                                 {
                                     "name": "days of premium account",
                                     "pictureUrl": "https://na-wotp.wgcdn.co/dcont/fb/image/440_wot_premium.png",
-                                    "dropRate": 0.80,
+                                    "dropRate": 0.8,
                                     "amount": 7
                                 },
                                 {
@@ -642,19 +642,19 @@
                             "lootDrops": [
                                 {
                                     "name": "personal reserve: +200% free & crew xp",
-                                    "pictureUrl": "https://tanki-media-content.tanki.su/tanki-media/images/stronghold/awards/7.png",
+                                    "pictureUrl": "https://content-wg.gcdn.co/locdoc/rich-article/waffentrager-lootboxes-2025/img/pr2_crew&free-exp.8facbc.png",
                                     "dropRate": 0.34,
                                     "amount": 6
                                 },
                                 {
                                     "name": "personal reserve: +50% combat xp",
-                                    "pictureUrl": "https://content-wg.gcdn.co/locdoc/rich-article/15th-anniversary-hub/img/bp_pr_credits.6e9500.png",
+                                    "pictureUrl": "https://content-wg.gcdn.co/locdoc/rich-article/waffentrager-lootboxes-2025/img/pr2_battle-exp.ed7a76.png",
                                     "dropRate": 0.33,
                                     "amount": 6
                                 },
                                 {
                                     "name": "personal reserve: +50% credits",
-                                    "pictureUrl": "https://tanki-media-content.tanki.su/tanki-media/images/stronghold/awards/6.png",
+                                    "pictureUrl": "https://content-wg.gcdn.co/locdoc/rich-article/waffentrager-lootboxes-2025/img/pr2_credits.9307d3.png",
                                     "dropRate": 0.33,
                                     "amount": 6
                                 }
@@ -667,7 +667,7 @@
                                 {
                                     "name": "crew book: universal guide",
                                     "pictureUrl": "https://content-wg.gcdn.co/locdoc/game_guides/crew_training/universal_guide.png",
-                                    "dropRate": 0.80,
+                                    "dropRate": 0.8,
                                     "amount": 1
                                 },
                                 {
@@ -688,7 +688,7 @@
                 },
                 {
                     "alias": "Filler slot 2 (Crew members, Experimental components, Missions for x5 XP)",
-                    "dropRate": 0.30,
+                    "dropRate": 0.3,
                     "contentType": "filler",
                     "lootGroups": [
                         {
@@ -698,7 +698,7 @@
                                 {
                                     "name": "crew member with 1 trained skill",
                                     "pictureUrl": "https://wxpcdn-cbprodretail.gcdn.co/static/clans/img/overview/splash.png",
-                                    "dropRate": 0.80,
+                                    "dropRate": 0.8,
                                     "amount": 1
                                 },
                                 {
@@ -722,7 +722,7 @@
                                 {
                                     "name": "experimental components",
                                     "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/new_experimental_equipment_components_300x193.png",
-                                    "dropRate": 0.80,
+                                    "dropRate": 0.8,
                                     "amount": 200
                                 },
                                 {
@@ -746,7 +746,7 @@
                                 {
                                     "name": "missions for x5 XP",
                                     "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/x5_xp_420x283.png",
-                                    "dropRate": 0.80,
+                                    "dropRate": 0.8,
                                     "amount": 10
                                 },
                                 {
@@ -767,7 +767,7 @@
                 },
                 {
                     "alias": "Extra lootboxes",
-                    "dropRate": 0.20,
+                    "dropRate": 0.2,
                     "contentType": "filler",
                     "lootGroups": [
                         {
@@ -802,7 +802,7 @@
                 },
                 {
                     "alias": "Tanks",
-                    "dropRate": 0.10,
+                    "dropRate": 0.1,
                     "contentType": "main",
                     "lootGroups": [
                         {
@@ -813,21 +813,21 @@
                                     "name": "Vercingétorix",
                                     "displayPriority": 9,
                                     "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/france-F132_Vercingetorix.png",
-                                    "dropRate": 0.20,
+                                    "dropRate": 0.2,
                                     "amount": 1
                                 },
                                 {
                                     "name": "MBT-B",
                                     "displayPriority": 10,
                                     "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/usa-A150_MBT_B.png",
-                                    "dropRate": 0.40,
+                                    "dropRate": 0.4,
                                     "amount": 1
                                 },
                                 {
                                     "name": "Chieftain Mk. 6",
                                     "displayPriority": 10,
                                     "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/uk-GB84_Chieftain_Mk6.png",
-                                    "dropRate": 0.40,
+                                    "dropRate": 0.4,
                                     "amount": 1
                                 }
                             ]

@@ -148,6 +148,10 @@ export interface SessionConfiguration {
      */
     targetPrizes: { name: string; type: LootDropType }[];
     /**
+     * Amount of gold the simulator should obtain before stopping in 'unlimited' mode.
+     */
+    targetGold: number;
+    /**
      * How many simulator workers will run in parallel. Not lower than 1.
      */
     simulatorThreads: number;

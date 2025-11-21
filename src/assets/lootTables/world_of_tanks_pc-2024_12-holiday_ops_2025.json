@@ -66,19 +66,19 @@
                             "lootDrops": [
                                 {
                                     "name": "days of premium account",
-                                    "pictureUrl": "https://na-wotp.wgcdn.co/dcont/fb/image/440_wot_premium.png",
-                                    "dropRate": 0.80,
+                                    "pictureUrl": "https://content-wg.gcdn.co/locdoc/rich-article/waffentrager-lootboxes-2025/img/days_general.2ac423.png",
+                                    "dropRate": 0.8,
                                     "amount": 1
                                 },
                                 {
                                     "name": "days of premium account",
-                                    "pictureUrl": "https://na-wotp.wgcdn.co/dcont/fb/image/440_wot_premium.png",
+                                    "pictureUrl": "https://content-wg.gcdn.co/locdoc/rich-article/waffentrager-lootboxes-2025/img/days_general.2ac423.png",
                                     "dropRate": 0.15,
                                     "amount": 3
                                 },
                                 {
                                     "name": "days of premium account",
-                                    "pictureUrl": "https://na-wotp.wgcdn.co/dcont/fb/image/440_wot_premium.png",
+                                    "pictureUrl": "https://content-wg.gcdn.co/locdoc/rich-article/waffentrager-lootboxes-2025/img/days_general.2ac423.png",
                                     "dropRate": 0.05,
                                     "amount": 7
                                 }
@@ -92,7 +92,7 @@
                                 {
                                     "name": "gold",
                                     "pictureUrl": "https://discoff.net/image/cache/catalog/2500_gold-600x600.png",
-                                    "dropRate": 0.80,
+                                    "dropRate": 0.8,
                                     "amount": 250
                                 },
                                 {
@@ -117,13 +117,13 @@
                                 {
                                     "name": "credits",
                                     "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/new_credits_icon_440x440_png.png",
-                                    "dropRate": 0.80,
+                                    "dropRate": 0.8,
                                     "amount": 100000
                                 },
                                 {
                                     "name": "credits",
                                     "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/new_credits_icon_440x440_png.png",
-                                    "dropRate": 0.20,
+                                    "dropRate": 0.2,
                                     "amount": 500000
                                 }
                             ]
@@ -137,7 +137,7 @@
                                     "name": "SU-100I",
                                     "displayPriority": 5,
                                     "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/ussr-R225_SU_100i.png",
-                                    "dropRate": 0.10,
+                                    "dropRate": 0.1,
                                     "amount": 1,
                                     "substitute": {
                                         "name": "gold",
@@ -149,7 +149,7 @@
                                     "name": "Pz.Kpfw. 38 (K)",
                                     "displayPriority": 5,
                                     "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/germany-G124_Pz_Kpfw_38_K.png",
-                                    "dropRate": 0.10,
+                                    "dropRate": 0.1,
                                     "amount": 1,
                                     "substitute": {
                                         "name": "gold",
@@ -161,7 +161,7 @@
                                     "name": "Type 1 Ho-Ni II",
                                     "displayPriority": 4,
                                     "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/japan-J50_Type_1_Ho_Ni_II.png",
-                                    "dropRate": 0.20,
+                                    "dropRate": 0.2,
                                     "amount": 1,
                                     "substitute": {
                                         "name": "gold",
@@ -173,7 +173,7 @@
                                     "name": "M3A3 Stuart",
                                     "displayPriority": 3,
                                     "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/usa-A76_M3_A3.png",
-                                    "dropRate": 0.30,
+                                    "dropRate": 0.3,
                                     "amount": 1,
                                     "substitute": {
                                         "name": "gold",
@@ -185,7 +185,7 @@
                                     "name": "AMR P.103",
                                     "displayPriority": 2,
                                     "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/france-F39_AMR_P103.png",
-                                    "dropRate": 0.30,
+                                    "dropRate": 0.3,
                                     "amount": 1,
                                     "substitute": {
                                         "name": "gold",

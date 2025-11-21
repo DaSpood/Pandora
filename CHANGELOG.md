@@ -1,3 +1,8 @@
+# v1.1.0
+
+- Add `until` mode target: set amount of gold
+- Fix picture urls for downed CDN's (WG's CDN remains flaky and pictures sometimes fail to load)
+
 # v1.0.2
 
 - Fix Universal Guide reward for Waffenträger: Paradox loot table

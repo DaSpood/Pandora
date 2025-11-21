@@ -41,6 +41,7 @@ export default function SettingsModal({
     );
     const [preOwnedPrizes, setPreOwnedPrizes] = useState<Record<string, { name: string; type: LootDropType }>>({});
     const [targetPrizes, setTargetPrizes] = useState<Record<string, { name: string; type: LootDropType }>>({});
+    const [targetGold, setTargetGold] = useState<number>(0);
     const [threads, setThreads] = useState<number>(1);
     const [iterationsPerThread, setIterationsPerThread] = useState<number>(1);
     const [displayChecksumMismatchWarnings, setDisplayChecksumMismatchWarnings] = useState<boolean>(false);
@@ -69,6 +70,7 @@ export default function SettingsModal({
                 {} as Record<string, { name: string; type: LootDropType }>,
             ),
         );
+        setTargetGold(session.simulatorConfig.targetGold ?? 0);
     }, [session]);
 
     const loadUploadedConfig = () => {
@@ -114,6 +116,8 @@ export default function SettingsModal({
                     delete loadedTargetPrizes[key];
                 });
             setTargetPrizes(loadedTargetPrizes);
+
+            setTargetGold(loadedConfig.targetGold ?? 0);
         };
         reader.readAsText(uploadedConfig);
     };
@@ -123,6 +127,7 @@ export default function SettingsModal({
         newConfig.openingMode = openingMode;
         newConfig.preOwnedPrizes = Object.values(preOwnedPrizes);
         newConfig.targetPrizes = Object.values(targetPrizes);
+        newConfig.targetGold = targetGold;
         newConfig.simulatorThreads = threads;
         newConfig.simulatorIterationsPerThread = iterationsPerThread;
         onApplyConfig(newConfig);
@@ -197,6 +202,10 @@ export default function SettingsModal({
         .filter((drop) => drop.type === 'secondary')
         .filter((drop) => !drop.isSubstitute)
         .toSorted((a, b) => b.priority - a.priority || a.drop.name.localeCompare(b.drop.name));
+
+    /** WoT-specific currency, loot table drop name must match "gold" for it to be detected **/
+    const targettableGold =
+        Object.values(session.referenceLootTableUniqueDrops).filter((drop) => drop.drop.name === 'gold').length > 0;
 
     const renderBody = () => {
         return (
@@ -304,6 +313,27 @@ export default function SettingsModal({
                                                 stats panel.
                                             </i>
                                         </p>
+                                    </AccordionBody>
+                                </AccordionItem>
+                            </Accordion>
+                        </Container>
+                    )}
+                    {/*Gold prize "until" goal*/}
+                    {openingMode === 'until' && targettableGold && (
+                        <Container>
+                            <Accordion defaultActiveKey="0">
+                                <AccordionItem eventKey="0">
+                                    <AccordionHeader>Target Gold amount</AccordionHeader>
+                                    <AccordionBody>
+                                        <Row className="p-0">
+                                            <Col className="col-6 col-lg-3">
+                                                <FormControl
+                                                    type="number"
+                                                    value={targetGold}
+                                                    onChange={(e) => setTargetGold(e.target.value as unknown as number)}
+                                                />
+                                            </Col>
+                                        </Row>
                                     </AccordionBody>
                                 </AccordionItem>
                             </Accordion>
@@ -452,7 +482,7 @@ export default function SettingsModal({
                     <Button
                         variant="primary"
                         onClick={applyConfig}
-                        disabled={openingMode === 'until' && Object.keys(targetPrizes).length === 0}
+                        disabled={openingMode === 'until' && Object.keys(targetPrizes).length === 0 && targetGold <= 0}
                     >
                         Apply<span className="d-none d-md-inline"> and reset session</span>
                     </Button>

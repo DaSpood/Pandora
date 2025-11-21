@@ -153,6 +153,7 @@ export const newSession = (rawTable: string, checksum: string): OpeningSession =
             openingMode: 'unlimited',
             preOwnedPrizes: [],
             targetPrizes: [],
+            targetGold: 0,
             simulatorThreads: 1,
             simulatorIterationsPerThread: 1,
         },
@@ -734,7 +735,7 @@ export const openAllInInventory = (initialSession: OpeningSession): OpeningSessi
  * @returns The final state of the session after the goal has been reached.
  */
 export const openUntilOneIteration = (session: OpeningSession): OpeningSession => {
-    if (!session.simulatorConfig.targetPrizes.length) return session;
+    if (!session.simulatorConfig.targetPrizes.length && !session.simulatorConfig.targetGold) return session;
 
     const preOwned = session.simulatorConfig.preOwnedPrizes.map((item) => item.name);
     const goals = session.simulatorConfig.targetPrizes
@@ -743,20 +744,27 @@ export const openUntilOneIteration = (session: OpeningSession): OpeningSession =
     const purchasableBox: string = session.referenceLootTable.lootboxes.find((box: Lootbox) => box.purchasable)!.name;
 
     // Pre-init in case simulate was pressed again after already fulfilling the goal
-    let allObtained =
-        Object.entries(session.aggregatedResults).filter(([key, value]) => goals.includes(key) && value > 0).length ===
-        goals.length;
+    let allPrizesObtained =
+        session.simulatorConfig.targetPrizes.length > 0
+            ? Object.entries(session.aggregatedResults).filter(([key, value]) => goals.includes(key) && value > 0)
+                  .length === goals.length
+            : true;
 
-    while (!allObtained) {
+    let allGoldObtained = session.aggregatedResults['gold'] >= (session.simulatorConfig.targetGold ?? 0);
+
+    while (!allPrizesObtained || !allGoldObtained) {
         // Buy a box
         session.lootboxPurchasedCounters[purchasableBox]++;
         session.lootboxPendingCounters[purchasableBox]++;
         // Open all
         session = openAllInInventory(session);
         // Check results
-        allObtained =
-            Object.entries(session.aggregatedResults).filter(([key, value]) => goals.includes(key) && value > 0)
-                .length === goals.length;
+        allPrizesObtained =
+            session.simulatorConfig.targetPrizes.length > 0
+                ? Object.entries(session.aggregatedResults).filter(([key, value]) => goals.includes(key) && value > 0)
+                      .length === goals.length
+                : true;
+        allGoldObtained = session.aggregatedResults['gold'] >= (session.simulatorConfig.targetGold ?? 0);
     }
 
     return session;
