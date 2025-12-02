@@ -1,3 +1,8 @@
+# v1.2.0
+
+- Add loot table for WoT PC's Holiday Ops 2025 event
+- Store all assets locally to avoid relying on external CDNs
+
 # v1.1.0
 
 - Add `until` mode target: set amount of gold

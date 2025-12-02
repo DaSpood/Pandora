@@ -1,17 +1,17 @@
 {
     "game": "World Of Tanks PC",
-    "eventName": "Holiday Ops 2025",
-    "startDate": "2024-12-06",
-    "endDate": "2025-01-13",
+    "eventName": "Holiday Ops 2026",
+    "startDate": "2025-12-05",
+    "endDate": "2026-01-12",
     "recursive": false,
     "autoOpenRecursive": false,
     "author": "DaSpood",
-    "source": "'https://worldoftanks.eu/en/news/specials/holiday-ops-large-boxes-december-2024/' for loot slots, 'https://www.13disciple.stream/24-25-loot-box-guide.html' for drop rates in main slot",
+    "source": "'https://worldoftanks.asia/ko/news/general-news/holiday-ops-2026-large-boxes/', hover mouse over drops",
     "notes": "Cosmetics and Holiday Ops stuff not differentiated because no real compensation value. 3D styles too complicated to handle and they're a separate slot anyway so no big deal.",
     "lootboxes": [
         {
             "name": "Large Box",
-            "pictureUrl": "images/lootboxes/2024_12-large_boxes.png",
+            "pictureUrl": "images/lootboxes/2025_12-large_boxes.png",
             "purchasable": true,
             "mainPrizeHardPity": 50,
             "mainPrizeDuplicates": "remove",
@@ -60,70 +60,56 @@
                     "dropRate": 1,
                     "lootGroups": [
                         {
-                            "alias": "Premium account",
-                            "dropRate": 0.364,
+                            "alias": "Premium account / gold / credits",
+                            "dropRate": 0.8594,
                             "contentType": "filler",
                             "lootDrops": [
                                 {
                                     "name": "days of premium account",
                                     "pictureUrl": "images/resources/premium-account.png",
-                                    "dropRate": 0.8,
+                                    "dropRate": 0.3016,
                                     "amount": 1
                                 },
                                 {
                                     "name": "days of premium account",
                                     "pictureUrl": "images/resources/premium-account.png",
-                                    "dropRate": 0.15,
+                                    "dropRate": 0.0873,
                                     "amount": 3
                                 },
                                 {
                                     "name": "days of premium account",
                                     "pictureUrl": "images/resources/premium-account.png",
-                                    "dropRate": 0.05,
+                                    "dropRate": 0.0387,
                                     "amount": 7
-                                }
-                            ]
-                        },
-                        {
-                            "alias": "Gold",
-                            "dropRate": 0.21,
-                            "contentType": "filler",
-                            "lootDrops": [
+                                },
                                 {
                                     "name": "gold",
                                     "pictureUrl": "images/resources/gold.png",
-                                    "dropRate": 0.8,
+                                    "dropRate": 0.1745,
                                     "amount": 250
                                 },
                                 {
                                     "name": "gold",
                                     "pictureUrl": "images/resources/gold.png",
-                                    "dropRate": 0.15,
+                                    "dropRate": 0.0582,
                                     "amount": 500
                                 },
                                 {
                                     "name": "gold",
                                     "pictureUrl": "images/resources/gold.png",
-                                    "dropRate": 0.05,
+                                    "dropRate": 0.0194,
                                     "amount": 1000
-                                }
-                            ]
-                        },
-                        {
-                            "alias": "Credits",
-                            "dropRate": 0.2854,
-                            "contentType": "filler",
-                            "lootDrops": [
+                                },
                                 {
                                     "name": "credits",
                                     "pictureUrl": "images/resources/credits.png",
-                                    "dropRate": 0.8,
+                                    "dropRate": 0.233,
                                     "amount": 100000
                                 },
                                 {
                                     "name": "credits",
                                     "pictureUrl": "images/resources/credits.png",
-                                    "dropRate": 0.2,
+                                    "dropRate": 0.0873,
                                     "amount": 500000
                                 }
                             ]
@@ -134,10 +120,10 @@
                             "contentType": "secondary",
                             "lootDrops": [
                                 {
-                                    "name": "SU-100I",
+                                    "name": "Cromwell Applique",
                                     "displayPriority": 5,
-                                    "pictureUrl": "images/tanks/ussr-R225_SU_100i.png",
-                                    "dropRate": 0.1,
+                                    "pictureUrl": "images/tanks/uk-GB137_Cromwell_Applique.png",
+                                    "dropRate": 0.06,
                                     "amount": 1,
                                     "substitute": {
                                         "name": "gold",
@@ -146,10 +132,10 @@
                                     }
                                 },
                                 {
-                                    "name": "Pz.Kpfw. 38 (K)",
+                                    "name": "T-115",
                                     "displayPriority": 5,
-                                    "pictureUrl": "images/tanks/germany-G124_Pz_Kpfw_38_K.png",
-                                    "dropRate": 0.1,
+                                    "pictureUrl": "images/tanks/ussr-R218_T_115.png",
+                                    "dropRate": 0.06,
                                     "amount": 1,
                                     "substitute": {
                                         "name": "gold",
@@ -158,10 +144,10 @@
                                     }
                                 },
                                 {
-                                    "name": "Type 1 Ho-Ni II",
+                                    "name": "Škoda T 15A",
                                     "displayPriority": 4,
-                                    "pictureUrl": "images/tanks/japan-J50_Type_1_Ho_Ni_II.png",
-                                    "dropRate": 0.2,
+                                    "pictureUrl": "images/tanks/czech-Cz22_Skoda_T_15A.png",
+                                    "dropRate": 0.2454,
                                     "amount": 1,
                                     "substitute": {
                                         "name": "gold",
@@ -170,10 +156,10 @@
                                     }
                                 },
                                 {
-                                    "name": "M3A3 Stuart",
+                                    "name": "Rheinmetall Begleitwagen",
                                     "displayPriority": 3,
-                                    "pictureUrl": "images/tanks/usa-A76_M3_A3.png",
-                                    "dropRate": 0.3,
+                                    "pictureUrl": "images/tanks/germany-G175_Rheinmetall_Begleitwagen.png",
+                                    "dropRate": 0.3173,
                                     "amount": 1,
                                     "substitute": {
                                         "name": "gold",
@@ -182,10 +168,10 @@
                                     }
                                 },
                                 {
-                                    "name": "AMR P.103",
+                                    "name": "Renault R35/FCM 36",
                                     "displayPriority": 2,
-                                    "pictureUrl": "images/tanks/france-F39_AMR_P103.png",
-                                    "dropRate": 0.3,
+                                    "pictureUrl": "images/tanks/france-F138_Renault_R35_FCM_36.png",
+                                    "dropRate": 0.3173,
                                     "amount": 1,
                                     "substitute": {
                                         "name": "gold",
@@ -201,63 +187,75 @@
                             "contentType": "main",
                             "lootDrops": [
                                 {
-                                    "name": "DZT-159",
+                                    "name": "BZT-70",
+                                    "displayPriority": 10,
+                                    "pictureUrl": "images/tanks/china-Ch57_BZT_70.png",
+                                    "dropRate": 0.0542,
+                                    "amount": 1,
+                                    "substitute": {
+                                        "name": "gold",
+                                        "pictureUrl": "images/resources/gold.png",
+                                        "amount": 22500
+                                    }
+                                },
+                                {
+                                    "name": "Coccodrillo",
+                                    "displayPriority": 10,
+                                    "pictureUrl": "images/tanks/italy-It39_Coccodrillo.png",
+                                    "dropRate": 0.0542,
+                                    "amount": 1,
+                                    "substitute": {
+                                        "name": "gold",
+                                        "pictureUrl": "images/resources/gold.png",
+                                        "amount": 22500
+                                    }
+                                },
+                                {
+                                    "name": "Projet Louis",
                                     "displayPriority": 9,
-                                    "pictureUrl": "images/tanks/china-Ch61_DZT_159.png",
-                                    "dropRate": 0.15,
+                                    "pictureUrl": "images/tanks/france-F120_Projet_Louis.png",
+                                    "dropRate": 0.2083,
                                     "amount": 1,
                                     "substitute": {
                                         "name": "gold",
                                         "pictureUrl": "images/resources/gold.png",
-                                        "amount": 11900
+                                        "amount": 8850
                                     }
                                 },
                                 {
-                                    "name": "Toro",
+                                    "name": "TBT",
                                     "displayPriority": 9,
-                                    "pictureUrl": "images/tanks/italy-It34_Toro.png",
-                                    "dropRate": 0.15,
+                                    "pictureUrl": "images/tanks/czech-Cz30_TBT.png",
+                                    "dropRate": 0.2083,
                                     "amount": 1,
                                     "substitute": {
                                         "name": "gold",
                                         "pictureUrl": "images/resources/gold.png",
-                                        "amount": 12450
+                                        "amount": 11050
                                     }
                                 },
                                 {
-                                    "name": "FV226 Contradictious",
-                                    "displayPriority": 8,
-                                    "pictureUrl": "images/tanks/uk-GB139_FV226_Contradictious.png",
-                                    "dropRate": 0.23,
+                                    "name": "Jagdpanzer E 90",
+                                    "displayPriority": 9,
+                                    "pictureUrl": "images/tanks/germany-G176_Jagdpanzer_E90.png",
+                                    "dropRate": 0.2083,
                                     "amount": 1,
                                     "substitute": {
                                         "name": "gold",
                                         "pictureUrl": "images/resources/gold.png",
-                                        "amount": 10200
+                                        "amount": 10350
                                     }
                                 },
                                 {
-                                    "name": "XM57",
+                                    "name": "Stridsyxa",
                                     "displayPriority": 8,
-                                    "pictureUrl": "images/tanks/usa-A168_XM_57.png",
-                                    "dropRate": 0.24,
+                                    "pictureUrl": "images/tanks/sweden-S35_Stridsyxa.png",
+                                    "dropRate": 0.2667,
                                     "amount": 1,
                                     "substitute": {
                                         "name": "gold",
                                         "pictureUrl": "images/resources/gold.png",
-                                        "amount": 9400
-                                    }
-                                },
-                                {
-                                    "name": "Vz. 68 Squall",
-                                    "displayPriority": 8,
-                                    "pictureUrl": "images/tanks/czech-Cz33_Vz_68_Squall.png",
-                                    "dropRate": 0.23,
-                                    "amount": 1,
-                                    "substitute": {
-                                        "name": "gold",
-                                        "pictureUrl": "images/resources/gold.png",
-                                        "amount": 6500
+                                        "amount": 6750
                                     }
                                 }
                             ]

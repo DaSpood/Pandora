@@ -124,7 +124,7 @@ export default function ResultDisplay({
                                 <Image
                                     src={
                                         session.referenceLootTableUniqueDrops[drop.lootTableBranch.drop.name]?.drop
-                                            .pictureUrl || 'default-loot-icon.png'
+                                            .pictureUrl || 'images/default-loot-icon.png'
                                     }
                                     alt={drop.lootTableBranch.drop.name}
                                     className="object-fit-contain flex-grow-1"

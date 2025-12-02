@@ -1,3 +1,6 @@
 - 'public/favicon.png': created by Freepik at https://www.flaticon.com/free-icon/loot-box_4176144?related_id=4176144
 - 'public/default-loot-box.png': created by Freepik at https://www.flaticon.com/free-icon/loot-box_4176145?related_id=4176237
 - 'public/default-loot-icon.png': created by Freepik at https://www.flaticon.com/free-icon/mystery_6726753?related_id=6726753
+- 'public/lootboxes': downloaded from various CDNs, made by Wargaming.net
+- 'public/resources': downloaded from various CDNs, made by Wargaming.net (mostly)
+- 'public/tanks': downloaded from https://tanks.gg/, made by Wargaming.net

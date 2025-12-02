@@ -58,7 +58,7 @@ export default function StatsLeftPanel({
                             >
                                 <Col className="col-2">
                                     <Image
-                                        src={lootbox.pictureUrl || 'default-loot-box.png'}
+                                        src={lootbox.pictureUrl || 'images/default-loot-box.png'}
                                         alt={lootbox.name}
                                         className="object-fit-contain flex-grow-1 w-100 h-100"
                                     />
@@ -123,7 +123,7 @@ export default function StatsLeftPanel({
                                         <Image
                                             src={
                                                 session.referenceLootTableUniqueDrops[rewardName].drop.pictureUrl ||
-                                                'default-loot-drop.png'
+                                                'images/default-loot-drop.png'
                                             }
                                             alt={rewardName}
                                             className="object-fit-contain flex-grow-1 w-100 h-100"
@@ -171,7 +171,7 @@ export default function StatsLeftPanel({
                                         src={
                                             session.referenceLootTable.lootboxes.find(
                                                 (lootbox: Lootbox) => lootbox.name === result.boxName,
-                                            )!.pictureUrl || 'default-loot-box.png'
+                                            )!.pictureUrl || 'images/default-loot-box.png'
                                         }
                                         alt={result.boxName}
                                         className="object-fit-contain flex-grow-1 w-100 h-100"

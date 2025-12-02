@@ -45,7 +45,7 @@ export default function LootboxSelector({
                                     onClick={() => (locked ? () => {} : onSelectedLootboxNameChanged(box.name))}
                                 >
                                     <Image
-                                        src={box.pictureUrl || 'default-loot-box.png'}
+                                        src={box.pictureUrl || 'images/default-loot-box.png'}
                                         alt={box.name}
                                         className="object-fit-contain flex-grow-1"
                                     />

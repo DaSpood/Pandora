@@ -80,7 +80,7 @@ export default function PurchaseModal({
                                 >
                                     <Col className="col-2">
                                         <Image
-                                            src={lootbox.pictureUrl || 'default-loot-box.png'}
+                                            src={lootbox.pictureUrl || 'images/default-loot-box.png'}
                                             alt={lootbox.name}
                                             className="object-fit-contain flex-grow-1 w-100 h-100"
                                         />

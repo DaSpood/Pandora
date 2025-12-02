@@ -43,9 +43,10 @@ export const validateOptionalUrl = (obj: unknown): boolean => {
     return (
         !obj ||
         (typeof obj === 'string' &&
-            /^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&/=]*)$/.test(
-                obj,
-            ))
+            (obj.startsWith('images/') ||
+                /^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&/=]*)$/.test(
+                    obj,
+                )))
     );
 };
 

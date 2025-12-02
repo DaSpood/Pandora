@@ -11,7 +11,7 @@
     "lootboxes": [
         {
             "name": "Raumfalte Proto",
-            "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/raumfalte_proto_small.png",
+            "pictureUrl": "images/lootboxes/2025_05-raumfalte_proto.png",
             "purchasable": true,
             "mainPrizeHardPity": 50,
             "mainPrizeDuplicates": "remove",
@@ -19,7 +19,7 @@
             "mainPrizeSubstitute": {
                 "name": "Raumfalte Prime",
                 "displayPriority": 7,
-                "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/raumfalte_prime_small.png",
+                "pictureUrl": "images/lootboxes/2025_05-raumfalte_prime.png",
                 "amount": 1
             },
             "lootSlots": [
@@ -34,19 +34,19 @@
                             "lootDrops": [
                                 {
                                     "name": "credits",
-                                    "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/new_credits_icon_440x440_png.png",
+                                    "pictureUrl": "images/resources/credits.png",
                                     "dropRate": 0.8,
                                     "amount": 50000
                                 },
                                 {
                                     "name": "credits",
-                                    "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/new_credits_icon_440x440_png.png",
+                                    "pictureUrl": "images/resources/credits.png",
                                     "dropRate": 0.15,
                                     "amount": 100000
                                 },
                                 {
                                     "name": "credits",
-                                    "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/new_credits_icon_440x440_png.png",
+                                    "pictureUrl": "images/resources/credits.png",
                                     "dropRate": 0.05,
                                     "amount": 250000
                                 }
@@ -58,19 +58,19 @@
                             "lootDrops": [
                                 {
                                     "name": "crew book: universal booklet",
-                                    "pictureUrl": "https://content-wg.gcdn.co/locdoc/game_guides/crew_training/universal_brochure.png",
+                                    "pictureUrl": "images/resources/crew-booklet.png",
                                     "dropRate": 0.8,
                                     "amount": 1
                                 },
                                 {
                                     "name": "crew book: universal guide",
-                                    "pictureUrl": "https://content-wg.gcdn.co/locdoc/game_guides/crew_training/universal_guide.png",
+                                    "pictureUrl": "images/resources/crew-guide.png",
                                     "dropRate": 0.15,
                                     "amount": 1
                                 },
                                 {
                                     "name": "crew book: universal manual",
-                                    "pictureUrl": "https://content-wg.gcdn.co/locdoc/book-cards/img/universalBook1.png",
+                                    "pictureUrl": "images/resources/crew-manual.png",
                                     "dropRate": 0.05,
                                     "amount": 1
                                 }
@@ -89,19 +89,19 @@
                             "lootDrops": [
                                 {
                                     "name": "personal reserve: +200% free & crew xp",
-                                    "pictureUrl": "https://content-wg.gcdn.co/locdoc/rich-article/waffentrager-lootboxes-2025/img/pr2_crew&free-exp.8facbc.png",
+                                    "pictureUrl": "images/resources/reserve-crew-free-xp.png",
                                     "dropRate": 0.34,
                                     "amount": 1
                                 },
                                 {
                                     "name": "personal reserve: +50% combat xp",
-                                    "pictureUrl": "https://content-wg.gcdn.co/locdoc/rich-article/waffentrager-lootboxes-2025/img/pr2_battle-exp.ed7a76.png",
+                                    "pictureUrl": "images/resources/reserve-combat-xp.png",
                                     "dropRate": 0.33,
                                     "amount": 1
                                 },
                                 {
                                     "name": "personal reserve: +50% credits",
-                                    "pictureUrl": "https://content-wg.gcdn.co/locdoc/rich-article/waffentrager-lootboxes-2025/img/pr2_credits.9307d3.png",
+                                    "pictureUrl": "images/resources/reserve-credits.png",
                                     "dropRate": 0.33,
                                     "amount": 1
                                 }
@@ -120,19 +120,19 @@
                             "lootDrops": [
                                 {
                                     "name": "days of premium account",
-                                    "pictureUrl": "https://na-wotp.wgcdn.co/dcont/fb/image/440_wot_premium.png",
+                                    "pictureUrl": "images/resources/premium-account.png",
                                     "dropRate": 0.8,
                                     "amount": 1
                                 },
                                 {
                                     "name": "days of premium account",
-                                    "pictureUrl": "https://na-wotp.wgcdn.co/dcont/fb/image/440_wot_premium.png",
+                                    "pictureUrl": "images/resources/premium-account.png",
                                     "dropRate": 0.15,
                                     "amount": 3
                                 },
                                 {
                                     "name": "days of premium account",
-                                    "pictureUrl": "https://na-wotp.wgcdn.co/dcont/fb/image/440_wot_premium.png",
+                                    "pictureUrl": "images/resources/premium-account.png",
                                     "dropRate": 0.05,
                                     "amount": 7
                                 }
@@ -152,21 +152,21 @@
                                 {
                                     "name": "Raumfalte Proto",
                                     "displayPriority": 5,
-                                    "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/raumfalte_proto_small.png",
+                                    "pictureUrl": "images/lootboxes/2025_05-raumfalte_proto.png",
                                     "dropRate": 0.23,
                                     "amount": 1
                                 },
                                 {
                                     "name": "Raumfalte Alpha",
                                     "displayPriority": 6,
-                                    "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/raumfalte_alpha_small.png",
+                                    "pictureUrl": "images/lootboxes/2025_05-raumfalte_alpha.png",
                                     "dropRate": 0.75,
                                     "amount": 1
                                 },
                                 {
                                     "name": "Raumfalte Prime",
                                     "displayPriority": 7,
-                                    "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/raumfalte_prime_small.png",
+                                    "pictureUrl": "images/lootboxes/2025_05-raumfalte_prime.png",
                                     "overrideRarityInUi": "main",
                                     "dropRate": 0.02,
                                     "amount": 1
@@ -187,70 +187,70 @@
                                 {
                                     "name": "Kpz. 3 GST Turm",
                                     "displayPriority": 8,
-                                    "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/germany-G174_Kpz3_GST_Turm.png",
+                                    "pictureUrl": "images/tanks/germany-G174_Kpz3_GST_Turm.png",
                                     "dropRate": 0.13,
                                     "amount": 1
                                 },
                                 {
                                     "name": "CC-46 Pancernik",
                                     "displayPriority": 9,
-                                    "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/poland-Pl26_Czolg_P_Wz_46.png",
+                                    "pictureUrl": "images/tanks/poland-Pl26_Czolg_P_Wz_46.png",
                                     "dropRate": 0.08,
                                     "amount": 1
                                 },
                                 {
                                     "name": "AMBT",
                                     "displayPriority": 8,
-                                    "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/usa-A149_AMBT.png",
+                                    "pictureUrl": "images/tanks/usa-A149_AMBT.png",
                                     "dropRate": 0.08,
                                     "amount": 1
                                 },
                                 {
                                     "name": "SDP wz 66 Grom",
                                     "displayPriority": 8,
-                                    "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/poland-Pl27_SDP_Wz_66T.png",
+                                    "pictureUrl": "images/tanks/poland-Pl27_SDP_Wz_66T.png",
                                     "dropRate": 0.13,
                                     "amount": 1
                                 },
                                 {
                                     "name": "Jagdtiger Prototype",
                                     "displayPriority": 8,
-                                    "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/germany-G44_JagdTigerH.png",
+                                    "pictureUrl": "images/tanks/germany-G44_JagdTigerH.png",
                                     "dropRate": 0.08,
                                     "amount": 1
                                 },
                                 {
                                     "name": "T-44-100",
                                     "displayPriority": 8,
-                                    "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/ussr-R122_T44_100.png",
+                                    "pictureUrl": "images/tanks/ussr-R122_T44_100.png",
                                     "dropRate": 0.08,
                                     "amount": 1
                                 },
                                 {
                                     "name": "AAT60",
                                     "displayPriority": 8,
-                                    "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/usa-A155_AAT60.png",
+                                    "pictureUrl": "images/tanks/usa-A155_AAT60.png",
                                     "dropRate": 0.08,
                                     "amount": 1
                                 },
                                 {
                                     "name": "VCS 6X6 TS 90",
                                     "displayPriority": 9,
-                                    "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/france-F122_VCS_6x6_TS90.png",
+                                    "pictureUrl": "images/tanks/france-F122_VCS_6x6_TS90.png",
                                     "dropRate": 0.13,
                                     "amount": 1
                                 },
                                 {
                                     "name": "EMIL 1951",
                                     "displayPriority": 8,
-                                    "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/sweden-S25_EMIL_51.png",
+                                    "pictureUrl": "images/tanks/sweden-S25_EMIL_51.png",
                                     "dropRate": 0.13,
                                     "amount": 1
                                 },
                                 {
                                     "name": "T77",
                                     "displayPriority": 8,
-                                    "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/usa-A132_T77.png",
+                                    "pictureUrl": "images/tanks/usa-A132_T77.png",
                                     "dropRate": 0.08,
                                     "amount": 1
                                 }
@@ -262,7 +262,7 @@
         },
         {
             "name": "Raumfalte Alpha",
-            "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/raumfalte_alpha_small.png",
+            "pictureUrl": "images/lootboxes/2025_05-raumfalte_alpha.png",
             "purchasable": false,
             "mainPrizeHardPity": 40,
             "mainPrizeDuplicates": "remove",
@@ -270,7 +270,7 @@
             "mainPrizeSubstitute": {
                 "name": "Raumfalte Prime",
                 "displayPriority": 7,
-                "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/raumfalte_prime_small.png",
+                "pictureUrl": "images/lootboxes/2025_05-raumfalte_prime.png",
                 "amount": 1
             },
             "lootSlots": [
@@ -285,19 +285,19 @@
                             "lootDrops": [
                                 {
                                     "name": "free xp",
-                                    "pictureUrl": "https://na-wotp.wgcdn.co/dcont/fb/image/wot_xpicon_freexp_164x157.png",
+                                    "pictureUrl": "images/resources/free-xp.png",
                                     "dropRate": 0.8,
                                     "amount": 1500
                                 },
                                 {
                                     "name": "free xp",
-                                    "pictureUrl": "https://na-wotp.wgcdn.co/dcont/fb/image/wot_xpicon_freexp_164x157.png",
+                                    "pictureUrl": "images/resources/free-xp.png",
                                     "dropRate": 0.15,
                                     "amount": 5000
                                 },
                                 {
                                     "name": "free xp",
-                                    "pictureUrl": "https://na-wotp.wgcdn.co/dcont/fb/image/wot_xpicon_freexp_164x157.png",
+                                    "pictureUrl": "images/resources/free-xp.png",
                                     "dropRate": 0.05,
                                     "amount": 25000
                                 }
@@ -316,19 +316,19 @@
                             "lootDrops": [
                                 {
                                     "name": "days of premium account",
-                                    "pictureUrl": "https://na-wotp.wgcdn.co/dcont/fb/image/440_wot_premium.png",
+                                    "pictureUrl": "images/resources/premium-account.png",
                                     "dropRate": 0.8,
                                     "amount": 3
                                 },
                                 {
                                     "name": "days of premium account",
-                                    "pictureUrl": "https://na-wotp.wgcdn.co/dcont/fb/image/440_wot_premium.png",
+                                    "pictureUrl": "images/resources/premium-account.png",
                                     "dropRate": 0.15,
                                     "amount": 7
                                 },
                                 {
                                     "name": "days of premium account",
-                                    "pictureUrl": "https://na-wotp.wgcdn.co/dcont/fb/image/440_wot_premium.png",
+                                    "pictureUrl": "images/resources/premium-account.png",
                                     "dropRate": 0.05,
                                     "amount": 14
                                 }
@@ -340,19 +340,19 @@
                             "lootDrops": [
                                 {
                                     "name": "personal reserve: +200% free & crew xp",
-                                    "pictureUrl": "https://content-wg.gcdn.co/locdoc/rich-article/waffentrager-lootboxes-2025/img/pr2_crew&free-exp.8facbc.png",
+                                    "pictureUrl": "images/resources/reserve-crew-free-xp.png",
                                     "dropRate": 0.34,
                                     "amount": 2
                                 },
                                 {
                                     "name": "personal reserve: +50% combat xp",
-                                    "pictureUrl": "https://content-wg.gcdn.co/locdoc/rich-article/waffentrager-lootboxes-2025/img/pr2_battle-exp.ed7a76.png",
+                                    "pictureUrl": "images/resources/reserve-combat-xp.png",
                                     "dropRate": 0.33,
                                     "amount": 2
                                 },
                                 {
                                     "name": "personal reserve: +50% credits",
-                                    "pictureUrl": "https://content-wg.gcdn.co/locdoc/rich-article/waffentrager-lootboxes-2025/img/pr2_credits.9307d3.png",
+                                    "pictureUrl": "images/resources/reserve-credits.png",
                                     "dropRate": 0.33,
                                     "amount": 2
                                 }
@@ -364,19 +364,19 @@
                             "lootDrops": [
                                 {
                                     "name": "crew book: universal guide",
-                                    "pictureUrl": "https://content-wg.gcdn.co/locdoc/game_guides/crew_training/universal_guide.png",
+                                    "pictureUrl": "images/resources/crew-guide.png",
                                     "dropRate": 0.8,
                                     "amount": 1
                                 },
                                 {
                                     "name": "crew book: universal manual",
-                                    "pictureUrl": "https://content-wg.gcdn.co/locdoc/book-cards/img/universalBook1.png",
+                                    "pictureUrl": "images/resources/crew-manual.png",
                                     "dropRate": 0.15,
                                     "amount": 1
                                 },
                                 {
                                     "name": "crew book: personal training manual",
-                                    "pictureUrl": "https://content-wg.gcdn.co/locdoc/book-cards/img/personalBook1.png",
+                                    "pictureUrl": "images/resources/crew-personal.png",
                                     "dropRate": 0.05,
                                     "amount": 1
                                 }
@@ -395,7 +395,7 @@
                             "lootDrops": [
                                 {
                                     "name": "3D attachment (alpha)",
-                                    "pictureUrl": "https://clan.akamai.steamstatic.com/images//39263509/fc34c8de5cfc7f4a2b4ef270dce8ad8f8a2011e2.png",
+                                    "pictureUrl": "images/resources/3d-attachment.png",
                                     "dropRate": 1,
                                     "amount": 1
                                 }
@@ -415,21 +415,21 @@
                                 {
                                     "name": "Raumfalte Proto",
                                     "displayPriority": 5,
-                                    "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/raumfalte_proto_small.png",
+                                    "pictureUrl": "images/lootboxes/2025_05-raumfalte_proto.png",
                                     "dropRate": 0.02,
                                     "amount": 1
                                 },
                                 {
                                     "name": "Raumfalte Alpha",
                                     "displayPriority": 6,
-                                    "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/raumfalte_alpha_small.png",
+                                    "pictureUrl": "images/lootboxes/2025_05-raumfalte_alpha.png",
                                     "dropRate": 0.23,
                                     "amount": 1
                                 },
                                 {
                                     "name": "Raumfalte Prime",
                                     "displayPriority": 7,
-                                    "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/raumfalte_prime_small.png",
+                                    "pictureUrl": "images/lootboxes/2025_05-raumfalte_prime.png",
                                     "overrideRarityInUi": "main",
                                     "dropRate": 0.75,
                                     "amount": 1
@@ -449,19 +449,19 @@
                             "lootDrops": [
                                 {
                                     "name": "experimental components",
-                                    "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/new_experimental_equipment_components_300x193.png",
+                                    "pictureUrl": "images/resources/components.png",
                                     "dropRate": 0.8,
                                     "amount": 100
                                 },
                                 {
                                     "name": "experimental components",
-                                    "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/new_experimental_equipment_components_300x193.png",
+                                    "pictureUrl": "images/resources/components.png",
                                     "dropRate": 0.15,
                                     "amount": 200
                                 },
                                 {
                                     "name": "experimental components",
-                                    "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/new_experimental_equipment_components_300x193.png",
+                                    "pictureUrl": "images/resources/components.png",
                                     "dropRate": 0.05,
                                     "amount": 500
                                 }
@@ -473,19 +473,19 @@
                             "lootDrops": [
                                 {
                                     "name": "missions for x5 XP",
-                                    "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/x5_xp_420x283.png",
+                                    "pictureUrl": "images/resources/x5.png",
                                     "dropRate": 0.8,
                                     "amount": 3
                                 },
                                 {
                                     "name": "missions for x5 XP",
-                                    "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/x5_xp_420x283.png",
+                                    "pictureUrl": "images/resources/x5.png",
                                     "dropRate": 0.15,
                                     "amount": 5
                                 },
                                 {
                                     "name": "missions for x5 XP",
-                                    "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/x5_xp_420x283.png",
+                                    "pictureUrl": "images/resources/x5.png",
                                     "dropRate": 0.05,
                                     "amount": 10
                                 }
@@ -505,35 +505,35 @@
                                 {
                                     "name": "UDES 03 Alt 3",
                                     "displayPriority": 9,
-                                    "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/sweden-S30_UDES_03_Alt_3.png",
+                                    "pictureUrl": "images/tanks/sweden-S30_UDES_03_Alt_3.png",
                                     "dropRate": 0.35,
                                     "amount": 1
                                 },
                                 {
                                     "name": "Kpz. Erich Konzept I",
                                     "displayPriority": 9,
-                                    "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/germany-G165_Erich_Konzept_I.png",
+                                    "pictureUrl": "images/tanks/germany-G165_Erich_Konzept_I.png",
                                     "dropRate": 0.15,
                                     "amount": 1
                                 },
                                 {
                                     "name": "BZ-72-1",
                                     "displayPriority": 10,
-                                    "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/china-Ch54_BZ_72_1.png",
+                                    "pictureUrl": "images/tanks/china-Ch54_BZ_72_1.png",
                                     "dropRate": 0.05,
                                     "amount": 1
                                 },
                                 {
                                     "name": "Vz. 58 Medvěd",
                                     "displayPriority": 9,
-                                    "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/czech-Cz32_Vz_58_Koncept.png",
+                                    "pictureUrl": "images/tanks/czech-Cz32_Vz_58_Koncept.png",
                                     "dropRate": 0.1,
                                     "amount": 1
                                 },
                                 {
                                     "name": "E 77",
                                     "displayPriority": 9,
-                                    "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/germany-G171_E77.png",
+                                    "pictureUrl": "images/tanks/germany-G171_E77.png",
                                     "dropRate": 0.35,
                                     "amount": 1
                                 }
@@ -545,7 +545,7 @@
         },
         {
             "name": "Raumfalte Prime",
-            "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/raumfalte_prime_small.png",
+            "pictureUrl": "images/lootboxes/2025_05-raumfalte_prime.png",
             "purchasable": false,
             "mainPrizeHardPity": 20,
             "mainPrizeDuplicates": "remove",
@@ -553,7 +553,7 @@
             "mainPrizeSubstitute": {
                 "name": "Raumfalte Prime",
                 "displayPriority": 7,
-                "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/raumfalte_prime_small.png",
+                "pictureUrl": "images/lootboxes/2025_05-raumfalte_prime.png",
                 "amount": 1
             },
             "lootSlots": [
@@ -568,19 +568,19 @@
                             "lootDrops": [
                                 {
                                     "name": "gold",
-                                    "pictureUrl": "https://discoff.net/image/cache/catalog/2500_gold-600x600.png",
+                                    "pictureUrl": "images/resources/gold.png",
                                     "dropRate": 0.8,
                                     "amount": 750
                                 },
                                 {
                                     "name": "gold",
-                                    "pictureUrl": "https://discoff.net/image/cache/catalog/2500_gold-600x600.png",
+                                    "pictureUrl": "images/resources/gold.png",
                                     "dropRate": 0.15,
                                     "amount": 1500
                                 },
                                 {
                                     "name": "gold",
-                                    "pictureUrl": "https://discoff.net/image/cache/catalog/2500_gold-600x600.png",
+                                    "pictureUrl": "images/resources/gold.png",
                                     "dropRate": 0.05,
                                     "amount": 3000
                                 }
@@ -599,7 +599,7 @@
                             "lootDrops": [
                                 {
                                     "name": "3D attachment (prime)",
-                                    "pictureUrl": "https://clan.akamai.steamstatic.com/images//39263509/fc34c8de5cfc7f4a2b4ef270dce8ad8f8a2011e2.png",
+                                    "pictureUrl": "images/resources/3d-attachment.png",
                                     "dropRate": 1,
                                     "amount": 1
                                 }
@@ -618,19 +618,19 @@
                             "lootDrops": [
                                 {
                                     "name": "days of premium account",
-                                    "pictureUrl": "https://na-wotp.wgcdn.co/dcont/fb/image/440_wot_premium.png",
+                                    "pictureUrl": "images/resources/premium-account.png",
                                     "dropRate": 0.8,
                                     "amount": 7
                                 },
                                 {
                                     "name": "days of premium account",
-                                    "pictureUrl": "https://na-wotp.wgcdn.co/dcont/fb/image/440_wot_premium.png",
+                                    "pictureUrl": "images/resources/premium-account.png",
                                     "dropRate": 0.15,
                                     "amount": 14
                                 },
                                 {
                                     "name": "days of premium account",
-                                    "pictureUrl": "https://na-wotp.wgcdn.co/dcont/fb/image/440_wot_premium.png",
+                                    "pictureUrl": "images/resources/premium-account.png",
                                     "dropRate": 0.05,
                                     "amount": 30
                                 }
@@ -642,19 +642,19 @@
                             "lootDrops": [
                                 {
                                     "name": "personal reserve: +200% free & crew xp",
-                                    "pictureUrl": "https://content-wg.gcdn.co/locdoc/rich-article/waffentrager-lootboxes-2025/img/pr2_crew&free-exp.8facbc.png",
+                                    "pictureUrl": "images/resources/reserve-crew-free-xp.png",
                                     "dropRate": 0.34,
                                     "amount": 6
                                 },
                                 {
                                     "name": "personal reserve: +50% combat xp",
-                                    "pictureUrl": "https://content-wg.gcdn.co/locdoc/rich-article/waffentrager-lootboxes-2025/img/pr2_battle-exp.ed7a76.png",
+                                    "pictureUrl": "images/resources/reserve-combat-xp.png",
                                     "dropRate": 0.33,
                                     "amount": 6
                                 },
                                 {
                                     "name": "personal reserve: +50% credits",
-                                    "pictureUrl": "https://content-wg.gcdn.co/locdoc/rich-article/waffentrager-lootboxes-2025/img/pr2_credits.9307d3.png",
+                                    "pictureUrl": "images/resources/reserve-credits.png",
                                     "dropRate": 0.33,
                                     "amount": 6
                                 }
@@ -666,19 +666,19 @@
                             "lootDrops": [
                                 {
                                     "name": "crew book: universal guide",
-                                    "pictureUrl": "https://content-wg.gcdn.co/locdoc/game_guides/crew_training/universal_guide.png",
+                                    "pictureUrl": "images/resources/crew-guide.png",
                                     "dropRate": 0.8,
                                     "amount": 1
                                 },
                                 {
                                     "name": "crew book: universal manual",
-                                    "pictureUrl": "https://content-wg.gcdn.co/locdoc/book-cards/img/universalBook1.png",
+                                    "pictureUrl": "images/resources/crew-manual.png",
                                     "dropRate": 0.15,
                                     "amount": 1
                                 },
                                 {
                                     "name": "crew book: personal training manual",
-                                    "pictureUrl": "https://content-wg.gcdn.co/locdoc/book-cards/img/personalBook1.png",
+                                    "pictureUrl": "images/resources/crew-personal.png",
                                     "dropRate": 0.05,
                                     "amount": 1
                                 }
@@ -697,19 +697,19 @@
                             "lootDrops": [
                                 {
                                     "name": "crew member with 1 trained skill",
-                                    "pictureUrl": "https://wxpcdn-cbprodretail.gcdn.co/static/clans/img/overview/splash.png",
+                                    "pictureUrl": "images/resources/crew-member.png",
                                     "dropRate": 0.8,
                                     "amount": 1
                                 },
                                 {
                                     "name": "crew member with 2 trained skills",
-                                    "pictureUrl": "https://wxpcdn-cbprodretail.gcdn.co/static/clans/img/overview/splash.png",
+                                    "pictureUrl": "images/resources/crew-member.png",
                                     "dropRate": 0.15,
                                     "amount": 1
                                 },
                                 {
                                     "name": "crew member with 3 trained skills",
-                                    "pictureUrl": "https://wxpcdn-cbprodretail.gcdn.co/static/clans/img/overview/splash.png",
+                                    "pictureUrl": "images/resources/crew-member.png",
                                     "dropRate": 0.05,
                                     "amount": 1
                                 }
@@ -721,19 +721,19 @@
                             "lootDrops": [
                                 {
                                     "name": "experimental components",
-                                    "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/new_experimental_equipment_components_300x193.png",
+                                    "pictureUrl": "images/resources/components.png",
                                     "dropRate": 0.8,
                                     "amount": 200
                                 },
                                 {
                                     "name": "experimental components",
-                                    "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/new_experimental_equipment_components_300x193.png",
+                                    "pictureUrl": "images/resources/components.png",
                                     "dropRate": 0.15,
                                     "amount": 500
                                 },
                                 {
                                     "name": "experimental components",
-                                    "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/new_experimental_equipment_components_300x193.png",
+                                    "pictureUrl": "images/resources/components.png",
                                     "dropRate": 0.05,
                                     "amount": 1000
                                 }
@@ -745,19 +745,19 @@
                             "lootDrops": [
                                 {
                                     "name": "missions for x5 XP",
-                                    "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/x5_xp_420x283.png",
+                                    "pictureUrl": "images/resources/x5.png",
                                     "dropRate": 0.8,
                                     "amount": 10
                                 },
                                 {
                                     "name": "missions for x5 XP",
-                                    "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/x5_xp_420x283.png",
+                                    "pictureUrl": "images/resources/x5.png",
                                     "dropRate": 0.15,
                                     "amount": 20
                                 },
                                 {
                                     "name": "missions for x5 XP",
-                                    "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/x5_xp_420x283.png",
+                                    "pictureUrl": "images/resources/x5.png",
                                     "dropRate": 0.05,
                                     "amount": 50
                                 }
@@ -777,21 +777,21 @@
                                 {
                                     "name": "Raumfalte Proto",
                                     "displayPriority": 5,
-                                    "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/raumfalte_proto_small.png",
+                                    "pictureUrl": "images/lootboxes/2025_05-raumfalte_proto.png",
                                     "dropRate": 0.75,
                                     "amount": 1
                                 },
                                 {
                                     "name": "Raumfalte Alpha",
                                     "displayPriority": 6,
-                                    "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/raumfalte_alpha_small.png",
+                                    "pictureUrl": "images/lootboxes/2025_05-raumfalte_alpha.png",
                                     "dropRate": 0.23,
                                     "amount": 1
                                 },
                                 {
                                     "name": "Raumfalte Prime",
                                     "displayPriority": 7,
-                                    "pictureUrl": "https://eu-wotp.wgcdn.co/dcont/fb/image/raumfalte_prime_small.png",
+                                    "pictureUrl": "images/lootboxes/2025_05-raumfalte_prime.png",
                                     "overrideRarityInUi": "main",
                                     "dropRate": 0.02,
                                     "amount": 1
@@ -812,21 +812,21 @@
                                 {
                                     "name": "Vercingétorix",
                                     "displayPriority": 9,
-                                    "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/france-F132_Vercingetorix.png",
+                                    "pictureUrl": "images/tanks/france-F132_Vercingetorix.png",
                                     "dropRate": 0.2,
                                     "amount": 1
                                 },
                                 {
                                     "name": "MBT-B",
                                     "displayPriority": 10,
-                                    "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/usa-A150_MBT_B.png",
+                                    "pictureUrl": "images/tanks/usa-A150_MBT_B.png",
                                     "dropRate": 0.4,
                                     "amount": 1
                                 },
                                 {
                                     "name": "Chieftain Mk. 6",
                                     "displayPriority": 10,
-                                    "pictureUrl": "https://assets.tanks.gg/icons/tanks/standard/uk-GB84_Chieftain_Mk6.png",
+                                    "pictureUrl": "images/tanks/uk-GB84_Chieftain_Mk6.png",
                                     "dropRate": 0.4,
                                     "amount": 1
                                 }
