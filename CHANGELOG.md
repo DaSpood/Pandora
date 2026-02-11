@@ -1,3 +1,7 @@
+# v1.2.1
+
+- Add loot table for WoT PC's Lunar Bounty event
+
 # v1.2.0
 
 - Add loot table for WoT PC's Holiday Ops 2025 event

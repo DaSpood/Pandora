@@ -1,0 +1,280 @@
+{
+    "game": "World Of Tanks PC",
+    "eventName": "Lunar Bounty",
+    "startDate": "2026-02-12",
+    "endDate": "2026-02-23",
+    "recursive": false,
+    "autoOpenRecursive": false,
+    "author": "DaSpood",
+    "source": "'https://worldoftanks.asia/ko/news/general-news/lunar-bounty-2026/', hover on items for individual drop rates",
+    "notes": "2D styles and 3D attachments bundled into one drop type each because nobody cares about them.",
+    "lootboxes": [
+        {
+            "name": "Lunar Crate",
+            "pictureUrl": "images/lootboxes/2026_02-lunar_crate.png",
+            "purchasable": true,
+            "mainPrizeHardPity": 50,
+            "mainPrizeDuplicates": "remove",
+            "secondaryPrizeDuplicates": "allowed",
+            "lootSlots": [
+                {
+                    "alias": "Guaranteed slot 1 (Premium account, Credits, Crew books)",
+                    "dropRate": 1,
+                    "contentType": "filler",
+                    "lootGroups": [
+                        {
+                            "alias": "Premium account, Credits, Crew books",
+                            "dropRate": 1,
+                            "lootDrops": [
+                                {
+                                    "name": "days of premium account",
+                                    "pictureUrl": "images/resources/premium-account.png",
+                                    "dropRate": 0.3,
+                                    "amount": 1
+                                },
+                                {
+                                    "name": "days of premium account",
+                                    "pictureUrl": "images/resources/premium-account.png",
+                                    "dropRate": 0.01,
+                                    "amount": 3
+                                },
+                                {
+                                    "name": "credits",
+                                    "pictureUrl": "images/resources/credits.png",
+                                    "dropRate": 0.4,
+                                    "amount": 85000
+                                },
+                                {
+                                    "name": "credits",
+                                    "pictureUrl": "images/resources/credits.png",
+                                    "dropRate": 0.07,
+                                    "amount": 150000
+                                },
+                                {
+                                    "name": "credits",
+                                    "pictureUrl": "images/resources/credits.png",
+                                    "dropRate": 0.01,
+                                    "amount": 750000
+                                },
+                                {
+                                    "name": "crew book: universal booklet",
+                                    "pictureUrl": "images/resources/crew-booklet.png",
+                                    "dropRate": 0.2,
+                                    "amount": 1
+                                },
+                                {
+                                    "name": "crew book: personal training manual",
+                                    "pictureUrl": "images/resources/crew-manual.png",
+                                    "dropRate": 0.01,
+                                    "amount": 1
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "alias": "Guaranteed slot 2 (Personal reserves)",
+                    "dropRate": 1,
+                    "contentType": "filler",
+                    "lootGroups": [
+                        {
+                            "alias": "Personal reserves",
+                            "dropRate": 1,
+                            "lootDrops": [
+                                {
+                                    "name": "personal reserve: +50% credits",
+                                    "pictureUrl": "images/resources/reserve-credits.png",
+                                    "dropRate": 0.4,
+                                    "amount": 1
+                                },
+                                {
+                                    "name": "personal reserve: +50% credits",
+                                    "pictureUrl": "images/resources/reserve-credits.png",
+                                    "dropRate": 0.02,
+                                    "amount": 3
+                                },
+                                {
+                                    "name": "personal reserve: +100% credits",
+                                    "pictureUrl": "images/resources/reserve-credits-big.png",
+                                    "dropRate": 0.01,
+                                    "amount": 1
+                                },
+                                {
+                                    "name": "personal reserve: +300% free & crew xp",
+                                    "pictureUrl": "images/resources/reserve-crew-free-xp-big.png",
+                                    "dropRate": 0.25,
+                                    "amount": 1
+                                },
+                                {
+                                    "name": "personal reserve: +300% free & crew xp",
+                                    "pictureUrl": "images/resources/reserve-crew-free-xp-big.png",
+                                    "dropRate": 0.035,
+                                    "amount": 3
+                                },
+                                {
+                                    "name": "personal reserve: +100% combat xp",
+                                    "pictureUrl": "images/resources/reserve-combat-xp-big.png",
+                                    "dropRate": 0.25,
+                                    "amount": 1
+                                },
+                                {
+                                    "name": "personal reserve: +100% combat xp",
+                                    "pictureUrl": "images/resources/reserve-combat-xp-big.png",
+                                    "dropRate": 0.035,
+                                    "amount": 3
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "alias": "Filler slot 1 (2D styles)",
+                    "dropRate": 0.1,
+                    "contentType": "filler",
+                    "lootGroups": [
+                        {
+                            "alias": "2D styles",
+                            "dropRate": 1,
+                            "lootDrops": [
+                                {
+                                    "name": "2D style",
+                                    "pictureUrl": "images/resources/2d-style.png",
+                                    "dropRate": 1,
+                                    "amount": 1
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "alias": "Filler slot 2 (3D attachments)",
+                    "dropRate": 0.2,
+                    "contentType": "filler",
+                    "lootGroups": [
+                        {
+                            "alias": "3D attachments",
+                            "dropRate": 1,
+                            "lootDrops": [
+                                {
+                                    "name": "3D attachment",
+                                    "pictureUrl": "images/resources/3d-attachment.png",
+                                    "dropRate": 1,
+                                    "amount": 1
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "alias": "Tanks",
+                    "dropRate": 0.02,
+                    "contentType": "main",
+                    "lootGroups": [
+                        {
+                            "alias": "Tanks",
+                            "dropRate": 1,
+                            "lootDrops": [
+                                {
+                                    "name": "Yong Bing",
+                                    "displayPriority": 9,
+                                    "pictureUrl": "images/tanks/china-Ch63_Yong_Bing.png",
+                                    "dropRate": 0.06,
+                                    "amount": 1,
+                                    "substitute": {
+                                        "name": "gold",
+                                        "pictureUrl": "images/resources/gold.png",
+                                        "amount": 10900
+                                    }
+                                },
+                                {
+                                    "name": "Kanonenjagdpanzer 2",
+                                    "displayPriority": 8,
+                                    "pictureUrl": "images/tanks/germany-G178_KanJpz_2.png",
+                                    "dropRate": 0.1,
+                                    "amount": 1,
+                                    "substitute": {
+                                        "name": "gold",
+                                        "pictureUrl": "images/resources/gold.png",
+                                        "amount": 7350
+                                    }
+                                },
+                                {
+                                    "name": "Vz. 58 Medvěd",
+                                    "displayPriority": 9,
+                                    "pictureUrl": "images/tanks/czech-Cz32_Vz_58_Koncept.png",
+                                    "dropRate": 0.12,
+                                    "amount": 1,
+                                    "substitute": {
+                                        "name": "gold",
+                                        "pictureUrl": "images/resources/gold.png",
+                                        "amount": 11050
+                                    }
+                                },
+                                {
+                                    "name": "Kpz. Erich Konzept I",
+                                    "displayPriority": 9,
+                                    "pictureUrl": "images/tanks/germany-G165_Erich_Konzept_I.png",
+                                    "dropRate": 0.1,
+                                    "amount": 1,
+                                    "substitute": {
+                                        "name": "gold",
+                                        "pictureUrl": "images/resources/gold.png",
+                                        "amount": 9900
+                                    }
+                                },
+                                {
+                                    "name": "T-44-100",
+                                    "displayPriority": 8,
+                                    "pictureUrl": "images/tanks/ussr-R122_T44_100.png",
+                                    "dropRate": 0.16,
+                                    "amount": 1,
+                                    "substitute": {
+                                        "name": "gold",
+                                        "pictureUrl": "images/resources/gold.png",
+                                        "amount": 9500
+                                    }
+                                },
+                                {
+                                    "name": "ISU-122-2",
+                                    "displayPriority": 8,
+                                    "pictureUrl": "images/tanks/ussr-R204_ISU_122_2.png",
+                                    "dropRate": 0.16,
+                                    "amount": 1,
+                                    "substitute": {
+                                        "name": "gold",
+                                        "pictureUrl": "images/resources/gold.png",
+                                        "amount": 7400
+                                    }
+                                },
+                                {
+                                    "name": "UDES 03 Alt 3",
+                                    "displayPriority": 9,
+                                    "pictureUrl": "images/tanks/sweden-S30_UDES_03_Alt_3.png",
+                                    "dropRate": 0.16,
+                                    "amount": 1,
+                                    "substitute": {
+                                        "name": "gold",
+                                        "pictureUrl": "images/resources/gold.png",
+                                        "amount": 10200
+                                    }
+                                },
+                                {
+                                    "name": "AAT60",
+                                    "displayPriority": 8,
+                                    "pictureUrl": "images/tanks/usa-A155_AAT60.png",
+                                    "dropRate": 0.14,
+                                    "amount": 1,
+                                    "substitute": {
+                                        "name": "gold",
+                                        "pictureUrl": "images/resources/gold.png",
+                                        "amount": 7800
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
