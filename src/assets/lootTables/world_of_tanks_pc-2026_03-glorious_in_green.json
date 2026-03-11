@@ -1,0 +1,304 @@
+{
+    "game": "World Of Tanks PC",
+    "eventName": "Glorious In Green",
+    "startDate": "2026-03-12",
+    "endDate": "2026-03-20",
+    "recursive": false,
+    "autoOpenRecursive": false,
+    "author": "DaSpood",
+    "source": "'https://worldoftanks.asia/ko/news/general-news/glorious-in-green-2026/', hover on items for individual drop rates",
+    "notes": "2D styles bundled into one drop type because nobody cares about them.",
+    "lootboxes": [
+        {
+            "name": "Emerald Chest",
+            "pictureUrl": "images/lootboxes/2025_03-emerald_chest.png",
+            "purchasable": true,
+            "mainPrizeHardPity": 50,
+            "mainPrizeDuplicates": "remove",
+            "secondaryPrizeDuplicates": "allowed",
+            "lootSlots": [
+                {
+                    "alias": "Guaranteed slot 1 (Crew books, XP reserves)",
+                    "dropRate": 1,
+                    "contentType": "filler",
+                    "lootGroups": [
+                        {
+                            "alias": "Crew books, XP reserves",
+                            "dropRate": 1,
+                            "lootDrops": [
+                                {
+                                    "name": "crew book: universal booklet",
+                                    "pictureUrl": "images/resources/crew-booklet.png",
+                                    "dropRate": 0.245,
+                                    "amount": 1
+                                },
+                                {
+                                    "name": "crew book: universal guide",
+                                    "pictureUrl": "images/resources/crew-guide.png",
+                                    "dropRate": 0.03,
+                                    "amount": 1
+                                },
+                                {
+                                    "name": "crew book: universal manual",
+                                    "pictureUrl": "images/resources/crew-manual.png",
+                                    "dropRate": 0.005,
+                                    "amount": 1
+                                },
+                                {
+                                    "name": "personal reserve: +100% combat xp",
+                                    "pictureUrl": "images/resources/reserve-combat-xp-big.png",
+                                    "dropRate": 0.35,
+                                    "amount": 1
+                                },
+                                {
+                                    "name": "personal reserve: +100% combat xp",
+                                    "pictureUrl": "images/resources/reserve-combat-xp-big.png",
+                                    "dropRate": 0.01,
+                                    "amount": 3
+                                },
+                                {
+                                    "name": "personal reserve: +300% free & crew xp",
+                                    "pictureUrl": "images/resources/reserve-crew-free-xp-big.png",
+                                    "dropRate": 0.35,
+                                    "amount": 1
+                                },
+                                {
+                                    "name": "personal reserve: +300% free & crew xp",
+                                    "pictureUrl": "images/resources/reserve-crew-free-xp-big.png",
+                                    "dropRate": 0.01,
+                                    "amount": 3
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "alias": "Guaranteed slot 2 (Credits, credit reserves, missions for crew xp)",
+                    "dropRate": 1,
+                    "contentType": "filler",
+                    "lootGroups": [
+                        {
+                            "alias": "Credits, credit reserves, missions for crew xp",
+                            "dropRate": 1,
+                            "lootDrops": [
+                                {
+                                    "name": "credits",
+                                    "pictureUrl": "images/resources/credits.png",
+                                    "dropRate": 0.45,
+                                    "amount": 50000
+                                },
+                                {
+                                    "name": "credits",
+                                    "pictureUrl": "images/resources/credits.png",
+                                    "dropRate": 0.05,
+                                    "amount": 100000
+                                },
+                                {
+                                    "name": "credits",
+                                    "pictureUrl": "images/resources/credits.png",
+                                    "dropRate": 0.01,
+                                    "amount": 250000
+                                },
+                                {
+                                    "name": "personal reserve: +50% credits",
+                                    "pictureUrl": "images/resources/reserve-credits.png",
+                                    "dropRate": 0.325,
+                                    "amount": 1
+                                },
+                                {
+                                    "name": "personal reserve: +50% credits",
+                                    "pictureUrl": "images/resources/reserve-credits.png",
+                                    "dropRate": 0.01,
+                                    "amount": 3
+                                },
+                                {
+                                    "name": "missions for x3 crew XP",
+                                    "pictureUrl": "images/resources/x3-crew-xp.png",
+                                    "dropRate": 0.14,
+                                    "amount": 3
+                                },
+                                {
+                                    "name": "missions for x3 crew XP",
+                                    "pictureUrl": "images/resources/x3-crew-xp.png",
+                                    "dropRate": 0.015,
+                                    "amount": 9
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "alias": "Filler slot 1 (Free xp)",
+                    "dropRate": 0.15,
+                    "contentType": "filler",
+                    "lootGroups": [
+                        {
+                            "alias": "Free xp",
+                            "dropRate": 1,
+                            "lootDrops": [
+                                {
+                                    "name": "free xp",
+                                    "pictureUrl": "images/resources/free-xp.png",
+                                    "dropRate": 0.74,
+                                    "amount": 5000
+                                },
+                                {
+                                    "name": "free xp",
+                                    "pictureUrl": "images/resources/free-xp.png",
+                                    "dropRate": 0.2,
+                                    "amount": 15000
+                                },
+                                {
+                                    "name": "free xp",
+                                    "pictureUrl": "images/resources/free-xp.png",
+                                    "dropRate": 0.03,
+                                    "amount": 35000
+                                },
+                                {
+                                    "name": "free xp",
+                                    "pictureUrl": "images/resources/free-xp.png",
+                                    "dropRate": 0.025,
+                                    "amount": 75000
+                                },
+                                {
+                                    "name": "free xp",
+                                    "pictureUrl": "images/resources/free-xp.png",
+                                    "dropRate": 0.005,
+                                    "amount": 250000
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "alias": "Filler slot 2 (3D attachments)",
+                    "dropRate": 0.2,
+                    "contentType": "filler",
+                    "lootGroups": [
+                        {
+                            "alias": "3D attachments",
+                            "dropRate": 1,
+                            "lootDrops": [
+                                {
+                                    "name": "3D attachment",
+                                    "pictureUrl": "images/resources/3d-attachment.png",
+                                    "dropRate": 1,
+                                    "amount": 1
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "alias": "Tanks",
+                    "dropRate": 0.02,
+                    "contentType": "main",
+                    "lootGroups": [
+                        {
+                            "alias": "Tanks",
+                            "dropRate": 1,
+                            "lootDrops": [
+                                {
+                                    "name": "Kame",
+                                    "displayPriority": 9,
+                                    "pictureUrl": "images/tanks/japan-J49_Kame.png",
+                                    "dropRate": 0.05,
+                                    "amount": 1,
+                                    "substitute": {
+                                        "name": "gold",
+                                        "pictureUrl": "images/resources/gold.png",
+                                        "amount": 10150
+                                    }
+                                },
+                                {
+                                    "name": "Buryan",
+                                    "displayPriority": 9,
+                                    "pictureUrl": "images/tanks/ussr-R231_Buryan.png",
+                                    "dropRate": 0.08,
+                                    "amount": 1,
+                                    "substitute": {
+                                        "name": "gold",
+                                        "pictureUrl": "images/resources/gold.png",
+                                        "amount": 10900
+                                    }
+                                },
+                                {
+                                    "name": "SDT-58 Vlkodav",
+                                    "displayPriority": 9,
+                                    "pictureUrl": "images/tanks/czech-Cz37_SDT_58_Vlkodav.png",
+                                    "dropRate": 0.1,
+                                    "amount": 1,
+                                    "substitute": {
+                                        "name": "gold",
+                                        "pictureUrl": "images/resources/gold.png",
+                                        "amount": 11050
+                                    }
+                                },
+                                {
+                                    "name": "CC-46 Pancernik",
+                                    "displayPriority": 9,
+                                    "pictureUrl": "images/tanks/poland-Pl26_Czolg_P_Wz_46.png",
+                                    "dropRate": 0.15,
+                                    "amount": 1,
+                                    "substitute": {
+                                        "name": "gold",
+                                        "pictureUrl": "images/resources/gold.png",
+                                        "amount": 10900
+                                    }
+                                },
+                                {
+                                    "name": "E 77",
+                                    "displayPriority": 9,
+                                    "pictureUrl": "images/tanks/germany-G171_E77.png",
+                                    "dropRate": 0.15,
+                                    "amount": 1,
+                                    "substitute": {
+                                        "name": "gold",
+                                        "pictureUrl": "images/resources/gold.png",
+                                        "amount": 11100
+                                    }
+                                },
+                                {
+                                    "name": "KJPZ TIII Jäger",
+                                    "displayPriority": 9,
+                                    "pictureUrl": "images/tanks/germany-G168_KJpz_T_III.png",
+                                    "dropRate": 0.12,
+                                    "amount": 1,
+                                    "substitute": {
+                                        "name": "gold",
+                                        "pictureUrl": "images/resources/gold.png",
+                                        "amount": 10150
+                                    }
+                                },
+                                {
+                                    "name": "Lätt Stridsfordon 120",
+                                    "displayPriority": 9,
+                                    "pictureUrl": "images/tanks/sweden-S33_Latt_Stridsfordon_120.png",
+                                    "dropRate": 0.175,
+                                    "amount": 1,
+                                    "substitute": {
+                                        "name": "gold",
+                                        "pictureUrl": "images/resources/gold.png",
+                                        "amount": 10450
+                                    }
+                                },
+                                {
+                                    "name": "Škoda T 56",
+                                    "displayPriority": 8,
+                                    "pictureUrl": "images/tanks/czech-Cz14_Skoda_T-56.png",
+                                    "dropRate": 0.175,
+                                    "amount": 1,
+                                    "substitute": {
+                                        "name": "gold",
+                                        "pictureUrl": "images/resources/gold.png",
+                                        "amount": 9100
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

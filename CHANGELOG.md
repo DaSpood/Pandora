@@ -1,3 +1,8 @@
+# v1.2.2
+
+- Add loot table for WoT PC's Glorious In Green event
+- Upgrade dependencies
+
 # v1.2.1
 
 - Add loot table for WoT PC's Lunar Bounty event
