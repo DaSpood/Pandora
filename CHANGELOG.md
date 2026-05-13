@@ -1,3 +1,7 @@
+# v1.2.3
+
+- Add loot table for WoT PC's Last Stand Invasion event
+
 # v1.2.2
 
 - Add loot table for WoT PC's Glorious In Green event
