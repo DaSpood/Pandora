@@ -1,0 +1,40 @@
+{
+    "game": "World Of Tanks PC",
+    "eventName": "Objects Spring",
+    "startDate": "2026-05-14",
+    "endDate": "2026-06-01",
+    "recursive": true,
+    "autoOpenRecursive": false,
+    "author": "Erzratte",
+    "source": "'https://worldoftanks.eu/de/news/general-news/objects-spring-2026/'",
+    "notes": "3D attachments bundled into 1 drop type because nobody cares about them.",
+    "lootboxes": [
+        {
+            "name": "Object Shard",
+            "pictureUrl": "images/lootboxes/2026_05-object_shard.png",
+            "purchasable": true,
+            "mainPrizeHardPity": 50,
+            "mainPrizeDuplicates": "remove",
+            "secondaryPrizeDuplicates": "allowed",
+            "lootSlots": []
+        },
+        {
+            "name": "Object Fragment",
+            "pictureUrl": "images/lootboxes/2026_05-object_fragment.png",
+            "purchasable": true,
+            "mainPrizeHardPity": 40,
+            "mainPrizeDuplicates": "remove",
+            "secondaryPrizeDuplicates": "allowed",
+            "lootSlots": []
+        },
+        {
+            "name": "Object Core",
+            "pictureUrl": "images/lootboxes/2026_05-object_core.png",
+            "purchasable": true,
+            "mainPrizeHardPity": 20,
+            "mainPrizeDuplicates": "remove",
+            "secondaryPrizeDuplicates": "allowed",
+            "lootSlots": []
+        }
+    ]
+}
