@@ -1,30 +1,30 @@
 {
     "game": "World Of Tanks PC",
-    "eventName": "Last Stand Invasion",
-    "startDate": "2026-05-14",
-    "endDate": "2026-06-01",
+    "eventName": "Vault of Whispers (ASIA-only)",
+    "startDate": "2026-08-20",
+    "endDate": "2026-08-31",
     "recursive": true,
     "autoOpenRecursive": false,
     "author": "DaSpood",
-    "source": "'https://worldoftanks.asia/ko/news/general-news/objects-spring-2026/', click the box animation and hover on items",
+    "source": "'https://worldoftanks.asia/ko/news/specials/vault-of-whispers-2026/', hover on items for individual drop rates",
     "notes": "3D attachments bundled into 1 drop type because nobody cares about them.",
     "lootboxes": [
         {
-            "name": "Object Shard",
-            "pictureUrl": "images/lootboxes/2026_05-object_shard.png",
+            "name": "Bounty Lootbox",
+            "pictureUrl": "images/lootboxes/2026_08_ASIA-bounty_lootbox.png",
             "purchasable": true,
             "mainPrizeHardPity": 50,
             "mainPrizeDuplicates": "remove",
             "secondaryPrizeDuplicates": "allowed",
             "mainPrizeSubstitute": {
-                "name": "Object Core",
+                "name": "Boon Lootbox",
                 "displayPriority": 7,
-                "pictureUrl": "images/lootboxes/2026_05-object_core.png",
+                "pictureUrl": "images/lootboxes/2026_08_ASIA-boon_lootbox.png",
                 "amount": 1
             },
             "lootSlots": [
                 {
-                    "alias": "Guaranteed slot 1 (Credits & Crew books)",
+                    "alias": "Guaranteed slot 1 (Credits & Components)",
                     "dropRate": 1,
                     "contentType": "filler",
                     "lootGroups": [
@@ -53,39 +53,39 @@
                             ]
                         },
                         {
-                            "alias": "Crew books",
+                            "alias": "Experimental components",
                             "dropRate": 0.5,
                             "lootDrops": [
                                 {
-                                    "name": "crew book: universal booklet",
-                                    "pictureUrl": "images/resources/crew-booklet.png",
+                                    "name": "experimental components",
+                                    "pictureUrl": "images/resources/components.png",
                                     "dropRate": 0.8,
-                                    "amount": 1
+                                    "amount": 100
                                 },
                                 {
-                                    "name": "crew book: universal guide",
-                                    "pictureUrl": "images/resources/crew-guide.png",
+                                    "name": "experimental components",
+                                    "pictureUrl": "images/resources/components.png",
                                     "dropRate": 0.15,
-                                    "amount": 1
+                                    "amount": 200
                                 },
                                 {
-                                    "name": "crew book: universal manual",
-                                    "pictureUrl": "images/resources/crew-manual.png",
+                                    "name": "experimental components",
+                                    "pictureUrl": "images/resources/components.png",
                                     "dropRate": 0.05,
-                                    "amount": 1
+                                    "amount": 300
                                 }
                             ]
                         }
                     ]
                 },
                 {
-                    "alias": "Guaranteed slot 2 (Personal reserves)",
+                    "alias": "Guaranteed slot 2 (Personal reserves, premium time and training books)",
                     "dropRate": 1,
                     "contentType": "filler",
                     "lootGroups": [
                         {
                             "alias": "Personal reserves",
-                            "dropRate": 1,
+                            "dropRate": 0.34,
                             "lootDrops": [
                                 {
                                     "name": "personal reserve: +200% free & crew xp",
@@ -106,17 +106,10 @@
                                     "amount": 1
                                 }
                             ]
-                        }
-                    ]
-                },
-                {
-                    "alias": "Filler slot 1 (Premium account)",
-                    "dropRate": 0.5,
-                    "contentType": "filler",
-                    "lootGroups": [
+                        },
                         {
                             "alias": "Premium account",
-                            "dropRate": 1,
+                            "dropRate": 0.33,
                             "lootDrops": [
                                 {
                                     "name": "days of premium account",
@@ -137,6 +130,61 @@
                                     "amount": 7
                                 }
                             ]
+                        },
+                        {
+                            "alias": "Crew books",
+                            "dropRate": 0.33,
+                            "lootDrops": [
+                                {
+                                    "name": "crew book: universal booklet",
+                                    "pictureUrl": "images/resources/crew-booklet.png",
+                                    "dropRate": 0.8,
+                                    "amount": 1
+                                },
+                                {
+                                    "name": "crew book: universal guide",
+                                    "pictureUrl": "images/resources/crew-guide.png",
+                                    "dropRate": 0.05,
+                                    "amount": 1
+                                },
+                                {
+                                    "name": "crew book: universal manual",
+                                    "pictureUrl": "images/resources/crew-manual.png",
+                                    "dropRate": 0.15,
+                                    "amount": 1
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "alias": "Filler slot 1 (Gold)",
+                    "dropRate": 0.2,
+                    "contentType": "filler",
+                    "lootGroups": [
+                        {
+                            "alias": "Gold",
+                            "dropRate": 1,
+                            "lootDrops": [
+                                {
+                                    "name": "gold",
+                                    "pictureUrl": "images/resources/gold.png",
+                                    "dropRate": 0.9,
+                                    "amount": 150
+                                },
+                                {
+                                    "name": "gold",
+                                    "pictureUrl": "images/resources/gold.png",
+                                    "dropRate": 0.08,
+                                    "amount": 300
+                                },
+                                {
+                                    "name": "gold",
+                                    "pictureUrl": "images/resources/gold.png",
+                                    "dropRate": 0.02,
+                                    "amount": 600
+                                }
+                            ]
                         }
                     ]
                 },
@@ -150,23 +198,23 @@
                             "dropRate": 1,
                             "lootDrops": [
                                 {
-                                    "name": "Object Shard",
+                                    "name": "Bounty Lootbox",
                                     "displayPriority": 5,
-                                    "pictureUrl": "images/lootboxes/2026_05-object_shard.png",
+                                    "pictureUrl": "images/lootboxes/2026_08_ASIA-bounty_lootbox.png",
                                     "dropRate": 0.23,
                                     "amount": 1
                                 },
                                 {
-                                    "name": "Object Fragment",
+                                    "name": "Bestowal Lootbox",
                                     "displayPriority": 6,
-                                    "pictureUrl": "images/lootboxes/2026_05-object_fragment.png",
+                                    "pictureUrl": "images/lootboxes/2026_08_ASIA-bestowal_lootbox.png",
                                     "dropRate": 0.75,
                                     "amount": 1
                                 },
                                 {
-                                    "name": "Object Core",
+                                    "name": "Boon Lootbox",
                                     "displayPriority": 7,
-                                    "pictureUrl": "images/lootboxes/2026_05-object_core.png",
+                                    "pictureUrl": "images/lootboxes/2026_08_ASIA-boon_lootbox.png",
                                     "overrideRarityInUi": "main",
                                     "dropRate": 0.02,
                                     "amount": 1
@@ -185,73 +233,59 @@
                             "dropRate": 1,
                             "lootDrops": [
                                 {
-                                    "name": "Lorraine 120 Alby",
-                                    "displayPriority": 8,
-                                    "pictureUrl": "images/tanks/france-F134_Lorraine_120_Alby.png",
+                                    "name": "T-13",
+                                    "displayPriority": 10,
+                                    "pictureUrl": "images/tanks/ussr-R234_T_13.png",
+                                    "dropRate": 0.05,
+                                    "amount": 1
+                                },
+                                {
+                                    "name": "M47 Chevalier",
+                                    "displayPriority": 9,
+                                    "pictureUrl": "images/tanks/france-F142_M47_Chevalier.png",
                                     "dropRate": 0.08,
                                     "amount": 1
                                 },
                                 {
-                                    "name": "Wz. 64GC Bzyg",
-                                    "displayPriority": 10,
-                                    "pictureUrl": "images/tanks/poland-Pl36_Wz_64GC_Bzyg.png",
-                                    "dropRate": 0.05,
+                                    "name": "Krazownik",
+                                    "displayPriority": 8,
+                                    "pictureUrl": "images/tanks/poland-Pl40_Krazownik.png",
+                                    "dropRate": 0.12,
+                                    "amount": 1
+                                },
+                                {
+                                    "name": "Lorraine 120 Alby",
+                                    "displayPriority": 8,
+                                    "pictureUrl": "images/tanks/france-F134_Lorraine_120_Alby.png",
+                                    "dropRate": 0.15,
                                     "amount": 1
                                 },
                                 {
                                     "name": "Chrysler MTC 2TC",
                                     "displayPriority": 8,
                                     "pictureUrl": "images/tanks/usa-A159_Chrysler_MTC_2.png",
-                                    "dropRate": 0.08,
+                                    "dropRate": 0.15,
                                     "amount": 1
                                 },
                                 {
-                                    "name": "Prototipo 6",
-                                    "displayPriority": 8,
-                                    "pictureUrl": "images/tanks/italy-It33_Prototipo_6.png",
-                                    "dropRate": 0.08,
-                                    "amount": 1
-                                },
-                                {
-                                    "name": "SDP wz 66 Grom",
-                                    "displayPriority": 8,
-                                    "pictureUrl": "images/tanks/poland-Pl27_SDP_Wz_66T.png",
-                                    "dropRate": 0.12,
-                                    "amount": 1
-                                },
-                                {
-                                    "name": "Sentinelle",
+                                    "name": "Vz. 58 Medvěd",
                                     "displayPriority": 9,
-                                    "pictureUrl": "images/tanks/france-F130_Sentinelle.png",
-                                    "dropRate": 0.12,
+                                    "pictureUrl": "images/tanks/czech-Cz32_Vz_58_Koncept.png",
+                                    "dropRate": 0.15,
                                     "amount": 1
                                 },
                                 {
-                                    "name": "WZ-120G FT",
+                                    "name": "Buryan",
                                     "displayPriority": 9,
-                                    "pictureUrl": "images/tanks/china-Ch40_WZ120G_FT.png",
-                                    "dropRate": 0.11,
+                                    "pictureUrl": "images/tanks/ussr-R231_Buryan.png",
+                                    "dropRate": 0.15,
                                     "amount": 1
                                 },
                                 {
-                                    "name": "Kpz. Erich Konzept I",
+                                    "name": "ZŤS Vz.63-1 Ogar",
                                     "displayPriority": 9,
-                                    "pictureUrl": "images/tanks/germany-G165_Erich_Konzept_I.png",
-                                    "dropRate": 0.12,
-                                    "amount": 1
-                                },
-                                {
-                                    "name": "VCS 6X6 TS 90",
-                                    "displayPriority": 9,
-                                    "pictureUrl": "images/tanks/france-F122_VCS_6x6_TS90.png",
-                                    "dropRate": 0.12,
-                                    "amount": 1
-                                },
-                                {
-                                    "name": "Yong Bing",
-                                    "displayPriority": 9,
-                                    "pictureUrl": "images/tanks/china-Ch63_Yong_Bing.png",
-                                    "dropRate": 0.12,
+                                    "pictureUrl": "images/tanks/czech-Cz43_Ogar.png",
+                                    "dropRate": 0.15,
                                     "amount": 1
                                 }
                             ]
@@ -261,16 +295,16 @@
             ]
         },
         {
-            "name": "Object Fragment",
-            "pictureUrl": "images/lootboxes/2026_05-object_fragment.png",
+            "name": "Bestowal Lootbox",
+            "pictureUrl": "images/lootboxes/2026_08_ASIA-bestowal_lootbox.png",
             "purchasable": false,
             "mainPrizeHardPity": 40,
             "mainPrizeDuplicates": "remove",
             "secondaryPrizeDuplicates": "allowed",
             "mainPrizeSubstitute": {
-                "name": "Object Core",
+                "name": "Boon Lootbox",
                 "displayPriority": 7,
-                "pictureUrl": "images/lootboxes/2026_05-object_core.png",
+                "pictureUrl": "images/lootboxes/2026_08_ASIA-boon_lootbox.png",
                 "overrideRarityInUi": "main",
                 "amount": 1
             },
@@ -287,57 +321,39 @@
                                 {
                                     "name": "free xp",
                                     "pictureUrl": "images/resources/free-xp.png",
-                                    "dropRate": 0.8,
-                                    "amount": 1500
+                                    "dropRate": 0.82,
+                                    "amount": 2000
                                 },
                                 {
                                     "name": "free xp",
                                     "pictureUrl": "images/resources/free-xp.png",
                                     "dropRate": 0.15,
-                                    "amount": 5000
+                                    "amount": 6000
                                 },
                                 {
                                     "name": "free xp",
                                     "pictureUrl": "images/resources/free-xp.png",
-                                    "dropRate": 0.05,
+                                    "dropRate": 0.02,
                                     "amount": 25000
+                                },
+                                {
+                                    "name": "free xp",
+                                    "pictureUrl": "images/resources/free-xp.png",
+                                    "dropRate": 0.01,
+                                    "amount": 75000
                                 }
                             ]
                         }
                     ]
                 },
                 {
-                    "alias": "Filler slot 1 (Premium account, Personal reserves, Crew books)",
-                    "dropRate": 0.75,
+                    "alias": "Guaranteed slot 2 (Personal reserves, Components, Crew books, Missions for x5 XP)",
+                    "dropRate": 1,
                     "contentType": "filler",
                     "lootGroups": [
                         {
-                            "alias": "Premium account",
-                            "dropRate": 0.33,
-                            "lootDrops": [
-                                {
-                                    "name": "days of premium account",
-                                    "pictureUrl": "images/resources/premium-account.png",
-                                    "dropRate": 0.8,
-                                    "amount": 3
-                                },
-                                {
-                                    "name": "days of premium account",
-                                    "pictureUrl": "images/resources/premium-account.png",
-                                    "dropRate": 0.15,
-                                    "amount": 7
-                                },
-                                {
-                                    "name": "days of premium account",
-                                    "pictureUrl": "images/resources/premium-account.png",
-                                    "dropRate": 0.05,
-                                    "amount": 14
-                                }
-                            ]
-                        },
-                        {
                             "alias": "Personal reserves",
-                            "dropRate": 0.34,
+                            "dropRate": 0.4,
                             "lootDrops": [
                                 {
                                     "name": "personal reserve: +200% free & crew xp",
@@ -360,8 +376,32 @@
                             ]
                         },
                         {
+                            "alias": "Experimental components",
+                            "dropRate": 0.1,
+                            "lootDrops": [
+                                {
+                                    "name": "experimental components",
+                                    "pictureUrl": "images/resources/components.png",
+                                    "dropRate": 0.8,
+                                    "amount": 150
+                                },
+                                {
+                                    "name": "experimental components",
+                                    "pictureUrl": "images/resources/components.png",
+                                    "dropRate": 0.15,
+                                    "amount": 300
+                                },
+                                {
+                                    "name": "experimental components",
+                                    "pictureUrl": "images/resources/components.png",
+                                    "dropRate": 0.05,
+                                    "amount": 600
+                                }
+                            ]
+                        },
+                        {
                             "alias": "Crew books",
-                            "dropRate": 0.33,
+                            "dropRate": 0.40,
                             "lootDrops": [
                                 {
                                     "name": "crew book: universal guide",
@@ -382,95 +422,10 @@
                                     "amount": 1
                                 }
                             ]
-                        }
-                    ]
-                },
-                {
-                    "alias": "Filler slot 2 (3D attachments)",
-                    "dropRate": 0.5,
-                    "contentType": "filler",
-                    "lootGroups": [
-                        {
-                            "alias": "3D attachments",
-                            "dropRate": 1,
-                            "lootDrops": [
-                                {
-                                    "name": "3D attachment (alpha)",
-                                    "pictureUrl": "images/resources/3d-attachment.png",
-                                    "dropRate": 1,
-                                    "amount": 1
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "alias": "Extra lootboxes",
-                    "dropRate": 0.2,
-                    "contentType": "filler",
-                    "lootGroups": [
-                        {
-                            "alias": "Extra lootboxes",
-                            "dropRate": 1,
-                            "lootDrops": [
-                                {
-                                    "name": "Object Shard",
-                                    "displayPriority": 5,
-                                    "pictureUrl": "images/lootboxes/2026_05-object_shard.png",
-                                    "dropRate": 0.02,
-                                    "amount": 1
-                                },
-                                {
-                                    "name": "Object Fragment",
-                                    "displayPriority": 6,
-                                    "pictureUrl": "images/lootboxes/2026_05-object_fragment.png",
-                                    "dropRate": 0.23,
-                                    "amount": 1
-                                },
-                                {
-                                    "name": "Object Core",
-                                    "displayPriority": 7,
-                                    "pictureUrl": "images/lootboxes/2026_05-object_core.png",
-                                    "overrideRarityInUi": "main",
-                                    "dropRate": 0.75,
-                                    "amount": 1
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "alias": "Filler slot 3 (Experimental components, Missions for x5 XP)",
-                    "dropRate": 0.15,
-                    "contentType": "filler",
-                    "lootGroups": [
-                        {
-                            "alias": "Experimental components",
-                            "dropRate": 0.5,
-                            "lootDrops": [
-                                {
-                                    "name": "experimental components",
-                                    "pictureUrl": "images/resources/components.png",
-                                    "dropRate": 0.8,
-                                    "amount": 100
-                                },
-                                {
-                                    "name": "experimental components",
-                                    "pictureUrl": "images/resources/components.png",
-                                    "dropRate": 0.15,
-                                    "amount": 200
-                                },
-                                {
-                                    "name": "experimental components",
-                                    "pictureUrl": "images/resources/components.png",
-                                    "dropRate": 0.05,
-                                    "amount": 500
-                                }
-                            ]
                         },
                         {
                             "alias": "Missions for x5 XP",
-                            "dropRate": 0.5,
+                            "dropRate": 0.1,
                             "lootDrops": [
                                 {
                                     "name": "missions for x5 XP",
@@ -495,6 +450,91 @@
                     ]
                 },
                 {
+                    "alias": "Filler slot 1 (3D attachments)",
+                    "dropRate": 0.5,
+                    "contentType": "filler",
+                    "lootGroups": [
+                        {
+                            "alias": "3D attachments",
+                            "dropRate": 1,
+                            "lootDrops": [
+                                {
+                                    "name": "3D attachment (alpha)",
+                                    "pictureUrl": "images/resources/3d-attachment.png",
+                                    "dropRate": 1,
+                                    "amount": 1
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "alias": "Filler slot 2 (Gold)",
+                    "dropRate": 0.33,
+                    "contentType": "filler",
+                    "lootGroups": [
+                    {
+                        "alias": "Gold",
+                        "dropRate": 1,
+                        "lootDrops": [
+                            {
+                                "name": "gold",
+                                "pictureUrl": "images/resources/gold.png",
+                                "dropRate": 0.9,
+                                "amount": 200
+                            },
+                            {
+                                "name": "gold",
+                                "pictureUrl": "images/resources/gold.png",
+                                "dropRate": 0.08,
+                                "amount": 400
+                            },
+                            {
+                                "name": "gold",
+                                "pictureUrl": "images/resources/gold.png",
+                                "dropRate": 0.02,
+                                "amount": 800
+                            }
+                        ]
+                    }
+                ]
+                },
+                {
+                    "alias": "Extra lootboxes",
+                    "dropRate": 0.2,
+                    "contentType": "filler",
+                    "lootGroups": [
+                        {
+                            "alias": "Extra lootboxes",
+                            "dropRate": 1,
+                            "lootDrops": [
+                                {
+                                    "name": "Bounty Lootbox",
+                                    "displayPriority": 5,
+                                    "pictureUrl": "images/lootboxes/2026_08_ASIA-bounty_lootbox.png",
+                                    "dropRate": 0.02,
+                                    "amount": 1
+                                },
+                                {
+                                    "name": "Bestowal Lootbox",
+                                    "displayPriority": 6,
+                                    "pictureUrl": "images/lootboxes/2026_08_ASIA-bestowal_lootbox.png",
+                                    "dropRate": 0.23,
+                                    "amount": 1
+                                },
+                                {
+                                    "name": "Boon Lootbox",
+                                    "displayPriority": 7,
+                                    "pictureUrl": "images/lootboxes/2026_08_ASIA-boon_lootbox.png",
+                                    "overrideRarityInUi": "main",
+                                    "dropRate": 0.75,
+                                    "amount": 1
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
                     "alias": "Tanks",
                     "dropRate": 0.05,
                     "contentType": "main",
@@ -504,10 +544,10 @@
                             "dropRate": 1,
                             "lootDrops": [
                                 {
-                                    "name": "ZŤS Vz.63-1 Ogar",
+                                    "name": "Headshaker",
                                     "displayPriority": 9,
-                                    "pictureUrl": "images/tanks/czech-Cz43_Ogar.png",
-                                    "dropRate": 0.1,
+                                    "pictureUrl": "images/tanks/uk-GB151_Headshaker.png",
+                                    "dropRate": 0.25,
                                     "amount": 1
                                 },
                                 {
@@ -518,17 +558,17 @@
                                     "amount": 1
                                 },
                                 {
-                                    "name": "Vercingétorix",
-                                    "displayPriority": 9,
-                                    "pictureUrl": "images/tanks/france-F132_Vercingetorix.png",
-                                    "dropRate": 0.35,
+                                    "name": "MBT-B",
+                                    "displayPriority": 10,
+                                    "pictureUrl": "images/tanks/usa-A150_MBT_B.png",
+                                    "dropRate": 0.15,
                                     "amount": 1
                                 },
                                 {
-                                    "name": "Chieftain Mk. 6",
+                                    "name": "BZT-70",
                                     "displayPriority": 10,
-                                    "pictureUrl": "images/tanks/uk-GB84_Chieftain_Mk6.png",
-                                    "dropRate": 0.2,
+                                    "pictureUrl": "images/tanks/china-Ch57_BZT_70.png",
+                                    "dropRate": 0.25,
                                     "amount": 1
                                 }
                             ]
@@ -538,16 +578,16 @@
             ]
         },
         {
-            "name": "Object Core",
-            "pictureUrl": "images/lootboxes/2026_05-object_core.png",
+            "name": "Boon Lootbox",
+            "pictureUrl": "images/lootboxes/2026_08_ASIA-boon_lootbox.png",
             "purchasable": false,
             "mainPrizeHardPity": 20,
             "mainPrizeDuplicates": "remove",
             "secondaryPrizeDuplicates": "allowed",
             "mainPrizeSubstitute": {
-                "name": "Object Core",
+                "name": "Boon Lootbox",
                 "displayPriority": 7,
-                "pictureUrl": "images/lootboxes/2026_05-object_core.png",
+                "pictureUrl": "images/lootboxes/2026_08_ASIA-boon_lootbox.png",
                 "amount": 1
             },
             "lootSlots": [
@@ -602,7 +642,7 @@
                     ]
                 },
                 {
-                    "alias": "Guaranteed slot 3 (Big Personal reserves, Crew books, Crew members, Experimental components, Missions for x5 XP)",
+                    "alias": "Guaranteed slot 3 (Big Personal reserves, Crew books, Crew members, Components, Missions for x5 XP)",
                     "dropRate": 1,
                     "contentType": "filler",
                     "lootGroups": [
@@ -738,23 +778,16 @@
                             "dropRate": 1,
                             "lootDrops": [
                                 {
-                                    "name": "Object Shard",
-                                    "displayPriority": 5,
-                                    "pictureUrl": "images/lootboxes/2026_05-object_shard.png",
-                                    "dropRate": 0.75,
-                                    "amount": 1
-                                },
-                                {
-                                    "name": "Object Fragment",
+                                    "name": "Bestowal Lootbox",
                                     "displayPriority": 6,
-                                    "pictureUrl": "images/lootboxes/2026_05-object_fragment.png",
-                                    "dropRate": 0.23,
+                                    "pictureUrl": "images/lootboxes/2026_08_ASIA-bestowal_lootbox.png",
+                                    "dropRate": 0.98,
                                     "amount": 1
                                 },
                                 {
-                                    "name": "Object Core",
+                                    "name": "Boon Lootbox",
                                     "displayPriority": 7,
-                                    "pictureUrl": "images/lootboxes/2026_05-object_core.png",
+                                    "pictureUrl": "images/lootboxes/2026_08_ASIA-boon_lootbox.png",
                                     "overrideRarityInUi": "main",
                                     "dropRate": 0.02,
                                     "amount": 1
@@ -765,7 +798,7 @@
                 },
                 {
                     "alias": "Filler slot 1 (Free XP Jackpot)",
-                    "dropRate": 0.025,
+                    "dropRate": 0.0125,
                     "contentType": "filler",
                     "lootGroups": [
                         {
@@ -793,23 +826,16 @@
                             "dropRate": 1,
                             "lootDrops": [
                                 {
-                                    "name": "Serpente",
+                                    "name": "Ares MTB",
                                     "displayPriority": 9,
-                                    "pictureUrl": "images/tanks/italy-It37_Serpente.png",
-                                    "dropRate": 0.25,
+                                    "pictureUrl": "images/tanks/usa-A188_Ares_MTB.png",
+                                    "dropRate": 0.5,
                                     "amount": 1
                                 },
                                 {
-                                    "name": "Schwertwal",
+                                    "name": "AHT-7",
                                     "displayPriority": 10,
-                                    "pictureUrl": "images/tanks/germany-G186_Schwertwal.png",
-                                    "dropRate": 0.25,
-                                    "amount": 1
-                                },
-                                {
-                                    "name": "MBT-B",
-                                    "displayPriority": 10,
-                                    "pictureUrl": "images/tanks/usa-A150_MBT_B.png",
+                                    "pictureUrl": "images/tanks/usa-A194_AHT_7.png",
                                     "dropRate": 0.5,
                                     "amount": 1
                                 }
