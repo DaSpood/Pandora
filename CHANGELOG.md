@@ -1,3 +1,7 @@
+# V1.2.4
+
+- Add loot table for WoT PC's ASIA-exclusive Vault Of Whispers event
+
 # v1.2.3
 
 - Add loot table for WoT PC's Last Stand Invasion event
